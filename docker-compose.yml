@@ -3,8 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: s7te-janelas
+    container_name: sete-janelas
     ports:
       - '5173:5173'
     volumes:
       - .:/app
+      - /app/node_modules
