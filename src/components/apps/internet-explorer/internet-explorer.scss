@@ -37,7 +37,7 @@
       flex-direction: column;
       gap: 0.5em;
       align-items: center;
-      justify-content: space-around;
+      justify-content: flex-end;
       background: white;
       padding: 1em;
       min-height: 9em;
@@ -46,22 +46,22 @@
       border: 1px solid transparent;
       cursor: pointer;
 
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+
       &:hover {
-        background: linear-gradient(180deg, rgba(248, 251, 255, 1) 35%, rgba(223, 235, 248, 1) 65%);
+        filter: saturate(1.25) brightness(1.25);
         border: 1px solid #9cb6ce;
       }
-    }
-    img {
-      width: 4em;
-      height: 4em;
     }
 
     span {
       font-size: 1.25em;
       font-weight: bold;
-      max-width: 6em;
       word-wrap: break-word;
       text-align: center;
+      background: white;
     }
   }
 }

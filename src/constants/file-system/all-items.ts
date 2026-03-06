@@ -13,7 +13,9 @@ import {
   GithubExternalLogo,
   LinkedinExternalLogo,
   WhatsappExternalLogo,
-  internetExplorerExternalLinkIcon,
+  LettLogo,
+  LeafletZenLogo,
+  LocaWebLogo,
 } from '@/assets';
 import { type FileSystemItem } from '../file-system-map';
 
@@ -335,7 +337,7 @@ export const ITEMS_MAP_PROJETO_1_CHALLENGELETT: Record<string, FileSystemItem> =
     path: 'C:/Usuários/Fiterman/Projetos/ChallengeLett/challengelett.html',
     type: 'link',
     uri: 'https://gabfiterman.github.io/ChallengeLett/',
-    miniature: internetExplorerExternalLinkIcon,
+    miniature: LettLogo,
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/CHALLENGELETT/REPOCHALLENGELETT.HTML': {
@@ -393,7 +395,7 @@ export const ITEMS_MAP_PROJETO_2_LOCAWEB: Record<string, FileSystemItem> = {
     path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/locaweb.html',
     type: 'link',
     uri: 'https://loca-web.vercel.app/',
-    miniature: internetExplorerExternalLinkIcon,
+    miniature: LocaWebLogo,
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/REPOLOCAWEB.HTML': {
@@ -487,7 +489,7 @@ export const ITEMS_MAP_PROJETO_3_LEAFLETZEN: Record<string, FileSystemItem> = {
     path: 'C:/Usuários/Fiterman/Projetos/LeafletZen/LeafletZen.html',
     type: 'link',
     uri: 'https://leaflet-zen.vercel.app/',
-    miniature: internetExplorerExternalLinkIcon,
+    miniature: LeafletZenLogo,
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN/REPOLEAFLETZEN.HTML': {

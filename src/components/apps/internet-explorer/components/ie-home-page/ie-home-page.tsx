@@ -15,8 +15,12 @@ function IeHomePage() {
       {projects?.length > 0 &&
         projects.map((item, index) => {
           return (
-            <div className="project-item" key={index} onMouseDown={() => navigateToUrl(item.uri)}>
-              <img src={item.miniature} alt={item.label} />
+            <div
+              className="project-item"
+              key={index}
+              onMouseDown={() => navigateToUrl(item.uri)}
+              style={{ backgroundImage: `url(${item.miniature})` }}
+            >
               <span>{item.label}</span>
             </div>
           );

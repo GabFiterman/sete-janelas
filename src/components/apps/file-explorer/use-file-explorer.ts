@@ -241,7 +241,7 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
 
         newPaths = currentDirectoryContents.slice(startIndex, endIndex + 1).map((i) => i.path);
       } else {
-        if (selectedItemPaths.length === 1 && selectedItemPaths.includes(itemPath)) {
+        if (selectedItemPaths.includes(itemPath)) {
           navigateTo(item);
           newPaths = [];
         } else {

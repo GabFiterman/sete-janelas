@@ -1,4 +1,5 @@
 # Sete Janelas - Web Operating System
+
 <div align="center">
   <img src="https://img.shields.io/github/v/release/GabFiterman/s7te-janelas?style=for-the-badge&label=Vers%C3%A3o&color=blueviolet" alt="Versão" />
   <img src="https://img.shields.io/github/last-commit/GabFiterman/s7te-janelas?style=for-the-badge&label=Atualizado&color=blue" alt="Last Commit" />
@@ -25,10 +26,6 @@
     <td><img width="1920" height="959" alt="image" src="https://github.com/user-attachments/assets/ed98249d-2a6d-4497-93e1-623de9db99b5" /></td>
   </tr>
 </table>
-
-
-
-
 
 ## 🖥️ O Conceito
 
@@ -81,19 +78,23 @@ npm run dev
 
 ## 🗺️ Roadmap de Evolução
 
-### **Versão Atual**: 
+### **Versão Atual**:
+
 `v1.0` (_MVP Estável_) Transparência no desenvolvimento: Priorizo a entrega contínua de valor e a evolução incremental da arquitetura.
 
 ### **🚀 Core & Arquitetura**
+
 - [ ] **Persistência de Sessão**: Implementar salvamento de estado das janelas abertas e posição dos ícones via LocalStorage ou IndexedDB.
 - [ ] **Multitarefa Real**: Refatorar processos pesados para Web Workers.
 - [ ] **Sistema de Temas**: Migrar variáveis SCSS para CSS Variables dinâmicas (Dark/Light Mode).
 
 ### **📦 Aplicações & Features**
+
 - [ ] **Terminal Emulator**: Implementar um terminal interativo (bash-like).
 - [ ] **Mecânica de Drag-and-Drop Global**: Permitir arrastar arquivos do File Explorer para o Desktop.
 
 ### **🛠️ DX & Qualidade**
+
 - [ ] **Testes E2E** (Cypress): Automatizar fluxos críticos de abertura e fechamento de janelas.
 - [ ] **Bundle Splitting**: Lazy loading de aplicações (Code Splitting por rota/componente).
 
