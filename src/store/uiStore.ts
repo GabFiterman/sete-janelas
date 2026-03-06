@@ -12,11 +12,13 @@ export interface WindowState {
   appName: AppName;
   appProps?: Record<string, unknown>;
   height: number;
+  heightRatio?: number;
   iconSrc: string;
   id: string;
   status: 'normal' | 'minimized' | 'maximized';
   title: string;
   width: number;
+  widthRatio?: number;
   x: number;
   y: number;
   zIndex: number;
@@ -53,8 +55,7 @@ interface UIState {
   focusWindow: (id: string) => void;
   openWindow: (
     window: Omit<WindowState, 'zIndex' | 'x' | 'y' | 'status' | 'width' | 'height'> &
-      Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>> &
-      Partial<{ widthRatio: number; heightRatio: number }>
+      Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>>
   ) => void;
   setIsStartMenuOpen: (isOpen: boolean) => void;
   toggleIsStartMenuOpen: (event?: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
@@ -177,9 +178,9 @@ const useUIStore = create<UIState>((set, get) => ({
           ...state.windows,
           {
             ...newWindow,
-            height: resolvedHeight(newWindow.height, (newWindow as any).heightRatio),
+            height: resolvedHeight(newWindow.height, newWindow.heightRatio),
             status: newWindow.status ?? 'normal',
-            width: resolvedWidth(newWindow.width, (newWindow as any).widthRatio),
+            width: resolvedWidth(newWindow.width, newWindow.widthRatio),
             x: newWindow.x ?? 50,
             y: newWindow.y ?? 50,
             zIndex: newZIndex,

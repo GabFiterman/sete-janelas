@@ -49,6 +49,8 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
         appName: 'FileExplorer',
         iconSrc: fileExplorerIcon,
         title: 'File Explorer',
+        widthRatio: 0.9,
+        heightRatio: 0.75,
       });
     }
 

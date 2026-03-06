@@ -54,6 +54,8 @@ function useFixedMenuStates() {
           title: 'File Explorer',
           appName: 'FileExplorer',
           iconSrc: fileExplorerIcon,
+          widthRatio: 0.9,
+          heightRatio: 0.75,
         }),
       icon: fileExplorerIcon,
     },
