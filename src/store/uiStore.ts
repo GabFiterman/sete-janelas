@@ -53,7 +53,8 @@ interface UIState {
   focusWindow: (id: string) => void;
   openWindow: (
     window: Omit<WindowState, 'zIndex' | 'x' | 'y' | 'status' | 'width' | 'height'> &
-      Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>>
+      Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>> &
+      Partial<{ widthRatio: number; heightRatio: number }>
   ) => void;
   setIsStartMenuOpen: (isOpen: boolean) => void;
   toggleIsStartMenuOpen: (event?: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
@@ -64,7 +65,7 @@ interface UIState {
 
 const useUIStore = create<UIState>((set, get) => ({
   CONSTANTS: {
-    FIXED_MENU_HEIGHT: 60,
+    FIXED_MENU_HEIGHT: 35,
     WINDOW_DEFAULT_WIDTH: 1200,
     WINDOW_DEFAULT_HEIGHT: 800,
     WINDOW_MAX_HEIGHT: INITIAL_USER_WINDOW.height,
@@ -138,23 +139,53 @@ const useUIStore = create<UIState>((set, get) => ({
       }
 
       const newZIndex = state.maxZIndex + 1;
-      const defaultWidth = get().CONSTANTS.WINDOW_DEFAULT_WIDTH;
-      const defaultHeight = get().CONSTANTS.WINDOW_DEFAULT_HEIGHT;
+      // Calcular tamanhos padrão dinamicamente com base no tamanho atual da tela,
+      // respeitando os valores máximos/nominais já definidos em CONSTANTS.
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight;
+      const fixedMenu = get().CONSTANTS.FIXED_MENU_HEIGHT;
+      const constants = get().CONSTANTS;
+
+      const clampRatio = (r?: number) => {
+        if (typeof r !== 'number' || Number.isNaN(r)) return undefined;
+        return Math.max(0.05, Math.min(1, r));
+      };
+
+      const resolvedWidth = (w?: number, ratio?: number) => {
+        const clamped = clampRatio(ratio);
+        if (clamped !== undefined) {
+          const val = Math.floor(screenW * clamped);
+          return Math.min(val, constants.WINDOW_MAX_WIDTH ?? screenW);
+        }
+        if (typeof w === 'number') return w;
+        return Math.min(constants.WINDOW_DEFAULT_WIDTH, Math.floor(screenW * 0.8));
+      };
+
+      const resolvedHeight = (h?: number, ratio?: number) => {
+        const clamped = clampRatio(ratio);
+        const availH = screenH - fixedMenu;
+        if (clamped !== undefined) {
+          const val = Math.floor(availH * clamped);
+          return Math.min(val, constants.WINDOW_MAX_HEIGHT ?? availH);
+        }
+        if (typeof h === 'number') return h;
+        return Math.min(constants.WINDOW_DEFAULT_HEIGHT, Math.floor(availH * 0.8));
+      };
 
       return {
         windows: [
           ...state.windows,
           {
             ...newWindow,
-            height: newWindow.height ?? defaultHeight,
+            height: resolvedHeight(newWindow.height, (newWindow as any).heightRatio),
             status: newWindow.status ?? 'normal',
-            width: newWindow.width ?? defaultWidth,
+            width: resolvedWidth(newWindow.width, (newWindow as any).widthRatio),
             x: newWindow.x ?? 50,
             y: newWindow.y ?? 50,
             zIndex: newZIndex,
             iconSrc: newWindow.iconSrc,
             appProps: newWindow.appProps ?? {},
-          },
+          } as WindowState,
         ],
         maxZIndex: newZIndex,
       };
@@ -170,6 +201,14 @@ const useUIStore = create<UIState>((set, get) => ({
     })),
 
   updateWindowStatus: (id, newStatus) => {
+    // Calcular dimensões de maximização dinamicamente conforme a tela atual
+    const constants = get().CONSTANTS;
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+    const fixedMenu = constants.FIXED_MENU_HEIGHT;
+    const maxW = constants.WINDOW_MAX_WIDTH ?? screenW;
+    const maxH = constants.WINDOW_MAX_HEIGHT ?? screenH - fixedMenu;
+
     set((state) => ({
       windows: state.windows.map((window) => {
         if (window.id === id) {
@@ -179,6 +218,8 @@ const useUIStore = create<UIState>((set, get) => ({
           if (newStatus === 'maximized') {
             newProps.x = 0;
             newProps.y = 0;
+            newProps.width = Math.min(maxW, screenW);
+            newProps.height = Math.min(maxH, screenH - fixedMenu);
           }
 
           return { ...window, ...newProps };
