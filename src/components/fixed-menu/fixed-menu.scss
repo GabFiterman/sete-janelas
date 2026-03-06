@@ -11,7 +11,7 @@
   border: 1px solid rgba(62, 129, 201, 0.96);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   display: flex;
-  height: 2.5em;
+  height: 3vh;
   padding: 0.5em 0;
   width: 100vw;
 
@@ -23,9 +23,9 @@
     background: $icon-bright-gradient;
     border-radius: 50%;
     border: 1px solid rgb(14, 84, 134);
-    height: 1.5em;
-    padding: 0.5em;
-    width: 1.5em;
+    height: 1.25em;
+    padding: 0.33em;
+    width: 1.25em;
 
     &:hover {
       border: 1px solid #02e5fd;
@@ -57,7 +57,7 @@
       }
 
       &.taskbar-item {
-        padding: 0.5em 1em;
+        padding: 0.25em 1em;
 
         &.active {
           background: linear-gradient(145deg, rgba(194, 204, 217, 1) 0%, rgba(143, 165, 189, 1) 100%);
@@ -127,7 +127,7 @@
     }
 
     img.menu-icon {
-      height: 2.5em;
+      height: 1.75em;
       width: auto;
     }
   }

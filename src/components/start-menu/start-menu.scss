@@ -2,6 +2,8 @@
 
 div.start-menu {
   $border-radius: 8px;
+  $menu-height: 65vh;
+  $menu-width: 45vw;
 
   $background-gradient: #8da2b9
     linear-gradient(
@@ -21,9 +23,9 @@ div.start-menu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  min-height: 40em;
-  padding: 0.75em 0.5em;
-  width: 40em;
+  height: $menu-height;
+  padding: 0.75em 0.5em 7vh .5em;
+  width: $menu-width;
 
   div.start-menu-left-container {
     align-items: flex-start;
@@ -33,7 +35,7 @@ div.start-menu {
     flex-direction: column;
     gap: 0.5em;
     justify-content: space-between;
-    min-height: 40em;
+    height: $menu-height;
     width: 65%;
 
     div.start-menu-apps {
@@ -61,7 +63,8 @@ div.start-menu {
         }
 
         img.start-menu-icon {
-          height: 2.5em;
+          height: 3.5vh;
+          width: auto;
         }
       }
     }
@@ -107,7 +110,7 @@ div.start-menu {
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
-    min-height: 40em;
+    height: $menu-height;
     padding: 0 1em;
     width: 35%;
 
