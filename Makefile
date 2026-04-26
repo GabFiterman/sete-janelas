@@ -9,7 +9,7 @@ all: up
 
 app: ## Sobe os containers da aplicação em modo de desenvolvimento.
 	@echo "\n #### Iniciando os containers do projeto... ####\n"
-	$(DOCKER_COMPOSE) up --build
+	$(DOCKER_COMPOSE) up --build -V
 
 down: ## Derruba os containers da aplicação.
 	@echo "\n #### Parando os containers do projeto... ####\n"

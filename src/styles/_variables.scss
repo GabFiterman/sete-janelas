@@ -1,16 +1,29 @@
-// TODO: Add color variables
-// $color-primary: #003366;
-// $color-secondary: #f0f0f0;
-// $color-text: #333;
+// Design Tokens - Windows 7 Aero Aesthetic
 
-// NOTE: Font sizes
+// Aero Glass Palette
+$aero-glass-base: rgba(180, 210, 240, 0.45);
+$aero-glass-active: rgba(160, 200, 245, 0.65);
+$aero-glass-inactive: rgba(220, 225, 230, 0.4);
+$aero-border: rgba(255, 255, 255, 0.5);
+$aero-border-inner: rgba(255, 255, 255, 0.2);
+
+// Controls
+$aero-close-bg: linear-gradient(to bottom, #f8baba 0%, #e85050 50%, #c01010 100%);
+$aero-close-hover: linear-gradient(to bottom, #ffcccc 0%, #ff4444 50%, #ee0000 100%);
+$aero-btn-bg: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(200, 215, 235, 0.3) 100%);
+
+// Shadows
+$shadow-active: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.1);
+$shadow-inactive: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+// Typography
 $font-size-xs: 12px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
 $font-size-lg: 18px;
 $font-size-xl: 20px;
 
-// NOTE: Spacing
+// Spacing
 $spacing-xs: 0.25em;
 $spacing-sm: 0.5em;
 $spacing-md: 1em;
@@ -29,13 +42,13 @@ $z: 200;
 $z-high: 300;
 $z-highest: 8000;
 
-// NOTE: Transitions
-$transition-default: all 0.3s ease-in-out;
+// Transitions
+$transition-default: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.15s ease;
 
 // NOTE: SPECIALS
-
-$fixed-menu-gradient: rgba(85, 117, 148, 0.5)
-  linear-gradient(90deg, rgba(105, 177, 250, 0.31) 0%, rgba(220, 234, 250, 0.31) 68%, rgba(92, 167, 247, 0.9) 100%);
+$fixed-menu-gradient: rgba(20, 60, 100, 0.6)
+  linear-gradient(90deg, rgba(30, 90, 150, 0.4) 0%, rgba(100, 160, 220, 0.3) 68%, rgba(20, 60, 100, 0.6) 100%);
 
 $icon-bright-gradient: #02e5fd
   linear-gradient(180deg, rgba(2, 229, 253, 1) 0%, rgba(1, 58, 98, 1) 68%, rgba(196, 209, 220, 1) 100%);

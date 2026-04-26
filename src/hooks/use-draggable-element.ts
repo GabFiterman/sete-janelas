@@ -7,13 +7,15 @@ type ElementType = 'icon' | 'window';
  * Hook customizado para gerenciar a lógica de drag-and-drop de janelas e ícones.
  * @param id ID do elemento.
  * @param type Tipo do elemento ('icon' ou 'window').
+ * @param initialX Posição X inicial antes do drag.
+ * @param initialY Posição Y inicial antes do drag.
  */
-export function useDraggableElement(id: string, type: ElementType) {
+export function useDraggableElement(id: string, type: ElementType, initialX: number, initialY: number) {
   const { updateWorkspaceIconPosition, updateWindowPosition } = useUIStore();
 
   const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const newX = info.point.x;
-    const newY = info.point.y;
+    const newX = initialX + info.offset.x;
+    const newY = initialY + info.offset.y;
 
     switch (type) {
       case 'icon': {
