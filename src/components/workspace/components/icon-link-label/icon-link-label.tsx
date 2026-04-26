@@ -13,11 +13,11 @@ import './icon-link-label.scss';
 interface IconLinkLabelProps {
   icon: WorkspaceIcon;
   className?: string;
-  size?: number;
+  size?: string;
   constraintsRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-function IconLinkLabel({ className, constraintsRef, icon, size = 64 }: IconLinkLabelProps) {
+function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLinkLabelProps) {
   const { extension, iconSrc, label, path, type, uri, x, y } = icon;
   const FILE_EXPLORER_WINDOW_ID = `file-explorer-window`;
 
@@ -49,6 +49,8 @@ function IconLinkLabel({ className, constraintsRef, icon, size = 64 }: IconLinkL
         appName: 'FileExplorer',
         iconSrc: fileExplorerIcon,
         title: 'File Explorer',
+        widthRatio: 0.9,
+        heightRatio: 0.75,
       });
     }
 
@@ -126,8 +128,8 @@ function IconLinkLabel({ className, constraintsRef, icon, size = 64 }: IconLinkL
             src={iconSrc}
             alt={`${label} Icon`}
             style={{
-              width: `${size}px`,
-              height: `${size}px`,
+              width: 'auto',
+              height: `${size}`,
             }}
             className={`icon ${className || ''}`}
             draggable={false}
