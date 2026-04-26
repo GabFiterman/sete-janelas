@@ -1,11 +1,12 @@
 import React from 'react';
-import { closeIcon } from '@/assets';
+import { Close } from '@/assets';
 
 interface WindowLayoutProps {
   children: React.ReactNode;
   iconSrc: string;
   title: string;
 
+  isMaximized: boolean;
   handleClose: () => void;
   handleMaximize: () => void;
   handleMinimize: () => void;
@@ -14,7 +15,9 @@ interface WindowLayoutProps {
 
 function WindowLayout({
   children,
+
   iconSrc,
+  isMaximized,
   title,
 
   handleClose,
@@ -24,14 +27,30 @@ function WindowLayout({
 }: WindowLayoutProps) {
   return (
     <>
-      <div className="title-bar" onPointerDown={handleStartDrag}>
+      <div className="title-bar" onPointerDown={handleStartDrag} onDoubleClick={handleMaximize}>
         <span className="title">
           <img src={iconSrc} alt="." />
           {title}
         </span>
         <div className="controls">
-          <button onClick={handleMinimize}>_</button>
-          <button onClick={handleMaximize}>▢</button>
+          <button
+            className="minimize"
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              handleMinimize();
+            }}
+          >
+            <span>&mdash;</span>
+          </button>
+          <button
+            className="maximize"
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              handleMaximize();
+            }}
+          >
+            <span>{isMaximized ? '\u2750' : '\u25FB'}</span>
+          </button>
           <button
             className="close"
             onMouseDown={(e) => {
@@ -39,7 +58,7 @@ function WindowLayout({
               handleClose();
             }}
           >
-            <img src={closeIcon} alt="x" />
+            <Close size={14} />
           </button>
         </div>
       </div>

@@ -21,13 +21,13 @@
   }
 
   .workspace-fixed-menu-container {
-    z-index: 600;
+    z-index: calc($z-highest * $z-highest + 1);
   }
 
   .workspace-floating-menu-container {
     position: absolute;
     z-index: calc($z-highest * $z-highest);
-    bottom: 3.65em;
+    bottom: 0;
     left: 0;
   }
 }

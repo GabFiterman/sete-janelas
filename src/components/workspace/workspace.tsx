@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useWorkspace from './use-workspace';
 import useUIStore from '@/store/uiStore';
 
@@ -7,8 +8,18 @@ import { IconLinkLabel } from './components';
 import './workspace.scss';
 
 function Workspace() {
-  const { workspaceIcons, windows } = useUIStore();
+  const { workspaceIcons, windows, setViewport } = useUIStore();
   const { style, constraintsRef, handleIconClick } = useWorkspace();
+
+  useEffect(() => {
+    function handleResize() {
+      setViewport(window.innerWidth, window.innerHeight);
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setViewport]);
 
   return (
     <div className="workspace" style={style} onMouseDown={() => handleIconClick()}>

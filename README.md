@@ -1,9 +1,9 @@
 # Sete Janelas - Web Operating System
 
 <div align="center">
-  <img src="https://img.shields.io/github/v/release/GabFiterman/s7te-janelas?style=for-the-badge&label=Vers%C3%A3o&color=blueviolet" alt="Versão" />
-  <img src="https://img.shields.io/github/last-commit/GabFiterman/s7te-janelas?style=for-the-badge&label=Atualizado&color=blue" alt="Last Commit" />
-  <img src="https://img.shields.io/github/repo-size/GabFiterman/s7te-janelas?style=for-the-badge&label=Tamanho&color=success" alt="Repo Size" />
+  <img src="https://img.shields.io/github/v/release/GabFiterman/sete-janelas?style=for-the-badge&label=Vers%C3%A3o&color=blueviolet" alt="Versão" />
+  <img src="https://img.shields.io/github/last-commit/GabFiterman/sete-janelas?style=for-the-badge&label=Atualizado&color=blue" alt="Last Commit" />
+  <img src="https://img.shields.io/github/repo-size/GabFiterman/sete-janelas?style=for-the-badge&label=Tamanho&color=success" alt="Repo Size" />
   <img src="https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow?style=for-the-badge" alt="Status" />
 
   <br>

@@ -134,6 +134,8 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
           title: item.label,
           appName: 'FileExplorer',
           iconSrc: fileExplorerIcon,
+          widthRatio: 0.9,
+          heightRatio: 0.75,
         });
 
         setCurrentPath(newPath);

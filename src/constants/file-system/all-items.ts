@@ -510,7 +510,7 @@ export const ITEMS_MAP_PROJETO_4_SETEJANELAS: Record<string, FileSystemItem> = {
     label: 'Github Repo Sete Janelas',
     path: 'C:/Usuários/Fiterman/Projetos/SeteJanelas/reposetejanelas.html',
     type: 'externalLink',
-    uri: 'https://github.com/GabFiterman/s7te-janelas/',
+    uri: 'https://github.com/GabFiterman/sete-janelas/',
   },
   'C:/USUARIOS/FITERMAN/PROJETOS/SETEJANELAS/BACKLOG.MD': {
     extension: '.md',
