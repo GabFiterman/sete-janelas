@@ -1,7 +1,8 @@
 import { motion, useDragControls } from 'framer-motion';
+import { useMemo } from 'react';
 
 import useUIStore from '@/store/uiStore';
-import { useDraggableElement, useWindowSize } from '@/hooks';
+import { useDraggableElement, useWindowResize } from '@/hooks';
 import { getAppComponent } from '@/components/apps/app-config';
 
 import WindowLayout from './window-layout';
@@ -18,75 +19,104 @@ function Window({ id }: WindowProps) {
   const focusWindow = useUIStore((state) => state.focusWindow);
   const updateWindowStatus = useUIStore((state) => state.updateWindowStatus);
   const FIXED_MENU_HEIGHT = useUIStore((state) => state.CONSTANTS.FIXED_MENU_HEIGHT);
+  const viewportSize = useUIStore((state) => state.viewport);
+  const maxZIndex = useUIStore((state) => state.maxZIndex);
 
-  const viewportSize = useWindowSize();
-  const { dragProps } = useDraggableElement(id, 'window');
+  const safeX = windowData?.x ?? 0;
+  const safeY = windowData?.y ?? 0;
+  const safeW = windowData?.width ?? 0;
+  const safeH = windowData?.height ?? 0;
+  const safeStatus = windowData?.status ?? 'normal';
+
+  const { dragProps } = useDraggableElement(id, 'window', safeX, safeY);
+  const { localDims, isResizing, handlePointerDown } = useWindowResize(id, safeX, safeY, safeW, safeH);
   const controls = useDragControls();
 
-  if (!windowData) return null;
+  const isMaximized = safeStatus === 'maximized';
+  const isDraggable = !isMaximized && !isResizing;
+  const isFocused = windowData?.zIndex === maxZIndex;
 
-  const { appName, height, iconSrc, status, title, width, x, y, zIndex, appProps } = windowData;
-  const AppComponent = getAppComponent(appName);
+  const targetDims = useMemo(
+    () => ({
+      x: isMaximized ? 0 : localDims.x,
+      y: isMaximized ? 0 : localDims.y,
+      width: isMaximized ? viewportSize.width : localDims.width,
+      height: isMaximized ? viewportSize.height - FIXED_MENU_HEIGHT : localDims.height,
+    }),
+    [isMaximized, localDims, viewportSize.width, viewportSize.height, FIXED_MENU_HEIGHT]
+  );
 
-  if (status === 'minimized') return null;
+  if (!windowData || safeStatus === 'minimized') return null;
 
-  let styleMotionProps = {};
-  let isDraggable = false;
-  let dragConstraints = {};
-
-  const currentWidth = width;
-  const currentHeight = height;
-
-  if (status === 'maximized') {
-    styleMotionProps = {
-      left: 0,
-      top: 0,
-      width: viewportSize.width,
-      height: viewportSize.height - FIXED_MENU_HEIGHT,
-    };
-    isDraggable = false;
-  } else if (status === 'normal') {
-    styleMotionProps = { x, y, width, height };
-    isDraggable = true;
-    dragConstraints = {
-      left: 0,
-      top: 0,
-      right: viewportSize.width - currentWidth,
-      bottom: viewportSize.height - currentHeight - FIXED_MENU_HEIGHT,
-    };
-  }
+  const AppComponent = getAppComponent(windowData.appName);
 
   const handleStartDrag = (event: React.PointerEvent) => {
-    if (event.button !== 2) controls.start(event);
+    if (event.button !== 2 && !isMaximized) controls.start(event);
   };
+
   const handleClose = () => closeWindow(id);
   const handleMinimize = () => updateWindowStatus(id, 'minimized');
-  const handleMaximize = () => updateWindowStatus(id, status === 'maximized' ? 'normal' : 'maximized');
+  const handleMaximize = () => {
+    updateWindowStatus(id, isMaximized ? 'normal' : 'maximized');
+  };
 
   return (
     <motion.div
-      className={`window ${status}`}
+      className={`window ${safeStatus} ${isFocused ? 'active' : 'inactive'}`}
       dragControls={controls}
       drag={isDraggable}
       dragListener={false}
-      dragConstraints={dragConstraints}
       onMouseDown={() => focusWindow(id)}
-      initial={{ x, y }}
+      initial={{
+        scale: 0.9,
+        opacity: 0,
+        x: targetDims.x,
+        y: targetDims.y,
+        width: targetDims.width,
+        height: targetDims.height,
+      }}
+      animate={{
+        ...targetDims,
+        scale: 1,
+        opacity: 1,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 350,
+        damping: 25,
+        mass: 0.8,
+      }}
       style={{
-        ...styleMotionProps,
-        zIndex,
+        zIndex: windowData.zIndex,
+        position: 'absolute',
+        top: 0,
+        left: 0,
       }}
       {...dragProps}
     >
+      {!isMaximized && (
+        <div className="resize-handles">
+          <div className="resize-handle n" onPointerDown={(e) => handlePointerDown(e, 'n')} />
+          <div className="resize-handle e" onPointerDown={(e) => handlePointerDown(e, 'e')} />
+          <div className="resize-handle s" onPointerDown={(e) => handlePointerDown(e, 's')} />
+          <div className="resize-handle w" onPointerDown={(e) => handlePointerDown(e, 'w')} />
+          <div className="resize-handle ne" onPointerDown={(e) => handlePointerDown(e, 'ne')} />
+          <div className="resize-handle nw" onPointerDown={(e) => handlePointerDown(e, 'nw')} />
+          <div className="resize-handle se" onPointerDown={(e) => handlePointerDown(e, 'se')} />
+          <div className="resize-handle sw" onPointerDown={(e) => handlePointerDown(e, 'sw')} />
+        </div>
+      )}
+
       <WindowLayout
-        iconSrc={iconSrc}
-        title={title}
+        iconSrc={windowData.iconSrc}
+        title={windowData.title}
+        isMaximized={isMaximized}
         handleClose={handleClose}
         handleMinimize={handleMinimize}
         handleMaximize={handleMaximize}
         handleStartDrag={handleStartDrag}
       >
-        <AppComponent {...appProps} />
+        <AppComponent {...(windowData.appProps ?? {})} />
       </WindowLayout>
     </motion.div>
   );

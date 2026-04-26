@@ -44,10 +44,14 @@ interface UIState {
     WINDOW_MAX_HEIGHT?: number;
   };
 
+  isBooting: boolean;
   isStartMenuOpen: boolean;
   maxZIndex: number;
+  viewport: { width: number; height: number };
   windows: WindowState[];
   workspaceIcons: WorkspaceIcon[];
+
+  setIsBooting: (isBooting: boolean) => void;
 
   activeWindowsByApp: () => GroupedWindows;
 
@@ -58,7 +62,9 @@ interface UIState {
       Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>>
   ) => void;
   setIsStartMenuOpen: (isOpen: boolean) => void;
+  setViewport: (width: number, height: number) => void;
   toggleIsStartMenuOpen: (event?: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+  updateWindowDimensions: (id: string, newX: number, newY: number, newWidth: number, newHeight: number) => void;
   updateWindowPosition: (id: string, newX: number, newY: number) => void;
   updateWindowStatus: (id: string, newStatus: WindowState['status']) => void;
   updateWorkspaceIconPosition: (path: string, newX: number, newY: number) => void;
@@ -73,6 +79,11 @@ const useUIStore = create<UIState>((set, get) => ({
     WINDOW_MAX_WIDTH: INITIAL_USER_WINDOW.width,
   },
 
+  viewport: {
+    width: INITIAL_USER_WINDOW.width,
+    height: INITIAL_USER_WINDOW.height,
+  },
+
   isStartMenuOpen: false,
   maxZIndex: 1000,
   windows: [],
@@ -81,6 +92,9 @@ const useUIStore = create<UIState>((set, get) => ({
     x: (index % 2) * 150,
     y: Math.floor(index / 2) * 150,
   })),
+
+  isBooting: true,
+  setIsBooting: (isBooting) => set({ isBooting }),
 
   activeWindowsByApp: () => {
     const windows = get().windows;
@@ -130,7 +144,7 @@ const useUIStore = create<UIState>((set, get) => ({
                 height: newWindow.height ?? window.height,
                 appProps: newWindow.appProps ?? window.appProps,
                 zIndex: newZIndex,
-                status: 'normal',
+                status: newWindow.status ?? window.status,
               };
             }
             return window;
@@ -140,8 +154,6 @@ const useUIStore = create<UIState>((set, get) => ({
       }
 
       const newZIndex = state.maxZIndex + 1;
-      // Calcular tamanhos padrão dinamicamente com base no tamanho atual da tela,
-      // respeitando os valores máximos/nominais já definidos em CONSTANTS.
       const screenW = window.innerWidth;
       const screenH = window.innerHeight;
       const fixedMenu = get().CONSTANTS.FIXED_MENU_HEIGHT;
@@ -194,36 +206,48 @@ const useUIStore = create<UIState>((set, get) => ({
 
   setIsStartMenuOpen: (isOpen) => set({ isStartMenuOpen: isOpen }),
 
+  setViewport: (width, height) => set({ viewport: { width, height } }),
+
   toggleIsStartMenuOpen: () => set((state) => ({ isStartMenuOpen: !state.isStartMenuOpen })),
 
+  updateWindowDimensions: (id, newX, newY, newWidth, newHeight) =>
+    set((state) => {
+      const { viewport, CONSTANTS } = state;
+      const maxX = viewport.width - newWidth;
+      const maxY = viewport.height - CONSTANTS.FIXED_MENU_HEIGHT - newHeight;
+
+      const clampedX = Math.max(0, Math.min(newX, maxX));
+      const clampedY = Math.max(0, Math.min(newY, maxY));
+
+      return {
+        windows: state.windows.map((window) =>
+          window.id === id ? { ...window, x: clampedX, y: clampedY, width: newWidth, height: newHeight } : window
+        ),
+      };
+    }),
+
   updateWindowPosition: (id, newX, newY) =>
-    set((state) => ({
-      windows: state.windows.map((window) => (window.id === id ? { ...window, x: newX, y: newY } : window)),
-    })),
+    set((state) => {
+      const window = state.windows.find((w) => w.id === id);
+      if (!window) return state;
+
+      const { viewport, CONSTANTS } = state;
+      const maxX = viewport.width - window.width;
+      const maxY = viewport.height - CONSTANTS.FIXED_MENU_HEIGHT - window.height;
+
+      const clampedX = Math.max(0, Math.min(newX, maxX));
+      const clampedY = Math.max(0, Math.min(newY, maxY));
+
+      return {
+        windows: state.windows.map((w) => (w.id === id ? { ...w, x: clampedX, y: clampedY } : w)),
+      };
+    }),
 
   updateWindowStatus: (id, newStatus) => {
-    // Calcular dimensões de maximização dinamicamente conforme a tela atual
-    const constants = get().CONSTANTS;
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
-    const fixedMenu = constants.FIXED_MENU_HEIGHT;
-    const maxW = constants.WINDOW_MAX_WIDTH ?? screenW;
-    const maxH = constants.WINDOW_MAX_HEIGHT ?? screenH - fixedMenu;
-
     set((state) => ({
       windows: state.windows.map((window) => {
         if (window.id === id) {
-          const newProps: Partial<WindowState> = {
-            status: newStatus,
-          };
-          if (newStatus === 'maximized') {
-            newProps.x = 0;
-            newProps.y = 0;
-            newProps.width = Math.min(maxW, screenW);
-            newProps.height = Math.min(maxH, screenH - fixedMenu);
-          }
-
-          return { ...window, ...newProps };
+          return { ...window, status: newStatus };
         }
         return window;
       }),
@@ -231,9 +255,18 @@ const useUIStore = create<UIState>((set, get) => ({
   },
 
   updateWorkspaceIconPosition: (path, newX, newY) =>
-    set((state) => ({
-      workspaceIcons: state.workspaceIcons.map((icon) => (icon.path === path ? { ...icon, x: newX, y: newY } : icon)),
-    })),
+    set((state) => {
+      const { viewport, CONSTANTS } = state;
+
+      const clampedX = Math.max(0, Math.min(newX, viewport.width - 80));
+      const clampedY = Math.max(0, Math.min(newY, viewport.height - CONSTANTS.FIXED_MENU_HEIGHT - 80));
+
+      return {
+        workspaceIcons: state.workspaceIcons.map((icon) =>
+          icon.path === path ? { ...icon, x: clampedX, y: clampedY } : icon
+        ),
+      };
+    }),
 }));
 
 export default useUIStore;

@@ -21,7 +21,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
   const { extension, iconSrc, label, path, type, uri, x, y } = icon;
   const FILE_EXPLORER_WINDOW_ID = `file-explorer-window`;
 
-  const { dragProps } = useDraggableElement(path, 'icon');
+  const { dragProps } = useDraggableElement(path, 'icon', x, y);
 
   const { openWindow } = useUiStore();
   const { getIsItemSelected, toggleItemSelection } = useFileExplorerStore();
