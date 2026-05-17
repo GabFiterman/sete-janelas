@@ -1,19 +1,34 @@
 import { useFileExplorerStore } from '../../use-file-explorer';
+import { useIsMobile } from '@/hooks';
 
 import { BtnIconTextLink } from '@/components';
 import { ITEMS_MAP_ALL, STRUCTURE_MAP_SIDE_MENU, type FileSystemItem } from '@/constants';
 import { normalizeStringForPath } from '@/utils';
 
 function FileExplorerSideMenu() {
-  const { getIsItemSelected, navigateTo, toggleItemSelection } = useFileExplorerStore();
+  const { getIsItemSelected, navigateTo, toggleItemSelection, isSidebarOpen, setIsSidebarOpen } =
+    useFileExplorerStore();
+  const isMobile = useIsMobile();
 
   const handleItemClick = (item: FileSystemItem | null | undefined) => {
     if (!item) return;
     navigateTo(item);
+    if (isMobile) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  const handleItemInteraction = (event: React.MouseEvent, item: FileSystemItem) => {
+    if (isMobile) {
+      navigateTo(item);
+      setIsSidebarOpen(false);
+    } else {
+      toggleItemSelection(event, item);
+    }
   };
 
   return (
-    <aside className="file-explorer-side-menu">
+    <aside className={`file-explorer-side-menu ${isMobile && isSidebarOpen ? 'mobile-open' : ''}`}>
       {STRUCTURE_MAP_SIDE_MENU &&
         Object.entries(STRUCTURE_MAP_SIDE_MENU).map(([pathKey, subItems]) => {
           const mainItem = ITEMS_MAP_ALL[normalizeStringForPath(pathKey)];
@@ -24,7 +39,7 @@ function FileExplorerSideMenu() {
               <BtnIconTextLink
                 className="side-menu-item pl-15 py-1"
                 icon={mainItem.iconSrc}
-                onClick={(event) => toggleItemSelection(event, mainItem)}
+                onClick={(event) => handleItemInteraction(event, mainItem)}
                 onDoubleClick={() => handleItemClick(mainItem)}
                 text={mainItem.label}
                 selected={getIsItemSelected(mainItem)}
@@ -38,7 +53,7 @@ function FileExplorerSideMenu() {
                         className="side-menu-subitem pl-28 py-1"
                         icon={subItem.iconSrc}
                         key={subItem.uri}
-                        onClick={(event) => toggleItemSelection(event, subItem)}
+                        onClick={(event) => handleItemInteraction(event, subItem)}
                         onDoubleClick={() => handleItemClick(subItem)}
                         text={subItem.label}
                         selected={getIsItemSelected(subItem)}

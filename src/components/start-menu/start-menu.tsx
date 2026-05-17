@@ -1,20 +1,32 @@
 import useUIStore from '@/store/uiStore';
 import useStartMenuStates from './use-start-menu';
+import { useIsMobile } from '@/hooks';
 
 import { InputAndIcon } from '@/components';
 import { indicationArrowIcon, personalUserIcon } from '@/assets';
 import './start-menu.scss';
 
 function StartMenu() {
-  const { isStartMenuOpen } = useUIStore();
+  const { isStartMenuOpen, setIsStartMenuOpen } = useUIStore();
+  const isMobile = useIsMobile();
 
   const { handleAppClick, startMenuApps, startMenuShortcuts } = useStartMenuStates();
 
   return (
     isStartMenuOpen && (
-      <div className="start-menu" onMouseDown={(event) => event.stopPropagation()}>
-        <div className="start-menu-left-container">
-          <div className="start-menu-apps">
+      <div
+        className={`start-menu ${isMobile ? 'mobile-fullscreen' : ''}`}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <div
+          className="start-menu-left-container"
+          onMouseDown={() => {
+            if (isMobile) {
+              setIsStartMenuOpen(false);
+            }
+          }}
+        >
+          <div className="start-menu-apps" onMouseDown={(event) => event.stopPropagation()}>
             {startMenuApps.map((item) => (
               <div
                 className="start-menu-app-item"
@@ -27,7 +39,7 @@ function StartMenu() {
             ))}
           </div>
 
-          <div className="start-menu-app-controller">
+          <div className="start-menu-app-controller" onMouseDown={(event) => event.stopPropagation()}>
             <div className="start-menu-app-divider" />
 
             <div className="start-menu-app-all-apps disabled">

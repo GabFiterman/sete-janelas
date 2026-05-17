@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { generateUUID, isImageByExtension, isVideoByExtension, isTextByExtension } from '@/utils';
 import { ITEMS_MAP_WORKSPACE } from '@/constants';
-import { useDraggableElement } from '@/hooks';
+import { useDraggableElement, useIsMobile } from '@/hooks';
 import useUiStore, { type WorkspaceIcon } from '@/store/uiStore';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 
@@ -25,6 +25,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
 
   const { openWindow } = useUiStore();
   const { getIsItemSelected, toggleItemSelection } = useFileExplorerStore();
+  const isMobile = useIsMobile();
 
   const iconRef = useRef<HTMLDivElement>(null);
   const [iconDimensions, setIconDimensions] = useState({
@@ -103,8 +104,14 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
 
   function handleSingleClick(event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation();
-    toggleItemSelection(event, icon);
+    if (isMobile) {
+      handleDoubleClick(event);
+    } else {
+      toggleItemSelection(event, icon);
+    }
   }
+
+  const adjustedSize = isMobile ? '4.5vh' : size;
 
   return icon ? (
     <motion.div
@@ -112,7 +119,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
       onDoubleClick={(event) => handleDoubleClick(event)}
       onClick={(event) => handleSingleClick(event)}
       dragConstraints={constraintsRef}
-      drag={true}
+      drag={!isMobile}
       style={{
         x: x,
         y: y,
@@ -129,7 +136,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
             alt={`${label} Icon`}
             style={{
               width: 'auto',
-              height: `${size}`,
+              height: `${adjustedSize}`,
             }}
             className={`icon ${className || ''}`}
             draggable={false}

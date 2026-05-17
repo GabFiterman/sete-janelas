@@ -127,6 +127,7 @@ const useUIStore = create<UIState>((set, get) => ({
   openWindow: (newWindow) =>
     set((state) => {
       const { windows } = state;
+      const isMobileDevice = window.innerWidth < 768;
 
       const existingWindow = windows.find((window) => window.id === newWindow.id);
 
@@ -144,7 +145,7 @@ const useUIStore = create<UIState>((set, get) => ({
                 height: newWindow.height ?? window.height,
                 appProps: newWindow.appProps ?? window.appProps,
                 zIndex: newZIndex,
-                status: newWindow.status ?? window.status,
+                status: isMobileDevice ? 'maximized' : (newWindow.status ?? window.status),
               };
             }
             return window;
@@ -191,7 +192,7 @@ const useUIStore = create<UIState>((set, get) => ({
           {
             ...newWindow,
             height: resolvedHeight(newWindow.height, newWindow.heightRatio),
-            status: newWindow.status ?? 'normal',
+            status: isMobileDevice ? 'maximized' : (newWindow.status ?? 'normal'),
             width: resolvedWidth(newWindow.width, newWindow.widthRatio),
             x: newWindow.x ?? 50,
             y: newWindow.y ?? 50,

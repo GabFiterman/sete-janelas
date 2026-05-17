@@ -19,6 +19,8 @@ interface FileExplorerState {
   history: string[];
   historyIndex: number;
   selectedItemPaths: string[];
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (isOpen: boolean) => void;
 
   getCurrentDirectoryContentsLength: () => number;
   getHistoryLength: () => number;
@@ -67,6 +69,8 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
   history: [INITIAL_PATH],
   historyIndex: 0,
   selectedItemPaths: [],
+  isSidebarOpen: false,
+  setIsSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
 
   getCurrentDirectoryContentsLength: () => get().currentDirectoryContents.length,
   getHistoryLength: () => get().history.length - 1,
