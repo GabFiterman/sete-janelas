@@ -61,15 +61,7 @@ function FixedMenu() {
   };
 
   const handleSearch = () => {
-    openWindow({
-      id: 'internet-explorer-window',
-      title: 'Internet Explorer',
-      appName: 'InternetExplorer',
-      iconSrc: internetExplorerIcon,
-      appProps: {
-        initialUrl: 'https://www.google.com',
-      },
-    });
+    setIsStartMenuOpen(true, true);
   };
 
   if (isMobile) {

@@ -7,7 +7,7 @@ import { useDraggableElement, useIsMobile } from '@/hooks';
 import useUiStore, { type WorkspaceIcon } from '@/store/uiStore';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 
-import { fileExplorerIcon, mediaCenterImageIcon, notepadIcon, videosIcon } from '@/assets';
+import { fileExplorerIcon, mediaCenterImageIcon, notepadIcon, videosIcon, internetExplorerIcon } from '@/assets';
 import './icon-link-label.scss';
 
 interface IconLinkLabelProps {
@@ -56,6 +56,53 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
     }
 
     if (type === 'file') {
+      if (icon.appName) {
+        const appName = icon.appName;
+        if (appName === 'FileExplorer') {
+          openWindow({
+            id: FILE_EXPLORER_WINDOW_ID,
+            appName: 'FileExplorer',
+            iconSrc: fileExplorerIcon,
+            title: 'File Explorer',
+            widthRatio: 0.9,
+            heightRatio: 0.75,
+          });
+        } else if (appName === 'InternetExplorer') {
+          openWindow({
+            id: 'internet-explorer-window',
+            appName: 'InternetExplorer',
+            iconSrc: internetExplorerIcon,
+            title: 'Internet Explorer',
+          });
+        } else if (appName === 'Notepad') {
+          const appId = `notepad-window-${uri}-${generateUUID}`;
+          openWindow({
+            id: appId,
+            title: label + extension,
+            appName: 'Notepad',
+            iconSrc: notepadIcon,
+            appProps: {
+              initialItem: icon,
+            },
+          });
+        } else if (appName === 'MediaCenterImage') {
+          openWindow({
+            id: 'media-center-image-window',
+            appName: 'MediaCenterImage',
+            iconSrc: mediaCenterImageIcon,
+            title: 'Visualizador de Imagens',
+          });
+        } else if (appName === 'MediaCenterVideo') {
+          openWindow({
+            id: 'media-center-video-window',
+            appName: 'MediaCenterVideo',
+            iconSrc: videosIcon,
+            title: 'Reprodutor de Vídeo',
+          });
+        }
+        return;
+      }
+
       if (isImageByExtension(extension)) {
         const imagePlaylist = ITEMS_MAP_WORKSPACE.filter(
           (item) => item.type === 'file' && isImageByExtension(item.extension)

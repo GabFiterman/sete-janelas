@@ -1,16 +1,33 @@
+import { useState, useEffect, useRef } from 'react';
 import useUIStore from '@/store/uiStore';
 import useStartMenuStates from './use-start-menu';
 import { useIsMobile } from '@/hooks';
+import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
+import { searchVFS } from '@/constants';
 
 import { InputAndIcon } from '@/components';
 import { indicationArrowIcon, personalUserIcon } from '@/assets';
 import './start-menu.scss';
 
 function StartMenu() {
-  const { isStartMenuOpen, setIsStartMenuOpen } = useUIStore();
+  const { isStartMenuOpen, setIsStartMenuOpen, startMenuAutofocusSearch } = useUIStore();
   const isMobile = useIsMobile();
+  const { navigateTo } = useFileExplorerStore();
 
   const { handleAppClick, startMenuApps, startMenuShortcuts } = useStartMenuStates();
+  const [searchVal, setSearchVal] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isStartMenuOpen) {
+      setSearchVal('');
+      if (startMenuAutofocusSearch) {
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 50);
+      }
+    }
+  }, [isStartMenuOpen, startMenuAutofocusSearch]);
 
   return (
     isStartMenuOpen && (
@@ -27,16 +44,47 @@ function StartMenu() {
           }}
         >
           <div className="start-menu-apps" onMouseDown={(event) => event.stopPropagation()}>
-            {startMenuApps.map((item) => (
-              <div
-                className="start-menu-app-item"
-                key={item.id}
-                onMouseDown={(event) => handleAppClick(event, item.action)}
-              >
-                <img src={item.icon} className="start-menu-icon" />
-                <span>{item.label}</span>
+            {searchVal.trim() ? (
+              <div className="start-menu-search-results">
+                {searchVFS(searchVal).length > 0 ? (
+                  searchVFS(searchVal).map((item, index) => (
+                    <div
+                      key={item.path || index}
+                      className="start-menu-search-item"
+                      onMouseDown={(event) => {
+                        event.stopPropagation();
+                        navigateTo(item);
+                        setIsStartMenuOpen(false);
+                      }}
+                    >
+                      <img src={item.iconSrc} className="start-menu-search-icon" />
+                      <div className="start-menu-search-details">
+                        <span className="start-menu-search-label">
+                          {item.label}
+                          {item.type === 'file' ? item.extension : ''}
+                        </span>
+                        <span className="start-menu-search-path">{item.path}</span>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="start-menu-search-no-results">
+                    Nenhum resultado encontrado.
+                  </div>
+                )}
               </div>
-            ))}
+            ) : (
+              startMenuApps.map((item) => (
+                <div
+                  className="start-menu-app-item"
+                  key={item.id}
+                  onMouseDown={(event) => handleAppClick(event, item.action)}
+                >
+                  <img src={item.icon} className="start-menu-icon" />
+                  <span>{item.label}</span>
+                </div>
+              ))
+            )}
           </div>
 
           <div className="start-menu-app-controller" onMouseDown={(event) => event.stopPropagation()}>
@@ -48,7 +96,13 @@ function StartMenu() {
             </div>
 
             <div className="start-menu-app-search">
-              <InputAndIcon type="text" placeholder="Pesquisar programas e arquivos" disabled />
+              <InputAndIcon
+                ref={inputRef}
+                type="text"
+                placeholder="Pesquisar programas e arquivos"
+                value={searchVal}
+                onChange={(e) => setSearchVal(e.target.value)}
+              />
             </div>
           </div>
         </div>

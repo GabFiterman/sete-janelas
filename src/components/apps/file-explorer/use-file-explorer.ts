@@ -21,6 +21,8 @@ interface FileExplorerState {
   selectedItemPaths: string[];
   isSidebarOpen: boolean;
   setIsSidebarOpen: (isOpen: boolean) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 
   getCurrentDirectoryContentsLength: () => number;
   getHistoryLength: () => number;
@@ -71,6 +73,8 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
   selectedItemPaths: [],
   isSidebarOpen: false,
   setIsSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
+  searchQuery: '',
+  setSearchQuery: (query) => set({ searchQuery: query, selectedItemPaths: [] }),
 
   getCurrentDirectoryContentsLength: () => get().currentDirectoryContents.length,
   getHistoryLength: () => get().history.length - 1,
@@ -94,6 +98,7 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
       history: [newPath],
       historyIndex: 0,
       selectedItemPaths: [],
+      searchQuery: '',
     });
   },
 
@@ -106,6 +111,7 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
           currentDirectoryContents: getContentsByPath(newPath),
           currentPath: newPath,
           historyIndex: newIndex,
+          searchQuery: '',
         };
       }
       return state;
@@ -119,6 +125,7 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
           currentDirectoryContents: getContentsByPath(newPath),
           currentPath: newPath,
           historyIndex: newIndex,
+          searchQuery: '',
         };
       }
       return state;
@@ -150,8 +157,56 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
           history: newHistory,
           historyIndex: newHistory.length - 1,
           selectedItemPaths: [],
+          searchQuery: '',
         };
       } else if (item.type === 'file') {
+        if (item.appName) {
+          const appName = item.appName;
+          if (appName === 'FileExplorer') {
+            openWindow({
+              id: 'file-explorer-window',
+              title: 'File Explorer',
+              appName: 'FileExplorer',
+              iconSrc: fileExplorerIcon,
+              widthRatio: 0.9,
+              heightRatio: 0.75,
+            });
+          } else if (appName === 'InternetExplorer') {
+            openWindow({
+              id: INTERNET_EXPLORER_WINDOW_ID,
+              title: 'Internet Explorer',
+              appName: 'InternetExplorer',
+              iconSrc: internetExplorerIcon,
+            });
+          } else if (appName === 'Notepad') {
+            const appId = NOTEPAD_WINDOW_ID(item.path);
+            openWindow({
+              id: appId,
+              title: item.label + item.extension,
+              appName: 'Notepad',
+              iconSrc: notepadIcon,
+              appProps: {
+                initialItem: undefined,
+              },
+            });
+          } else if (appName === 'MediaCenterImage') {
+            openWindow({
+              id: MEDIA_CENTER_IMAGE_WINDOW_ID,
+              title: 'Visualizador de Imagens',
+              appName: 'MediaCenterImage',
+              iconSrc: pictureIcon,
+            });
+          } else if (appName === 'MediaCenterVideo') {
+            openWindow({
+              id: MEDIA_CENTER_VIDEO_WINDOW_ID,
+              title: 'Reprodutor de Vídeo',
+              appName: 'MediaCenterVideo',
+              iconSrc: videosIcon,
+            });
+          }
+          return state;
+        }
+
         if (isImageByExtension(item.extension)) {
           const playlist = get().currentDirectoryContents.filter(
             (i) => i.type === 'file' && isImageByExtension(i.extension)

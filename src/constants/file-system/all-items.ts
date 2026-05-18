@@ -50,6 +50,15 @@ export const ITEMS_MAP_ROOT: Record<string, FileSystemItem> = {
     type: 'folder',
     uri: 'programas/',
   },
+
+  'C:/SISTEMA_DE_ARQUIVOS': {
+    extension: '/',
+    iconSrc: folderIcon,
+    path: 'C:/Sistema de arquivos',
+    label: 'Sistema de Arquivos',
+    type: 'folder',
+    uri: 'sistema_de_arquivos/',
+  },
 };
 
 // ROOT LEVEL 2 [ USUÁRIOS ]
@@ -586,6 +595,55 @@ export const ITEMS_MAP_ABOUT_ME: Record<string, FileSystemItem> = {
   },
 };
 
+// ROOT LEVEL 2 [ SISTEMA_DE_ARQUIVOS ]
+export const ITEMS_MAP_SISTEMA_DE_ARQUIVOS: Record<string, FileSystemItem> = {
+  'C:/SISTEMA_DE_ARQUIVOS/NOTEPAD.EXE': {
+    extension: '.exe',
+    iconSrc: notepadIcon,
+    label: 'Notepad',
+    path: 'C:/Sistema de arquivos/notepad.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/notepad.exe',
+    appName: 'Notepad',
+  },
+  'C:/SISTEMA_DE_ARQUIVOS/EXPLORER.EXE': {
+    extension: '.exe',
+    iconSrc: fileExplorerIcon,
+    label: 'File Explorer',
+    path: 'C:/Sistema de arquivos/explorer.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/explorer.exe',
+    appName: 'FileExplorer',
+  },
+  'C:/SISTEMA_DE_ARQUIVOS/IEXPLORE.EXE': {
+    extension: '.exe',
+    iconSrc: internetExplorerIcon,
+    label: 'Internet Explorer',
+    path: 'C:/Sistema de arquivos/iexplore.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/iexplore.exe',
+    appName: 'InternetExplorer',
+  },
+  'C:/SISTEMA_DE_ARQUIVOS/IMAGER.EXE': {
+    extension: '.exe',
+    iconSrc: pictureIcon,
+    label: 'Visualizador de Imagens',
+    path: 'C:/Sistema de arquivos/imager.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/imager.exe',
+    appName: 'MediaCenterImage',
+  },
+  'C:/SISTEMA_DE_ARQUIVOS/PLAYER.EXE': {
+    extension: '.exe',
+    iconSrc: videosIcon,
+    label: 'Reprodutor de Vídeo',
+    path: 'C:/Sistema de arquivos/player.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/player.exe',
+    appName: 'MediaCenterVideo',
+  },
+};
+
 // EXPORT ALL AS: ITEMS_MAP_ALL
 export const ITEMS_MAP_ALL: Record<string, FileSystemItem> = {
   ...ITEMS_MAP_C_DRIVE,
@@ -601,4 +659,5 @@ export const ITEMS_MAP_ALL: Record<string, FileSystemItem> = {
   ...ITEMS_MAP_PROJETO_3_LEAFLETZEN,
   ...ITEMS_MAP_PROJETO_4_SETEJANELAS,
   ...ITEMS_MAP_ABOUT_ME,
+  ...ITEMS_MAP_SISTEMA_DE_ARQUIVOS,
 };
