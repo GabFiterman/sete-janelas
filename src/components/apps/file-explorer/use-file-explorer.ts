@@ -2,7 +2,14 @@ import { create } from 'zustand';
 import { ITEMS_MAP_ALL, STRUCTURE_MAP_FILE_SYSTEM, type FileSystemItem } from '@/constants';
 import { isImageByExtension, isTextByExtension, isVideoByExtension, normalizeStringForPath } from '@/utils';
 import useUIStore from '@/store/uiStore';
-import { fileExplorerIcon, internetExplorerIcon, mediaCenterImageIcon, notepadIcon, videosIcon } from '@/assets';
+import {
+  fileExplorerIcon,
+  internetExplorerIcon,
+  mediaCenterImageIcon,
+  notepadIcon,
+  pictureIcon,
+  videosIcon,
+} from '@/assets';
 
 const INITIAL_URI = 'favoritos/';
 const ALIAS_TO_PATH_MAP = new Map<string, string>();

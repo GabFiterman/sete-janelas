@@ -212,7 +212,7 @@ const useUIStore = create<UIState>((set, get) => ({
 
   setViewport: (width, height) => set({ viewport: { width, height } }),
 
-  toggleIsStartMenuOpen: (event, autofocusSearch = false) =>
+  toggleIsStartMenuOpen: (_event, autofocusSearch = false) =>
     set((state) => ({
       isStartMenuOpen: !state.isStartMenuOpen,
       startMenuAutofocusSearch: !state.isStartMenuOpen ? autofocusSearch : false,
