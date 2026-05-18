@@ -207,7 +207,8 @@ const useUIStore = create<UIState>((set, get) => ({
       };
     }),
 
-  setIsStartMenuOpen: (isOpen, autofocusSearch = false) => set({ isStartMenuOpen: isOpen, startMenuAutofocusSearch: autofocusSearch }),
+  setIsStartMenuOpen: (isOpen, autofocusSearch = false) =>
+    set({ isStartMenuOpen: isOpen, startMenuAutofocusSearch: autofocusSearch }),
 
   setViewport: (width, height) => set({ viewport: { width, height } }),
 

@@ -4,7 +4,7 @@ import useUIStore from '@/store/uiStore';
 import useFixedMenuStates from './use-fixed-menu';
 import { FixedMenuTaskbarItem } from './components';
 import { DatetimeWidget } from '../common/widgets';
-import { ArrowLeft, Search, internetExplorerIcon } from '@/assets';
+import { ArrowLeft, Search } from '@/assets';
 import { useIsMobile } from '@/hooks';
 import './fixed-menu.scss';
 
@@ -18,7 +18,6 @@ function FixedMenu() {
   const windows = useUIStore((state) => state.windows);
   const closeWindow = useUIStore((state) => state.closeWindow);
   const toggleIsStartMenuOpen = useUIStore((state) => state.toggleIsStartMenuOpen);
-  const openWindow = useUIStore((state) => state.openWindow);
   const isStartMenuOpen = useUIStore((state) => state.isStartMenuOpen);
   const setIsStartMenuOpen = useUIStore((state) => state.setIsStartMenuOpen);
   const isMobile = useIsMobile();

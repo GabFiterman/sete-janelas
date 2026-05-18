@@ -5,9 +5,7 @@ import { searchVFS } from '@/constants';
 function FileExplorerFooter() {
   const { currentDirectoryContents, getSelectedItemsLength, searchQuery } = useFileExplorerStore();
 
-  const totalItems = searchQuery.trim()
-    ? searchVFS(searchQuery).length
-    : currentDirectoryContents?.length || 0;
+  const totalItems = searchQuery.trim() ? searchVFS(searchQuery).length : currentDirectoryContents?.length || 0;
 
   return (
     <div className="file-explorer-footer">

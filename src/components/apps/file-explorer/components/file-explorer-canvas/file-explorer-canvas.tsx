@@ -3,18 +3,10 @@ import { BtnIconTextLink } from '@/components';
 import { searchVFS } from '@/constants';
 
 function FileExplorerCanvas() {
-  const {
-    currentDirectoryContents,
-    getIsItemSelected,
-    navigateTo,
-    toggleItemSelection,
-    searchQuery,
-    setSearchQuery,
-  } = useFileExplorerStore();
+  const { currentDirectoryContents, getIsItemSelected, navigateTo, toggleItemSelection, searchQuery, setSearchQuery } =
+    useFileExplorerStore();
 
-  const itemsToRender = searchQuery.trim()
-    ? searchVFS(searchQuery)
-    : currentDirectoryContents;
+  const itemsToRender = searchQuery.trim() ? searchVFS(searchQuery) : currentDirectoryContents;
 
   return (
     <div className="file-explorer-canvas-container">
@@ -65,4 +57,3 @@ function FileExplorerCanvas() {
 }
 
 export default FileExplorerCanvas;
-

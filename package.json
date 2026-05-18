@@ -1,7 +1,7 @@
 {
   "name": "sete-janelas",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",

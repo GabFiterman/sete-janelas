@@ -68,9 +68,7 @@ function StartMenu() {
                     </div>
                   ))
                 ) : (
-                  <div className="start-menu-search-no-results">
-                    Nenhum resultado encontrado.
-                  </div>
+                  <div className="start-menu-search-no-results">Nenhum resultado encontrado.</div>
                 )}
               </div>
             ) : (
