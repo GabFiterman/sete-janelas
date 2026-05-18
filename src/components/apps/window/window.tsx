@@ -2,7 +2,7 @@ import { motion, useDragControls } from 'framer-motion';
 import { useMemo } from 'react';
 
 import useUIStore from '@/store/uiStore';
-import { useDraggableElement, useWindowResize } from '@/hooks';
+import { useDraggableElement, useWindowResize, useIsMobile } from '@/hooks';
 import { getAppComponent } from '@/components/apps/app-config';
 
 import WindowLayout from './window-layout';
@@ -22,6 +22,8 @@ function Window({ id }: WindowProps) {
   const viewportSize = useUIStore((state) => state.viewport);
   const maxZIndex = useUIStore((state) => state.maxZIndex);
 
+  const isMobile = useIsMobile();
+
   const safeX = windowData?.x ?? 0;
   const safeY = windowData?.y ?? 0;
   const safeW = windowData?.width ?? 0;
@@ -32,7 +34,7 @@ function Window({ id }: WindowProps) {
   const { localDims, isResizing, handlePointerDown } = useWindowResize(id, safeX, safeY, safeW, safeH);
   const controls = useDragControls();
 
-  const isMaximized = safeStatus === 'maximized';
+  const isMaximized = safeStatus === 'maximized' || isMobile;
   const isDraggable = !isMaximized && !isResizing;
   const isFocused = windowData?.zIndex === maxZIndex;
 
@@ -41,9 +43,9 @@ function Window({ id }: WindowProps) {
       x: isMaximized ? 0 : localDims.x,
       y: isMaximized ? 0 : localDims.y,
       width: isMaximized ? viewportSize.width : localDims.width,
-      height: isMaximized ? viewportSize.height - FIXED_MENU_HEIGHT : localDims.height,
+      height: isMaximized ? viewportSize.height - (isMobile ? 48 : FIXED_MENU_HEIGHT) : localDims.height,
     }),
-    [isMaximized, localDims, viewportSize.width, viewportSize.height, FIXED_MENU_HEIGHT]
+    [isMaximized, localDims, viewportSize.width, viewportSize.height, FIXED_MENU_HEIGHT, isMobile]
   );
 
   if (!windowData || safeStatus === 'minimized') return null;
@@ -57,6 +59,7 @@ function Window({ id }: WindowProps) {
   const handleClose = () => closeWindow(id);
   const handleMinimize = () => updateWindowStatus(id, 'minimized');
   const handleMaximize = () => {
+    if (isMobile) return;
     updateWindowStatus(id, isMaximized ? 'normal' : 'maximized');
   };
 
@@ -115,6 +118,7 @@ function Window({ id }: WindowProps) {
         handleMinimize={handleMinimize}
         handleMaximize={handleMaximize}
         handleStartDrag={handleStartDrag}
+        isMobile={isMobile}
       >
         <AppComponent {...(windowData.appProps ?? {})} />
       </WindowLayout>
