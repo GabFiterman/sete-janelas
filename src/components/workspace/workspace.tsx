@@ -34,10 +34,10 @@ function Workspace() {
           })}
         </div>
       </div>
-      <div className="workspace-floating-menu-container">
+      <div className="workspace-floating-menu-container" onMouseDown={(e) => e.stopPropagation()}>
         <StartMenu />
       </div>
-      <div className="workspace-fixed-menu-container">
+      <div className="workspace-fixed-menu-container" onMouseDown={(e) => e.stopPropagation()}>
         <FixedMenu />
       </div>
     </div>

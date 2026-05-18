@@ -2,21 +2,18 @@ import { Routes, Route } from 'react-router-dom';
 import RouteHandler from '@/RouteHandler';
 
 import useUIStore from '@/store/uiStore';
-import { useIsMobile } from '@/hooks';
 
-import { Workspace, MobileFallback, BootScreen } from '@/components';
+import { Workspace, BootScreen } from '@/components';
 
 import './styles/index.scss';
 
 function App() {
-  const isMobile = useIsMobile();
   const isBooting = useUIStore((state) => state.isBooting);
 
   return (
     <>
       <BootScreen />
-      {!isBooting && isMobile && <MobileFallback />}
-      {!isBooting && !isMobile && (
+      {!isBooting && (
         <div className="App">
           <Workspace />
           <Routes>

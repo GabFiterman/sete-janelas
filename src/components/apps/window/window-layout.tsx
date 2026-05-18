@@ -11,6 +11,7 @@ interface WindowLayoutProps {
   handleMaximize: () => void;
   handleMinimize: () => void;
   handleStartDrag: (event: React.PointerEvent) => void;
+  isMobile?: boolean;
 }
 
 function WindowLayout({
@@ -24,6 +25,7 @@ function WindowLayout({
   handleMaximize,
   handleMinimize,
   handleStartDrag,
+  isMobile,
 }: WindowLayoutProps) {
   return (
     <>
@@ -33,24 +35,28 @@ function WindowLayout({
           {title}
         </span>
         <div className="controls">
-          <button
-            className="minimize"
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              handleMinimize();
-            }}
-          >
-            <span>&mdash;</span>
-          </button>
-          <button
-            className="maximize"
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              handleMaximize();
-            }}
-          >
-            <span>{isMaximized ? '\u2750' : '\u25FB'}</span>
-          </button>
+          {!isMobile && (
+            <>
+              <button
+                className="minimize"
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  handleMinimize();
+                }}
+              >
+                <span>&mdash;</span>
+              </button>
+              <button
+                className="maximize"
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  handleMaximize();
+                }}
+              >
+                <span>{isMaximized ? '\u2750' : '\u25FB'}</span>
+              </button>
+            </>
+          )}
           <button
             className="close"
             onMouseDown={(e) => {

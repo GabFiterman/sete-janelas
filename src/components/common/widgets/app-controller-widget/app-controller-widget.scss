@@ -72,6 +72,12 @@
     height: -webkit-fill-available;
   }
 
+  .controller-actions {
+    @media (max-width: 767px) {
+      display: none !important;
+    }
+  }
+
   .controller-action-item {
     align-items: center;
     display: flex;

@@ -72,6 +72,27 @@ function MediaCenterImage({
       setIsLoading(false);
     }
   };
+  const currentIndexRef = useRef(currentIndex);
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    const handleAppBack = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail.windowId === 'media-center-image-window') {
+        if (currentIndexRef.current > 0) {
+          setCurrentIndex((prev) => prev - 1);
+          customEvent.preventDefault();
+        }
+      }
+    };
+    window.addEventListener('app-back-navigation', handleAppBack);
+    return () => {
+      window.removeEventListener('app-back-navigation', handleAppBack);
+    };
+  }, []);
+
   useEffect(() => {
     isMounted.current = true;
 

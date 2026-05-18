@@ -46,6 +46,7 @@ interface UIState {
 
   isBooting: boolean;
   isStartMenuOpen: boolean;
+  startMenuAutofocusSearch: boolean;
   maxZIndex: number;
   viewport: { width: number; height: number };
   windows: WindowState[];
@@ -61,9 +62,9 @@ interface UIState {
     window: Omit<WindowState, 'zIndex' | 'x' | 'y' | 'status' | 'width' | 'height'> &
       Partial<Pick<WindowState, 'x' | 'y' | 'width' | 'height' | 'status' | 'appProps'>>
   ) => void;
-  setIsStartMenuOpen: (isOpen: boolean) => void;
+  setIsStartMenuOpen: (isOpen: boolean, autofocusSearch?: boolean) => void;
   setViewport: (width: number, height: number) => void;
-  toggleIsStartMenuOpen: (event?: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+  toggleIsStartMenuOpen: (event?: React.MouseEvent<HTMLImageElement, MouseEvent>, autofocusSearch?: boolean) => void;
   updateWindowDimensions: (id: string, newX: number, newY: number, newWidth: number, newHeight: number) => void;
   updateWindowPosition: (id: string, newX: number, newY: number) => void;
   updateWindowStatus: (id: string, newStatus: WindowState['status']) => void;
@@ -85,6 +86,7 @@ const useUIStore = create<UIState>((set, get) => ({
   },
 
   isStartMenuOpen: false,
+  startMenuAutofocusSearch: false,
   maxZIndex: 1000,
   windows: [],
   workspaceIcons: ITEMS_MAP_WORKSPACE.map((item, index) => ({
@@ -127,6 +129,7 @@ const useUIStore = create<UIState>((set, get) => ({
   openWindow: (newWindow) =>
     set((state) => {
       const { windows } = state;
+      const isMobileDevice = window.innerWidth < 768;
 
       const existingWindow = windows.find((window) => window.id === newWindow.id);
 
@@ -144,7 +147,7 @@ const useUIStore = create<UIState>((set, get) => ({
                 height: newWindow.height ?? window.height,
                 appProps: newWindow.appProps ?? window.appProps,
                 zIndex: newZIndex,
-                status: newWindow.status ?? window.status,
+                status: isMobileDevice ? 'maximized' : (newWindow.status ?? window.status),
               };
             }
             return window;
@@ -191,7 +194,7 @@ const useUIStore = create<UIState>((set, get) => ({
           {
             ...newWindow,
             height: resolvedHeight(newWindow.height, newWindow.heightRatio),
-            status: newWindow.status ?? 'normal',
+            status: isMobileDevice ? 'maximized' : (newWindow.status ?? 'normal'),
             width: resolvedWidth(newWindow.width, newWindow.widthRatio),
             x: newWindow.x ?? 50,
             y: newWindow.y ?? 50,
@@ -204,11 +207,16 @@ const useUIStore = create<UIState>((set, get) => ({
       };
     }),
 
-  setIsStartMenuOpen: (isOpen) => set({ isStartMenuOpen: isOpen }),
+  setIsStartMenuOpen: (isOpen, autofocusSearch = false) =>
+    set({ isStartMenuOpen: isOpen, startMenuAutofocusSearch: autofocusSearch }),
 
   setViewport: (width, height) => set({ viewport: { width, height } }),
 
-  toggleIsStartMenuOpen: () => set((state) => ({ isStartMenuOpen: !state.isStartMenuOpen })),
+  toggleIsStartMenuOpen: (_event, autofocusSearch = false) =>
+    set((state) => ({
+      isStartMenuOpen: !state.isStartMenuOpen,
+      startMenuAutofocusSearch: !state.isStartMenuOpen ? autofocusSearch : false,
+    })),
 
   updateWindowDimensions: (id, newX, newY, newWidth, newHeight) =>
     set((state) => {
