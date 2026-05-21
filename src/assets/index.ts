@@ -72,4 +72,5 @@ export { default as WhatsappExternalLogo } from './logo/whatsapp_external_logo.w
 export { default as LettLogo } from './logo/lett_logo.webp';
 export { default as LocaWebLogo } from './logo/loca_web_logo.webp';
 export { default as LeafletZenLogo } from './logo/leaflet_zen_logo.webp';
+export { default as AcrobatReaderLogo } from './logo/acrobat_reader_logo.webp';
 export { default as bootAnimation } from './wallpapers/boot-animation.gif';

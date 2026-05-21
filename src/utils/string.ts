@@ -50,6 +50,15 @@ export const isVideoByExtension = (extension: string) => {
  * @returns bool
  */
 export const isTextByExtension = (extension: string) => {
-  const textExtensions = ['.txt', '.md', '.doc', '.docx', '.pdf'];
+  const textExtensions = ['.txt', '.md', '.doc', '.docx'];
   return textExtensions.includes(extension.toLowerCase());
+};
+
+/**
+ * @param extension A string de entrada
+ * @returns bool
+ */
+export const isPdfByExtension = (extension: string) => {
+  const pdfExtensions = ['.pdf'];
+  return pdfExtensions.includes(extension.toLowerCase());
 };

@@ -68,6 +68,7 @@ interface UIState {
   updateWindowDimensions: (id: string, newX: number, newY: number, newWidth: number, newHeight: number) => void;
   updateWindowPosition: (id: string, newX: number, newY: number) => void;
   updateWindowStatus: (id: string, newStatus: WindowState['status']) => void;
+  updateWindowTitle: (id: string, newTitle: string) => void;
   updateWorkspaceIconPosition: (path: string, newX: number, newY: number) => void;
 }
 
@@ -256,6 +257,17 @@ const useUIStore = create<UIState>((set, get) => ({
       windows: state.windows.map((window) => {
         if (window.id === id) {
           return { ...window, status: newStatus };
+        }
+        return window;
+      }),
+    }));
+  },
+
+  updateWindowTitle: (id, newTitle) => {
+    set((state) => ({
+      windows: state.windows.map((window) => {
+        if (window.id === id) {
+          return { ...window, title: newTitle };
         }
         return window;
       }),

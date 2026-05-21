@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Use this guide whenever you need to add, delete, or modify directories, files, and links in the VFS.
+---
+
 # Skill: Managing & Modifying the Virtual File System (VFS)
 
 Use this guide whenever you need to add, delete, or modify directories, files, and links in the VFS.

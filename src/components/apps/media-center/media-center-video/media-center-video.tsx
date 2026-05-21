@@ -1,69 +1,50 @@
-import { useState, useEffect } from 'react';
-import defaultVideo from '@/assets/media-center/The-Jimi-Hendrix-Experience-Purple-Haze_240p.mp4';
-import { type FileSystemItem, ITEMS_MAP_ALL } from '@/constants';
-import { LoaderCircle } from '@/components';
+// Local Subcomponents
+import { MediaCenterVideoDetail, MediaCenterVideoGallery } from './components';
+
+// Hooks & Utilities
+import { useMediaCenterVideo } from './hooks';
+
+// Styles
 import './media-center-video.scss';
 
-function getAssetPath(item: FileSystemItem | undefined): string {
-  if (!item) return defaultVideo;
-  if (item.uri && item.uri.startsWith('http')) return item.uri;
-
-  const ssoBasePath = 'C:/USUÁRIOS/FITERMAN/';
-  const assetBasePath = '/media-center/';
-
-  if (item.path.toUpperCase().startsWith(ssoBasePath)) {
-    const relativePath = item.path.substring(ssoBasePath.length);
-    return assetBasePath + relativePath;
-  }
-  return defaultVideo;
-}
-
-const defaultItem: FileSystemItem = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/VIDEOS/JIMMY_HENDRIX.MP4'];
+// Types
+import type { FileSystemItem } from '@/constants';
 
 interface MediaCenterVideoProps {
+  windowId?: string;
   initialItem?: FileSystemItem;
 }
 
-function MediaCenterVideo({ initialItem = defaultItem }: MediaCenterVideoProps) {
-  const [videoSource, setVideoSource] = useState(() => getAssetPath(initialItem));
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleVideoCanPlay = () => {
-    setIsLoading(false);
-  };
-
-  const handleVideoError = () => {
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    const newSource = getAssetPath(initialItem);
-
-    if (newSource !== videoSource) {
-      setIsLoading(true);
-      setVideoSource(newSource);
-    }
-  }, [initialItem, videoSource]);
+function MediaCenterVideo(props: MediaCenterVideoProps) {
+  const {
+    allSystemVideos,
+    isLoading,
+    videoSource,
+    viewMode,
+    handleVideoCanPlay,
+    handleVideoError,
+    setSelectedItem,
+    setViewMode,
+  } = useMediaCenterVideo(props);
 
   return (
-    <div className="media-center-video-container">
-      {isLoading && (
-        <div className="video-loader-overlay">
-          <LoaderCircle />
-        </div>
+    <div className={`media-center-video-container mode-${viewMode}`}>
+      {viewMode === 'gallery' ? (
+        <MediaCenterVideoGallery
+          videos={allSystemVideos}
+          onSelectVideo={(video) => {
+            setSelectedItem(video);
+            setViewMode('detail');
+          }}
+        />
+      ) : (
+        <MediaCenterVideoDetail
+          isLoading={isLoading}
+          videoSource={videoSource}
+          onCanPlay={handleVideoCanPlay}
+          onError={handleVideoError}
+        />
       )}
-
-      <video
-        className="media-center-video-player"
-        controls
-        onCanPlay={handleVideoCanPlay}
-        onError={handleVideoError}
-        style={{ opacity: isLoading ? 0 : 1 }}
-      >
-        <source src={videoSource} type="video/mp4" />
-        Tipo de vídeo não suportado.
-      </video>
     </div>
   );
 }

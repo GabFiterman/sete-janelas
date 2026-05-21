@@ -70,12 +70,13 @@ Sete Janelas features a custom **"Windows 7 Pocket"** layout optimized for touch
 
 ## 📚 Developer Skill Guides
 
-To assist with standard developer workflows, the following step-by-step interactive procedures are available in `.gemini/skills/`:
+To assist with standard developer workflows, the following step-by-step interactive procedures are available in `.agents/rules/`:
 
-1. 📂 **[Adding a New Application](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.gemini/skills/add-new-app.md)**: Standard registry steps in `app-config.ts` and VFS metadata definition.
-2. 🗄 **[Managing the Virtual File System (VFS)](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.gemini/skills/manage-vfs.md)**: Guide on configuring directories, folders, shortcuts, and executable files.
-3. 🪟 **[Window Manager API](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.gemini/skills/manage-windows.md)**: Master `uiStore.ts` to seamlessly control window lifecycles and positioning.
-4. 💅 **[Styling & Animations](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.gemini/skills/styling-and-animations.md)**: Harness the Aero design tokens and Framer Motion components.
+1. 📂 **[Adding a New Application](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.agents/rules/add-new-app.md)**: Standard registry steps in `app-config.ts` and VFS metadata definition.
+2. 🗄 **[Managing the Virtual File System (VFS)](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.agents/rules/manage-vfs.md)**: Guide on configuring directories, folders, shortcuts, and executable files.
+3. 🪟 **[Window Manager API](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.agents/rules/manage-windows.md)**: Master `uiStore.ts` to seamlessly control window lifecycles and positioning.
+4. 💅 **[Styling & Animations](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.agents/rules/styling-and-animations.md)**: Harness the Aero design tokens and Framer Motion components.
+5. 🗂 **[File Organization & Architecture](file:///home/dev-fiterman/Projects/Personal/sete-janelas/.agents/rules/file-organization.md)**: Standards for folder structures, logic/presentation division, directory indexes, and import conventions.
 
 ---
 

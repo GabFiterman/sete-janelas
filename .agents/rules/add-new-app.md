@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Use this guide whenever you need to add a new application to the Sete Janelas simulator.
+---
+
 # Skill: Adding a New Application to the OS
 
 Use this guide whenever you need to add a new application to the Sete Janelas simulator.
@@ -32,7 +37,13 @@ Use this guide whenever you need to add a new application to the Sete Janelas si
 2. Add your application to the `AppName` type union:
 
    ```typescript
-   export type AppName = 'InternetExplorer' | 'FileExplorer' | 'Notepad' | 'MediaCenterImage' | 'MediaCenterVideo' | 'MyApp';
+   export type AppName =
+     | 'InternetExplorer'
+     | 'FileExplorer'
+     | 'Notepad'
+     | 'MediaCenterImage'
+     | 'MediaCenterVideo'
+     | 'MyApp';
    ```
 
 3. Map the component to your app key inside `AppComponentMap`:

@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Skill: Styling & Animations
 
 Use this guide whenever you are building UI elements and need to ensure they match the high-fidelity Windows 7 aesthetic and Sete Janelas standards.
@@ -16,10 +20,10 @@ All core colors, borders, shadows, and specific gradients are exported as variab
 .my-custom-container {
   // Use Aero Glass background tokens
   background: $aero-glass-base;
-  
+
   // Outer bright border
   border: 1px solid $aero-border;
-  
+
   // Shadows based on z-index depth or focus
   box-shadow: $shadow-active;
 }
@@ -49,18 +53,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 const containerVariants = {
   initial: { opacity: 0, scale: 0.95 },
   animate: { opacity: 1, scale: 1, transition: { duration: 0.15 } },
-  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.1 } }
+  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.1 } },
 };
 
 export const MyComponent = ({ isVisible }) => (
   <AnimatePresence>
     {isVisible && (
-      <motion.div
-        variants={containerVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
+      <motion.div variants={containerVariants} initial="initial" animate="animate" exit="exit">
         Content
       </motion.div>
     )}
@@ -73,10 +72,7 @@ export const MyComponent = ({ isVisible }) => (
 Use `whileHover` and `whileTap` for immediate, fluid tactile feedback on interactive buttons and icons.
 
 ```tsx
-<motion.button
-  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
-  whileTap={{ scale: 0.95 }}
->
+<motion.button whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.2)' }} whileTap={{ scale: 0.95 }}>
   Click Me
 </motion.button>
 ```
