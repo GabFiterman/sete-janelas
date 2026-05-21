@@ -335,7 +335,8 @@ div.start-menu {
               gap: 12px;
               box-sizing: border-box;
 
-              &:hover, &:active {
+              &:hover,
+              &:active {
                 transform: scale(0.98);
                 background: rgba(2, 229, 253, 0.15);
                 border-color: rgba(2, 229, 253, 0.35);
@@ -385,7 +386,9 @@ div.start-menu {
             min-height: 100px;
             padding: 0.75em;
             gap: 0.5em;
-            transition: transform 0.1s, background-color 0.2s;
+            transition:
+              transform 0.1s,
+              background-color 0.2s;
 
             &:active {
               transform: scale(0.94);
