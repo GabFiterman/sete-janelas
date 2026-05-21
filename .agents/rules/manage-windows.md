@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Use this guide whenever you need to interact with the Zustand Kernel (`uiStore.ts`) to open, close, or modify windows dynamically within any React component.
+---
+
 # Skill: Window Manager API
 
 Use this guide whenever you need to interact with the Zustand Kernel (`uiStore.ts`) to open, close, or modify windows dynamically within any React component.
@@ -49,7 +54,7 @@ const handleLaunchNotepad = () => {
     title: 'Anotações.txt - Bloco de Notas',
     iconSrc: '/assets/icons/notepad.png',
     // Optional appProps to pre-load a file
-    appProps: { defaultText: "Hello World" }
+    appProps: { defaultText: 'Hello World' },
   });
 };
 ```
