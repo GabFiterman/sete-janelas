@@ -120,7 +120,7 @@ function Window({ id }: WindowProps) {
         handleStartDrag={handleStartDrag}
         isMobile={isMobile}
       >
-        <AppComponent {...(windowData.appProps ?? {})} />
+        <AppComponent windowId={id} {...(windowData.appProps ?? {})} />
       </WindowLayout>
     </motion.div>
   );
