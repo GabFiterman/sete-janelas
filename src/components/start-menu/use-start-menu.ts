@@ -1,4 +1,11 @@
-import { fileExplorerIcon, internetExplorerIcon, mediaCenterImageIcon, notepadIcon } from '@/assets';
+import {
+  fileExplorerIcon,
+  internetExplorerIcon,
+  mediaCenterImageIcon,
+  notepadIcon,
+  AcrobatReaderLogo,
+  videosIcon,
+} from '@/assets';
 
 import { type AppName } from '@/components/apps/app-config';
 
@@ -10,6 +17,8 @@ import { generateUUID } from '@/utils';
 const INTERNET_EXPLORER_WINDOW_ID = 'internet-explorer-window';
 const FILE_EXPLORER_WINDOW_ID = `file-explorer-window`;
 const MEDIA_CENTER_IMAGE_WINDOW_ID = `media-center-image-window`;
+const MEDIA_CENTER_VIDEO_WINDOW_ID = `media-center-video-menu-window-${generateUUID()}`;
+const ACROBAT_READER_WINDOW_ID = `acrobat-reader-menu-window-${generateUUID()}`;
 
 const FILE_EXPLORER_INITIAL_PATH = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/PROJETOS'].path;
 const FILE_EXPLORER_DOCUMENTS_PATH = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/DOCUMENTOS'].path;
@@ -76,6 +85,32 @@ function useStartMenuStates() {
         });
       },
       icon: mediaCenterImageIcon,
+    },
+    {
+      id: 5,
+      label: 'Visualizador de Vídeos',
+      action: () => {
+        openWindow({
+          id: MEDIA_CENTER_VIDEO_WINDOW_ID,
+          title: 'Visualizador de Vídeos do Sete Janelas',
+          appName: 'MediaCenterVideo' as AppName,
+          iconSrc: videosIcon,
+        });
+      },
+      icon: videosIcon,
+    },
+    {
+      id: 6,
+      label: 'Adobe Acrobat Reader',
+      action: () => {
+        openWindow({
+          id: ACROBAT_READER_WINDOW_ID,
+          title: 'Adobe Acrobat Reader',
+          appName: 'AcrobatReader' as AppName,
+          iconSrc: AcrobatReaderLogo,
+        });
+      },
+      icon: AcrobatReaderLogo,
     },
   ];
 

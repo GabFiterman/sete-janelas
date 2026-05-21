@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { ITEMS_MAP_ALL, STRUCTURE_MAP_FILE_SYSTEM, type FileSystemItem } from '@/constants';
-import { isImageByExtension, isTextByExtension, isVideoByExtension, normalizeStringForPath } from '@/utils';
+import {
+  isImageByExtension,
+  isTextByExtension,
+  isVideoByExtension,
+  isPdfByExtension,
+  normalizeStringForPath,
+} from '@/utils';
 import useUIStore from '@/store/uiStore';
 import {
   fileExplorerIcon,
@@ -9,6 +15,7 @@ import {
   notepadIcon,
   pictureIcon,
   videosIcon,
+  AcrobatReaderLogo,
 } from '@/assets';
 
 const INITIAL_URI = 'favoritos/';
@@ -19,6 +26,7 @@ const NOTEPAD_WINDOW_ID = (path: string): string => {
   return `notepad-file-explorer-window-${path}`;
 };
 const INTERNET_EXPLORER_WINDOW_ID = 'internet-explorer-window';
+const ACROBAT_READER_WINDOW_ID = 'acrobat-reader-window';
 
 interface FileExplorerState {
   currentDirectoryContents: FileSystemItem[];
@@ -210,6 +218,16 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
               appName: 'MediaCenterVideo',
               iconSrc: videosIcon,
             });
+          } else if (appName === 'AcrobatReader') {
+            openWindow({
+              id: ACROBAT_READER_WINDOW_ID,
+              title: 'Adobe Acrobat Reader',
+              appName: 'AcrobatReader',
+              iconSrc: AcrobatReaderLogo,
+              appProps: {
+                appContext: item,
+              },
+            });
           }
           return state;
         }
@@ -239,6 +257,19 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
             iconSrc: videosIcon,
             appProps: {
               initialItem: item,
+            },
+          });
+          return state;
+        }
+
+        if (isPdfByExtension(item.extension)) {
+          openWindow({
+            id: ACROBAT_READER_WINDOW_ID,
+            title: item.label + item.extension,
+            appName: 'AcrobatReader',
+            iconSrc: AcrobatReaderLogo,
+            appProps: {
+              appContext: item,
             },
           });
           return state;
