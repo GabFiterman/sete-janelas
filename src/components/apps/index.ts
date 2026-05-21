@@ -3,3 +3,4 @@ export { default as InternetExplorer } from './internet-explorer/internet-explor
 export * from './media-center';
 export { default as Notepad } from './notepad/notepad';
 export { default as Window } from './window/window';
+export * from './acrobat-reader';

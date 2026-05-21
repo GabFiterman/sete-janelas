@@ -16,6 +16,7 @@ import {
   LettLogo,
   LeafletZenLogo,
   LocaWebLogo,
+  AcrobatReaderLogo,
 } from '@/assets';
 import { type FileSystemItem } from '../file-system-map';
 
@@ -184,6 +185,30 @@ export const ITEMS_MAP_DOCUMENTS: Record<string, FileSystemItem> = {
     path: 'C:/Usuários/Fiterman/Documentos/Sobre_Mim',
     type: 'folder',
     uri: 'documentos/sobre_mim/',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/GUIA_DE_FERRAMENTAS_IA_EXAME.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Guia de Ferramentas IA EXAME',
+    path: 'C:/Usuários/Fiterman/Documentos/Guia-de-Ferramentas-IA-EXAME.pdf',
+    type: 'file',
+    uri: 'media-center/Documentos/Guia-de-Ferramentas-IA-EXAME.pdf',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/MEDITACOES_DE_MARCO_AURELIO.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Meditações de Marco Aurélio',
+    path: 'C:/Usuários/Fiterman/Documentos/Meditações de Marco Aurélio.pdf',
+    type: 'file',
+    uri: 'media-center/Documentos/Meditações de Marco Aurélio.pdf',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/ROUBE_COMO_UM_ARTISTA_AUSTIN_KLEON.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Roube como um artista - Austin Kleon',
+    path: 'C:/Usuários/Fiterman/Documentos/Roube como um artista - Austin Kleon.pdf',
+    type: 'file',
+    uri: 'media-center/Documentos/Roube como um artista - Austin Kleon.pdf',
   },
 };
 
@@ -641,6 +666,15 @@ export const ITEMS_MAP_SISTEMA_DE_ARQUIVOS: Record<string, FileSystemItem> = {
     type: 'file',
     uri: 'sistema_de_arquivos/player.exe',
     appName: 'MediaCenterVideo',
+  },
+  'C:/SISTEMA_DE_ARQUIVOS/ACROBAT.EXE': {
+    extension: '.exe',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Acrobat Reader',
+    path: 'C:/Sistema de arquivos/acrobat.exe',
+    type: 'file',
+    uri: 'sistema_de_arquivos/acrobat.exe',
+    appName: 'AcrobatReader',
   },
 };
 
