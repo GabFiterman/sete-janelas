@@ -33,6 +33,9 @@ export const TopBar = ({
   setActiveTool,
   onHome,
 }: TopBarProps) => {
+  const STANDARD_ZOOM_LEVELS = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 3.5, 4];
+  const isStandard = STANDARD_ZOOM_LEVELS.includes(zoomLevel);
+
   const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const page = parseInt(e.target.value);
     if (!isNaN(page) && page >= 1 && page <= numPages) {
@@ -108,8 +111,7 @@ export const TopBar = ({
         <button
           className="acrobat-icon-btn"
           onClick={() => {
-            const ZOOM_STEPS = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 3.5, 4];
-            const nextZoom = [...ZOOM_STEPS].reverse().find((z) => z < zoomLevel) || 0.125;
+            const nextZoom = [...STANDARD_ZOOM_LEVELS].reverse().find((z) => z < zoomLevel) || 0.125;
             setZoomLevel(nextZoom);
           }}
           disabled={zoomLevel <= 0.125}
@@ -117,6 +119,11 @@ export const TopBar = ({
           <FaSearchMinus />
         </button>
         <select value={zoomLevel} onChange={handleZoomChange} className="acrobat-zoom-select">
+          {!isStandard && (
+            <option value={zoomLevel}>
+              {Math.round(zoomLevel * 100)}%
+            </option>
+          )}
           <option value={0.125}>12.5%</option>
           <option value={0.25}>25%</option>
           <option value={0.5}>50%</option>
@@ -132,8 +139,7 @@ export const TopBar = ({
         <button
           className="acrobat-icon-btn"
           onClick={() => {
-            const ZOOM_STEPS = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 3.5, 4];
-            const nextZoom = ZOOM_STEPS.find((z) => z > zoomLevel) || 4;
+            const nextZoom = STANDARD_ZOOM_LEVELS.find((z) => z > zoomLevel) || 4;
             setZoomLevel(nextZoom);
           }}
           disabled={zoomLevel >= 4}
