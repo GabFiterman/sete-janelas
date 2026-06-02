@@ -1,13 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { generateUUID, isImageByExtension, isVideoByExtension, isTextByExtension } from '@/utils';
+import { generateUUID, isImageByExtension, isVideoByExtension, isTextByExtension, isPdfByExtension } from '@/utils';
 import { ITEMS_MAP_WORKSPACE } from '@/constants';
 import { useDraggableElement, useIsMobile } from '@/hooks';
 import useUiStore, { type WorkspaceIcon } from '@/store/uiStore';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 
-import { fileExplorerIcon, mediaCenterImageIcon, notepadIcon, videosIcon, internetExplorerIcon } from '@/assets';
+import {
+  fileExplorerIcon,
+  mediaCenterImageIcon,
+  notepadIcon,
+  videosIcon,
+  internetExplorerIcon,
+  AcrobatReaderLogo,
+} from '@/assets';
 import './icon-link-label.scss';
 
 interface IconLinkLabelProps {
@@ -45,6 +52,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
     event.preventDefault();
 
     if (type === 'folder') {
+      useFileExplorerStore.getState().setCurrentPath(path);
       openWindow({
         id: FILE_EXPLORER_WINDOW_ID,
         appName: 'FileExplorer',
@@ -99,6 +107,13 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
             iconSrc: videosIcon,
             title: 'Reprodutor de Vídeo',
           });
+        } else if (appName === 'AcrobatReader') {
+          openWindow({
+            id: 'acrobat-reader-window',
+            appName: 'AcrobatReader',
+            iconSrc: AcrobatReaderLogo,
+            title: 'Adobe Acrobat Reader',
+          });
         }
         return;
       }
@@ -143,6 +158,19 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
           iconSrc: notepadIcon,
           appProps: {
             initialItem: icon,
+          },
+        });
+      }
+
+      if (isPdfByExtension(extension)) {
+        const ACROBAT_READER_WINDOW_ID = 'acrobat-reader-window';
+        openWindow({
+          id: ACROBAT_READER_WINDOW_ID,
+          title: label + extension,
+          appName: 'AcrobatReader',
+          iconSrc: AcrobatReaderLogo,
+          appProps: {
+            appContext: icon,
           },
         });
       }

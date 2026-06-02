@@ -113,7 +113,7 @@ export const PdfViewer = ({
   const startPos = useRef({ x: 0, y: 0 });
   const scrollPos = useRef({ left: 0, top: 0 });
 
-  const handleFirstPageLoad = useCallback((width: number, _height: number) => {
+  const handleFirstPageLoad = useCallback((width: number) => {
     setFirstPageWidth(width);
   }, []);
 

@@ -119,11 +119,7 @@ export const TopBar = ({
           <FaSearchMinus />
         </button>
         <select value={zoomLevel} onChange={handleZoomChange} className="acrobat-zoom-select">
-          {!isStandard && (
-            <option value={zoomLevel}>
-              {Math.round(zoomLevel * 100)}%
-            </option>
-          )}
+          {!isStandard && <option value={zoomLevel}>{Math.round(zoomLevel * 100)}%</option>}
           <option value={0.125}>12.5%</option>
           <option value={0.25}>25%</option>
           <option value={0.5}>50%</option>
