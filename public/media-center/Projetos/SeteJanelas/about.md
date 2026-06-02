@@ -1,14 +1,10 @@
 # Sete Janelas: O Sistema Operacional Web
 
-## A Visão
+Este portfólio simula o comportamento interativo e multitarefa de um desktop real no navegador. Ele foi projetado do zero para atuar como o ápice técnico do meu trabalho atual.
 
-Mais do que um portfólio, o Sete Janelas é uma simulação de sistema operacional via web, projetada para quebrar a barreira entre a navegação passiva e a interação funcional. É a prova viva da minha tese central: Engenharia robusta e Design intuitivo são indissociáveis. Aqui, cada "janela" é um microuniverso de funcionalidade, gerenciado por um kernel simulado no navegador.
+### Desafios de Engenharia Resolvidos
 
-## Arquitetura e Decisões Técnicas
-
-O projeto foi arquitetado para demonstrar domínio completo sobre o ciclo de vida do React e gerenciamento de estados complexos.
-
-- **Gerenciamento de Estado Global (Zustand)**: Implementação de uma Store centralizada que atua como o "Kernel" do sistema, orquestrando janelas, processos (z-index, foco, minimização) e o sistema de arquivos virtual (VFS) sem prop drilling.
-- **Virtual File System (VFS)**: Arquitetura de dados baseada em grafos/árvores para simular diretórios, permitindo navegação real, histórico e mapeamento de assets estáticos e dinâmicos, com persistência via LocalStorage.
-- **Performance & Race Conditions**: Tratamento rigoroso de mount/unmount de componentes pesados (mídia) utilizando `refs` e cleanup functions para evitar memory leaks e condições de corrida em operações assíncronas.
-- **Componentização Atômica**: Uso de Atomic Design para criar um Design System proprietário e escalável, garantindo consistência visual do Boot ao Shutdown.
+- **Zustand Kernel**: Centralização da lógica de controle de processos, regulando ciclos de vida de janelas (abrir, minimizar, maximizar, fechar) e z-index em camadas dinâmicas de renderização.
+- **Virtual File System (VFS)**: Estruturação de um sistema de arquivos virtual completo baseado em caminhos absolutos (`C:/...`), permitindo busca indexada e execução de apps com base em extensões (.exe, .pdf, .md, .webp).
+- **Aero Design System**: Desenvolvimento visual em SCSS inspirado no Windows 7 com efeito Aero Glass e transições de tela dinâmicas via Framer Motion.
+- **Windows 7 Pocket (Mobile)**: Adaptação responsiva customizada para dispositivos móveis que maximiza janelas de forma nativa e ajusta a usabilidade para toques sem uso de estilos redundantes.

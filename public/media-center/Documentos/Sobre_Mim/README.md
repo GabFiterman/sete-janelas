@@ -1,14 +1,22 @@
 # Gabriel Fiterman
 
-> _Product Engineer & UI Specialist_
+> _Product-Oriented Engineer & UI Specialist_
 
-Sou um Desenvolvedor Full Stack com alma de Designer. Minha carreira não começou no código, mas na interface, o que me conferiu uma vantagem competitiva rara: eu não apenas traduzo requisitos técnicos; eu entendo a experiência do produto.
+Desenvolvedor Frontend / Full Stack com mais de 5 anos de experiência e um forte viés de produto. Atuo na intersecção perfeita entre Engenharia e Design, eliminando gargalos de UI/UX para entregar interfaces complexas com extrema fidelidade visual ("Pixel Perfect") e excelente performance técnica.
 
-Nos últimos anos, atuei como o ponto focal de engenharia em projetos críticos — desde a construção de sistemas meteorológicos de alta complexidade (Nimbus) até a arquitetura de page builders premiados. Tenho experiência comprovada em liderança técnica autônoma, migração de legados e construção de arquiteturas escaláveis em React/Node.
+### Diferenciais
 
-Minha Filosofia: Código limpo é importante, mas código que resolve o problema do usuário e escala o negócio é vital. Busco a intersecção onde a performance técnica encontra a usabilidade impecável.
+- **Autonomia & Liderança**: Ampla experiência em assumir a responsabilidade total por módulos complexos (ex: painéis geográficos em tempo real e criadores de páginas).
+- **Visão Full Cycle**: Do design e prototipagem no Figma à arquitetura de código, testes e deploy.
+- **Mentalidade de Produto**: Foco em resolver as dores reais do usuário final com código limpo e arquitetura escalável.
 
-- Offline:
-  - 👨‍👧 **Pai da Jade**: Minha melhor "feature" e constante fonte de aprendizado sobre paciência e criatividade.
-  - 🎧 **Audiófilo de Dados**: Faço parte do top 2% de ouvintes no Spotify (e tenho as estatísticas para provar).
-  - 🎮 **Narrativa Interativa**: Gamer focado em história e world-building.
+---
+
+### Contato Direto
+
+- ✉️ **<gfiterman96@gmail.com>**
+- 📞 **(62) 98460-2348**
+- 🔗 **linkedin.com/in/gabfiterman**
+- 💻 **github.com/gabfiterman**
+
+_Dica: Dê um duplo clique no arquivo `CURRICULO.pdf` ou `CURRICULO.md` para visualizar meu histórico completo._

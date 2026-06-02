@@ -355,13 +355,21 @@ export const ITEMS_MAP_PROJETOS: Record<string, FileSystemItem> = {
 
 // ROOT LEVEL 5 [ PROJETOS/CHALLENGE_LETT ]
 export const ITEMS_MAP_PROJETO_1_CHALLENGELETT: Record<string, FileSystemItem> = {
-  'C:/USUARIOS/FITERMAN/PROJETOS/CHALLENGELETT/ANALISE.TXT': {
-    extension: '.txt',
+  'C:/USUARIOS/FITERMAN/PROJETOS/CHALLENGELETT/ANALISE.MD': {
+    extension: '.md',
     iconSrc: notepadIcon,
     label: 'Análise',
-    path: 'C:/Usuários/Fiterman/Projetos/ChallengeLett/analise.txt',
+    path: 'C:/Usuários/Fiterman/Projetos/ChallengeLett/analise.md',
     type: 'file',
-    uri: 'projetos/ChallengeLett/analise.txt',
+    uri: 'projetos/ChallengeLett/analise.md',
+  },
+  'C:/USUARIOS/FITERMAN/PROJETOS/CHALLENGELETT/CHALLENGELETT_ANALISE.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Análise Técnica (Challenge Lett)',
+    path: 'C:/Usuários/Fiterman/Projetos/ChallengeLett/ChallengeLett-Analise.pdf',
+    type: 'file',
+    uri: 'media-center/Projetos/ChallengeLett/ChallengeLett-Analise.pdf',
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/CHALLENGELETT/CHALLENGELETT.HTML': {
@@ -404,13 +412,21 @@ export const ITEMS_MAP_PROJETO_1_CHALLENGELETT: Record<string, FileSystemItem> =
 
 // ROOT LEVEL 5 [ PROJETOS/LOCAWEB ]
 export const ITEMS_MAP_PROJETO_2_LOCAWEB: Record<string, FileSystemItem> = {
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/ANALISE.TXT': {
-    extension: '.txt',
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/ANALISE.MD': {
+    extension: '.md',
     iconSrc: notepadIcon,
     label: 'Análise',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/analise.txt',
+    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/analise.md',
     type: 'file',
-    uri: 'projetos/LocaWeb/analise.txt',
+    uri: 'projetos/LocaWeb/analise.md',
+  },
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/LOCAWEB_ANALISE.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Análise Técnica (LocaWeb)',
+    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/LocaWeb-Analise.pdf',
+    type: 'file',
+    uri: 'media-center/Projetos/LocaWeb/LocaWeb-Analise.pdf',
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/LOGIN.TXT': {
@@ -498,13 +514,21 @@ export const ITEMS_MAP_PROJETO_2_LOCAWEB: Record<string, FileSystemItem> = {
 
 // ROOT LEVEL 5 [ PROJETOS/LEAFLETZEN ]
 export const ITEMS_MAP_PROJETO_3_LEAFLETZEN: Record<string, FileSystemItem> = {
-  'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN/ANALISE.TXT': {
-    extension: '.txt',
+  'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN/ANALISE.MD': {
+    extension: '.md',
     iconSrc: notepadIcon,
     label: 'Análise',
-    path: 'C:/Usuários/Fiterman/Projetos/LeafletZen/analise.txt',
+    path: 'C:/Usuários/Fiterman/Projetos/LeafletZen/analise.md',
     type: 'file',
-    uri: 'projetos/LeafletZen/analise.txt',
+    uri: 'projetos/LeafletZen/analise.md',
+  },
+  'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN/LEAFLETZEN_ANALISE.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Análise Técnica (Leaflet Zen)',
+    path: 'C:/Usuários/Fiterman/Projetos/LeafletZen/LeafletZen-Analise.pdf',
+    type: 'file',
+    uri: 'media-center/Projetos/LeafletZen/LeafletZen-Analise.pdf',
   },
 
   'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN/DEMOGERAL.MP4': {
@@ -546,29 +570,21 @@ export const ITEMS_MAP_PROJETO_4_SETEJANELAS: Record<string, FileSystemItem> = {
     type: 'externalLink',
     uri: 'https://github.com/GabFiterman/sete-janelas/',
   },
-  'C:/USUARIOS/FITERMAN/PROJETOS/SETEJANELAS/BACKLOG.MD': {
-    extension: '.md',
-    iconSrc: notepadIcon,
-    label: 'Backlog - Sete Janelas',
-    path: 'C:/Usuários/Fiterman/Projetos/SeteJanelas/backlog.md',
-    type: 'file',
-    uri: '/projetos/SeteJanelas/backlog.md',
-  },
-  'C:/USUARIOS/FITERMAN/PROJETOS/SETEJANELAS/CHANGELOG.MD': {
-    extension: '.md',
-    iconSrc: notepadIcon,
-    label: 'Changelog - Sete Janelas',
-    path: 'C:/Usuários/Fiterman/Projetos/SeteJanelas/changelog.md',
-    type: 'file',
-    uri: '/projetos/SeteJanelas/changelog.md',
-  },
   'C:/USUARIOS/FITERMAN/PROJETOS/SETEJANELAS/ABOUT.MD': {
     extension: '.md',
     iconSrc: notepadIcon,
     label: 'Sobre o Sete Janelas',
     path: 'C:/Usuários/Fiterman/Projetos/SeteJanelas/about.md',
     type: 'file',
-    uri: '/projetos/SeteJanelas/about.md',
+    uri: 'projetos/SeteJanelas/about.md',
+  },
+  'C:/USUARIOS/FITERMAN/PROJETOS/SETEJANELAS/SETEJANELAS_ABOUT.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Sobre o Sete Janelas (Sete Janelas)',
+    path: 'C:/Usuários/Fiterman/Projetos/SeteJanelas/SeteJanelas-About.pdf',
+    type: 'file',
+    uri: 'media-center/Projetos/SeteJanelas/SeteJanelas-About.pdf',
   },
 };
 
@@ -581,6 +597,30 @@ export const ITEMS_MAP_ABOUT_ME: Record<string, FileSystemItem> = {
     path: 'C:/Usuários/Fiterman/Documentos/Sobre_Mim/README.md',
     type: 'file',
     uri: 'documentos/sobre_mim/README.md',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/SOBRE_MIM/README.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Apresentação (Gabriel Fiterman)',
+    path: 'C:/Usuários/Fiterman/Documentos/Sobre_Mim/README.pdf',
+    type: 'file',
+    uri: 'media-center/Documentos/Sobre_Mim/README.pdf',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/SOBRE_MIM/CURRICULO.MD': {
+    extension: '.md',
+    iconSrc: notepadIcon,
+    label: 'Currículo Gabriel Fiterman',
+    path: 'C:/Usuários/Fiterman/Documentos/Sobre_Mim/CURRICULO.md',
+    type: 'file',
+    uri: 'media-center/Documentos/Sobre_Mim/CURRICULO.md',
+  },
+  'C:/USUARIOS/FITERMAN/DOCUMENTOS/SOBRE_MIM/CURRICULO.PDF': {
+    extension: '.pdf',
+    iconSrc: AcrobatReaderLogo,
+    label: 'Currículo Gabriel Fiterman',
+    path: 'C:/Usuários/Fiterman/Documentos/Sobre_Mim/CURRICULO.pdf',
+    type: 'file',
+    uri: 'media-center/Documentos/Sobre_Mim/CURRICULO.pdf',
   },
   'C:/USUARIOS/FITERMAN/DOCUMENTOS/SOBRE_MIM/DEVFITERMAN.WEBP': {
     ...ITEMS_MAP_IMAGES['C:/USUARIOS/FITERMAN/IMAGENS/DEVFITERMAN.WEBP'],

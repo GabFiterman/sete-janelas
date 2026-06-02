@@ -14,9 +14,10 @@ interface VirtualPageWrapperProps {
   pageNumber: number;
   zoomLevel: number;
   innerRef: (el: HTMLDivElement | null) => void;
+  onLoadSuccess?: (width: number, height: number) => void;
 }
 
-const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef }: VirtualPageWrapperProps) => {
+const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef, onLoadSuccess }: VirtualPageWrapperProps) => {
   const localRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [pageSize, setPageSize] = useState<{ width: number; height: number } | null>(null);
@@ -61,6 +62,9 @@ const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef }: VirtualPageWrap
           renderAnnotationLayer={true}
           onLoadSuccess={(page) => {
             setPageSize({ width: page.originalWidth, height: page.originalHeight });
+            if (onLoadSuccess) {
+              onLoadSuccess(page.originalWidth, page.originalHeight);
+            }
           }}
         />
       ) : (
@@ -101,9 +105,17 @@ export const PdfViewer = ({
   const pageRefs = useRef<Array<HTMLDivElement | null>>([]);
   const internalPage = useRef<number>(1);
 
+  const [firstPageWidth, setFirstPageWidth] = useState<number | null>(null);
+  const [isAutoZoom, setIsAutoZoom] = useState(true);
+  const lastAutoZoom = useRef<number | null>(null);
+
   const isDragging = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
   const scrollPos = useRef({ left: 0, top: 0 });
+
+  const handleFirstPageLoad = useCallback((width: number) => {
+    setFirstPageWidth(width);
+  }, []);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -111,10 +123,50 @@ export const PdfViewer = ({
     pageRefs.current = new Array(numPages).fill(null);
   };
 
+  useEffect(() => {
+    setFirstPageWidth(null);
+    setIsAutoZoom(true);
+    lastAutoZoom.current = null;
+  }, [file]);
+
+  useEffect(() => {
+    if (lastAutoZoom.current !== null && zoomLevel !== lastAutoZoom.current) {
+      setIsAutoZoom(false);
+    }
+  }, [zoomLevel]);
+
+  useEffect(() => {
+    if (!firstPageWidth || !containerRef.current || !isAutoZoom) return;
+
+    const calculateFitZoom = () => {
+      if (!containerRef.current) return;
+      const containerWidth = containerRef.current.clientWidth;
+      const margin = 60;
+      const fitZoom = (containerWidth - margin) / firstPageWidth;
+      const roundedZoom = Math.round(fitZoom * 20) / 20;
+      const finalZoom = Math.max(0.125, Math.min(4, roundedZoom));
+      lastAutoZoom.current = finalZoom;
+      setZoomLevel(finalZoom);
+    };
+
+    calculateFitZoom();
+
+    const resizeObserver = new ResizeObserver(() => {
+      calculateFitZoom();
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [firstPageWidth, setZoomLevel, isAutoZoom]);
+
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       if (e.ctrlKey) {
         e.preventDefault();
+        setIsAutoZoom(false);
         if (e.deltaY < 0) {
           const nextZoom = ZOOM_STEPS.find((z) => z > zoomLevel) || 4;
           setZoomLevel(nextZoom);
@@ -205,6 +257,7 @@ export const PdfViewer = ({
       innerRef={(el) => {
         pageRefs.current[index] = el;
       }}
+      onLoadSuccess={index === 0 ? handleFirstPageLoad : undefined}
     />
   ));
 

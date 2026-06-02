@@ -148,7 +148,10 @@ const useUIStore = create<UIState>((set, get) => ({
                 height: newWindow.height ?? window.height,
                 appProps: newWindow.appProps ?? window.appProps,
                 zIndex: newZIndex,
-                status: isMobileDevice ? 'maximized' : (newWindow.status ?? window.status),
+                status:
+                  isMobileDevice || newWindow.appName === 'AcrobatReader'
+                    ? 'maximized'
+                    : (newWindow.status ?? window.status),
               };
             }
             return window;
@@ -195,7 +198,8 @@ const useUIStore = create<UIState>((set, get) => ({
           {
             ...newWindow,
             height: resolvedHeight(newWindow.height, newWindow.heightRatio),
-            status: isMobileDevice ? 'maximized' : (newWindow.status ?? 'normal'),
+            status:
+              isMobileDevice || newWindow.appName === 'AcrobatReader' ? 'maximized' : (newWindow.status ?? 'normal'),
             width: resolvedWidth(newWindow.width, newWindow.widthRatio),
             x: newWindow.x ?? 50,
             y: newWindow.y ?? 50,
