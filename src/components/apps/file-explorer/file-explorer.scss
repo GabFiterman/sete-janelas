@@ -317,4 +317,24 @@
       }
     }
   }
+
+  .file-explorer-thumbnail-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #c0c0c0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    padding: 1px;
+    box-sizing: border-box;
+
+    .file-explorer-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
+

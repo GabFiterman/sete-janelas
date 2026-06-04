@@ -7,14 +7,30 @@ import {
 } from './components';
 import { useFileExplorerStore } from './use-file-explorer';
 import { useIsMobile } from '@/hooks';
+import useUIStore from '@/store/uiStore';
+import { ITEMS_MAP_ALL } from '@/constants';
 
 import './file-explorer.scss';
 
 import { useEffect } from 'react';
 
-function FileExplorer() {
-  const { isSidebarOpen, setIsSidebarOpen } = useFileExplorerStore();
+interface FileExplorerProps {
+  windowId?: string;
+}
+
+function FileExplorer({ windowId }: FileExplorerProps) {
+  const { isSidebarOpen, setIsSidebarOpen, currentPath } = useFileExplorerStore();
   const isMobile = useIsMobile();
+  const updateWindowTitle = useUIStore((state) => state.updateWindowTitle);
+
+  useEffect(() => {
+    if (windowId && currentPath) {
+      const pathUpper = currentPath.toUpperCase();
+      const folderItem = ITEMS_MAP_ALL[pathUpper];
+      const title = folderItem ? folderItem.label : currentPath;
+      updateWindowTitle(windowId, title);
+    }
+  }, [currentPath, windowId, updateWindowTitle]);
 
   useEffect(() => {
     const handleAppBack = (e: Event) => {
@@ -56,3 +72,4 @@ function FileExplorer() {
 }
 
 export default FileExplorer;
+

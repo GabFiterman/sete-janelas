@@ -24,6 +24,13 @@
     }
   }
 
+  .ie-webview-container {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .ie-webview {
     background: #ffffff;
     flex-grow: 1;

@@ -15,7 +15,7 @@ import {
   WhatsappExternalLogo,
   LettLogo,
   LeafletZenLogo,
-  LocaWebLogo,
+  LokaWebLogo,
   AcrobatReaderLogo,
 } from '@/assets';
 import { type FileSystemItem } from '../file-system-map';
@@ -327,13 +327,13 @@ export const ITEMS_MAP_PROJETOS: Record<string, FileSystemItem> = {
     type: 'folder',
     uri: 'projetos/ChallengeLett/',
   },
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB': {
     extension: '/',
     iconSrc: folderIcon,
-    label: 'Loca Web',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb',
+    label: 'Loka Web',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb',
     type: 'folder',
-    uri: 'projetos/LocaWeb/',
+    uri: 'projetos/LokaWeb/',
   },
   'C:/USUARIOS/FITERMAN/PROJETOS/LEAFLETZEN': {
     extension: '/',
@@ -410,103 +410,103 @@ export const ITEMS_MAP_PROJETO_1_CHALLENGELETT: Record<string, FileSystemItem> =
   },
 };
 
-// ROOT LEVEL 5 [ PROJETOS/LOCAWEB ]
-export const ITEMS_MAP_PROJETO_2_LOCAWEB: Record<string, FileSystemItem> = {
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/ANALISE.MD': {
+// ROOT LEVEL 5 [ PROJETOS/LOKAWEB ]
+export const ITEMS_MAP_PROJETO_2_LOKAWEB: Record<string, FileSystemItem> = {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/ANALISE.MD': {
     extension: '.md',
     iconSrc: notepadIcon,
     label: 'Análise',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/analise.md',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/analise.md',
     type: 'file',
-    uri: 'projetos/LocaWeb/analise.md',
+    uri: 'projetos/LokaWeb/analise.md',
   },
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/LOCAWEB_ANALISE.PDF': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/LOKAWEB_ANALISE.PDF': {
     extension: '.pdf',
     iconSrc: AcrobatReaderLogo,
-    label: 'Análise Técnica (LocaWeb)',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/LocaWeb-Analise.pdf',
+    label: 'Análise Técnica (LokaWeb)',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/LokaWeb-Analise.pdf',
     type: 'file',
-    uri: 'media-center/Projetos/LocaWeb/LocaWeb-Analise.pdf',
+    uri: 'media-center/Projetos/LokaWeb/LokaWeb-Analise.pdf',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/LOGIN.TXT': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/LOGIN.TXT': {
     extension: '.txt',
     iconSrc: notepadIcon,
     label: 'Login',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/login.txt',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/login.txt',
     type: 'file',
-    uri: 'projetos/LocaWeb/login.txt',
+    uri: 'projetos/LokaWeb/login.txt',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/LOCAWEB.HTML': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/LOKAWEB.HTML': {
     extension: '.html',
     iconSrc: internetExplorerIcon,
-    label: 'Loca Web',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/locaweb.html',
+    label: 'Loka Web',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/lokaweb.html',
     type: 'link',
     uri: 'https://loca-web.vercel.app/',
-    miniature: LocaWebLogo,
+    miniature: LokaWebLogo,
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/REPOLOCAWEB.HTML': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/REPOLOKAWEB.HTML': {
     extension: '.html',
     iconSrc: GithubExternalLogo,
-    label: 'Github Repo LocaWeb',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/repolocaweb.html',
+    label: 'Github Repo LokaWeb',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/repolokaweb.html',
     type: 'externalLink',
     uri: 'https://github.com/GabFiterman/loca-web/',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/BASICS.GIF': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/BASICS.GIF': {
     extension: '.gif',
     iconSrc: pictureIcon,
     label: 'Basics',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/basics.gif',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/basics.gif',
     type: 'file',
     uri: 'https://github.com/GabFiterman/loca-web/assets/94033226/451e419a-9319-4a80-9403-75d91a134e95',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/PLANS.WEBP': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/PLANS.WEBP': {
     extension: '.webp',
     iconSrc: pictureIcon,
     label: 'Plans',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/plans.webp',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/plans.webp',
     type: 'file',
-    uri: 'projetos/LocaWeb/plans.webp',
+    uri: 'projetos/LokaWeb/plans.webp',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/AUTOMATEDTESTS.MP4': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/AUTOMATEDTESTS.MP4': {
     extension: '.mp4',
     iconSrc: videosIcon,
     label: 'Testes Automatizados',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/automated_tests.mp4',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/automated_tests.mp4',
     type: 'file',
     uri: 'https://github.com/GabFiterman/loca-web/assets/94033226/e9e2da7b-a95a-4a8a-bf45-6bd2a3c730a6',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/RESPONSIVITY.MP4': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/RESPONSIVITY.MP4': {
     extension: '.mp4',
     iconSrc: videosIcon,
     label: 'Responsividade',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/responsivity.mp4',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/responsivity.mp4',
     type: 'file',
     uri: 'https://github.com/GabFiterman/loca-web/assets/94033226/d495f731-f815-42e3-b74a-7c8fc7f5868f',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/validation.MP4': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/validation.MP4': {
     extension: '.mp4',
     iconSrc: videosIcon,
     label: 'Validação de Formulários',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/validation.mp4',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/validation.mp4',
     type: 'file',
     uri: 'https://github.com/GabFiterman/loca-web/assets/94033226/6e48c0ad-3bf8-4e65-b5f9-f73f7e95f87c',
   },
 
-  'C:/USUARIOS/FITERMAN/PROJETOS/LOCAWEB/AvatarGeneration.MP4': {
+  'C:/USUARIOS/FITERMAN/PROJETOS/LOKAWEB/AvatarGeneration.MP4': {
     extension: '.mp4',
     iconSrc: videosIcon,
     label: 'Geração de Avatar',
-    path: 'C:/Usuários/Fiterman/Projetos/LocaWeb/AvatarGeneration.mp4',
+    path: 'C:/Usuários/Fiterman/Projetos/LokaWeb/AvatarGeneration.mp4',
     type: 'file',
     uri: 'https://github.com/GabFiterman/loca-web/assets/94033226/d495f731-f815-42e3-b74a-7c8fc7f5868f',
   },
@@ -729,7 +729,7 @@ export const ITEMS_MAP_ALL: Record<string, FileSystemItem> = {
   ...ITEMS_MAP_VIDEOS,
   ...ITEMS_MAP_PROJETOS,
   ...ITEMS_MAP_PROJETO_1_CHALLENGELETT,
-  ...ITEMS_MAP_PROJETO_2_LOCAWEB,
+  ...ITEMS_MAP_PROJETO_2_LOKAWEB,
   ...ITEMS_MAP_PROJETO_3_LEAFLETZEN,
   ...ITEMS_MAP_PROJETO_4_SETEJANELAS,
   ...ITEMS_MAP_ABOUT_ME,
