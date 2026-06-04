@@ -9,7 +9,7 @@
   .icon-container {
     align-items: center;
     display: flex;
-    height: -webkit-fill-available;
+    align-self: stretch;
     justify-content: center;
 
     svg,
@@ -55,7 +55,7 @@
 
   .controller {
     display: flex;
-    height: -webkit-fill-available;
+    align-self: stretch;
     button {
       background: transparent;
       border: none;
