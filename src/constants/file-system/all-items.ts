@@ -378,7 +378,7 @@ export const ITEMS_MAP_PROJETO_1_CHALLENGELETT: Record<string, FileSystemItem> =
     label: 'Challenge Lett',
     path: 'C:/Usuários/Fiterman/Projetos/ChallengeLett/challengelett.html',
     type: 'link',
-    uri: 'https://gabfiterman.github.io/ChallengeLett/',
+    uri: 'https://challenge-lett.vercel.app/',
     miniature: LettLogo,
   },
 
