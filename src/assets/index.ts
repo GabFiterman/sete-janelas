@@ -70,7 +70,7 @@ export { default as WindowsLogo } from './logo/windows-logo.png';
 export { default as LinkedinExternalLogo } from './logo/linkedin_external_logo.webp';
 export { default as WhatsappExternalLogo } from './logo/whatsapp_external_logo.webp';
 export { default as LettLogo } from './logo/lett_logo.webp';
-export { default as LocaWebLogo } from './logo/loca_web_logo.webp';
+export { default as LokaWebLogo } from './logo/loca_web_logo.webp';
 export { default as LeafletZenLogo } from './logo/leaflet_zen_logo.webp';
 export { default as AcrobatReaderLogo } from './logo/acrobat_reader_logo.webp';
 export { default as bootAnimation } from './wallpapers/boot-animation.gif';
