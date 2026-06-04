@@ -1,12 +1,15 @@
 import { useFileExplorerStore } from '../../use-file-explorer';
 import { BtnIconTextLink } from '@/components';
-import { searchVFS } from '@/constants';
+import { searchVFS, type FileSystemItem } from '@/constants';
+import { isImageByExtension } from '@/utils';
+import { getMediaAssetPath } from '@/components/apps/media-center/utils';
 
 function FileExplorerCanvas() {
   const { currentDirectoryContents, getIsItemSelected, navigateTo, toggleItemSelection, searchQuery, setSearchQuery } =
     useFileExplorerStore();
 
-  const itemsToRender = searchQuery.trim() ? searchVFS(searchQuery) : currentDirectoryContents;
+  const rawItems = searchQuery.trim() ? searchVFS(searchQuery) : currentDirectoryContents;
+  const itemsToRender = (rawItems || []).filter((item): item is FileSystemItem => item !== undefined && item !== null);
 
   return (
     <div className="file-explorer-canvas-container">
@@ -30,22 +33,37 @@ function FileExplorerCanvas() {
         }}
       >
         {itemsToRender?.length > 0 ? (
-          itemsToRender.map((item, index) => (
-            <BtnIconTextLink
-              className="canvas-icon"
-              icon={item?.iconSrc}
-              iconSize="40px"
-              key={item?.path || index}
-              onClick={(event) => {
-                event.stopPropagation();
-                toggleItemSelection(event, item);
-              }}
-              onDoubleClick={() => navigateTo(item)}
-              orientation="vertical"
-              selected={getIsItemSelected(item)}
-              text={`${item?.label}${item.type === 'file' ? item.extension : ''}`}
-            />
-          ))
+          itemsToRender.map((item, index) => {
+            const isImage = item?.type === 'file' && isImageByExtension(item?.extension);
+            const resolvedIcon = isImage ? (
+              <div className="file-explorer-thumbnail-container">
+                <img
+                  src={getMediaAssetPath(item) || item?.iconSrc}
+                  className="file-explorer-thumbnail"
+                  alt={item.label}
+                />
+              </div>
+            ) : (
+              item?.iconSrc
+            );
+
+            return (
+              <BtnIconTextLink
+                className="canvas-icon"
+                icon={resolvedIcon}
+                iconSize="40px"
+                key={item?.path || index}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggleItemSelection(event, item);
+                }}
+                onDoubleClick={() => navigateTo(item)}
+                orientation="vertical"
+                selected={getIsItemSelected(item)}
+                text={`${item?.label}${item.type === 'file' ? item.extension : ''}`}
+              />
+            );
+          })
         ) : searchQuery.trim() ? (
           <div className="file-explorer-search-empty" onMouseDown={(e) => e.stopPropagation()}>
             Nenhum item correspondente encontrado neste computador.
@@ -57,3 +75,4 @@ function FileExplorerCanvas() {
 }
 
 export default FileExplorerCanvas;
+
