@@ -160,8 +160,8 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
           title: item.label,
           appName: 'FileExplorer',
           iconSrc: fileExplorerIcon,
-          widthRatio: 0.9,
-          heightRatio: 0.75,
+          widthRatio: 0.55,
+          heightRatio: 0.83,
         });
 
         setCurrentPath(newPath);
@@ -183,8 +183,8 @@ export const useFileExplorerStore = create<FileExplorerState>((set, get) => ({
               title: 'File Explorer',
               appName: 'FileExplorer',
               iconSrc: fileExplorerIcon,
-              widthRatio: 0.9,
-              heightRatio: 0.75,
+              widthRatio: 0.55,
+              heightRatio: 0.83,
             });
           } else if (appName === 'InternetExplorer') {
             openWindow({
