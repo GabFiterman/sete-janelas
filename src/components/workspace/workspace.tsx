@@ -30,7 +30,13 @@ function Workspace() {
 
         <div className="workspace-canvas-icons" ref={constraintsRef}>
           {workspaceIcons.map((workspaceIcon) => {
-            return <IconLinkLabel key={workspaceIcon.path} icon={workspaceIcon} constraintsRef={constraintsRef} />;
+            return (
+              <IconLinkLabel
+                key={`${workspaceIcon.path}_${workspaceIcon.dragVersion ?? 0}`}
+                icon={workspaceIcon}
+                constraintsRef={constraintsRef}
+              />
+            );
           })}
         </div>
       </div>

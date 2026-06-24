@@ -195,6 +195,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
       onClick={(event) => handleSingleClick(event)}
       dragConstraints={constraintsRef}
       drag={!isMobile}
+      title={`${label}${type === 'file' && extension ? extension : ''}`}
       style={{
         x: x,
         y: y,
