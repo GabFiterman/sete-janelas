@@ -38,8 +38,8 @@ function RouteHandler() {
           title: 'File Explorer',
           appName: 'FileExplorer',
           iconSrc: fileExplorerIcon,
-          widthRatio: 0.9,
-          heightRatio: 0.75,
+          widthRatio: 0.55,
+          heightRatio: 0.83,
         });
       } else {
         focusWindow(FILE_EXPLORER_WINDOW_ID);

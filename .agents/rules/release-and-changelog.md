@@ -85,6 +85,7 @@ The project uses a Gitflow-inspired branching strategy tailored for portfolio de
 - **`release/vX.Y.Z`**: Temporary branches cut from `develop` when a milestone is complete. Used to finalize version bumps, update the changelog, and perform final build verification.
 
 ### Flow Diagram
+
 ```mermaid
 graph TD
     feature[feature/issue-123] -->|PR| develop[develop]
@@ -106,11 +107,11 @@ When all issues in a milestone are complete and the milestone is ready for relea
 4. **Bump the version** in `package.json`.
 5. **Commit** with message: `chore: release vX.Y.Z`.
 6. **Merge to main and Tag**:
-   * Open a PR from `release/vX.Y.Z` to `main`.
-   * Once merged, create a Git tag: `git tag vX.Y.Z` on `main`.
-   * Create a GitHub Release from the tag, using the CHANGELOG section as release notes.
+   - Open a PR from `release/vX.Y.Z` to `main`.
+   - Once merged, create a Git tag: `git tag vX.Y.Z` on `main`.
+   - Create a GitHub Release from the tag, using the CHANGELOG section as release notes.
 7. **Merge back to develop**:
-   * Open a PR from `release/vX.Y.Z` to `develop` to sync the version bump and changelog.
+   - Open a PR from `release/vX.Y.Z` to `develop` to sync the version bump and changelog.
 8. **Close the milestone** on GitHub.
 
 ---

@@ -58,8 +58,8 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
         appName: 'FileExplorer',
         iconSrc: fileExplorerIcon,
         title: 'File Explorer',
-        widthRatio: 0.9,
-        heightRatio: 0.75,
+        widthRatio: 0.55,
+        heightRatio: 0.83,
       });
     }
 
@@ -72,8 +72,8 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
             appName: 'FileExplorer',
             iconSrc: fileExplorerIcon,
             title: 'File Explorer',
-            widthRatio: 0.9,
-            heightRatio: 0.75,
+            widthRatio: 0.55,
+            heightRatio: 0.83,
           });
         } else if (appName === 'InternetExplorer') {
           openWindow({
