@@ -23,7 +23,7 @@ const ACROBAT_READER_WINDOW_ID = `acrobat-reader-menu-window-${generateUUID()}`;
 const FILE_EXPLORER_INITIAL_PATH = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/PROJETOS'].path;
 const FILE_EXPLORER_DOCUMENTS_PATH = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/DOCUMENTOS'].path;
 const FILE_EXPLORER_IMAGES_PATH = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/IMAGENS'].path;
-const MEDIA_CENTER_IMAGE_FITERMAN = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/IMAGENS/GABRIEL1.WEBP'];
+const MEDIA_CENTER_IMAGE_FITERMAN = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/IMAGENS/GABRIEL2.WEBP'];
 
 function useStartMenuStates() {
   const { openWindow, toggleIsStartMenuOpen, activeWindowsByApp } = useUIStore();
@@ -159,13 +159,26 @@ function useStartMenuStates() {
     },
   ];
 
+  const openProfileImage = () => {
+    openWindow({
+      id: MEDIA_CENTER_IMAGE_WINDOW_ID,
+      title: 'gabriel(2).webp',
+      appName: 'MediaCenterImage' as AppName,
+      iconSrc: mediaCenterImageIcon,
+      appProps: {
+        initialItem: MEDIA_CENTER_IMAGE_FITERMAN,
+        playlist: [MEDIA_CENTER_IMAGE_FITERMAN],
+      },
+    });
+  };
+
   function handleAppClick(event: React.MouseEvent<HTMLDivElement>, action: () => void) {
     event.stopPropagation();
     action();
     toggleIsStartMenuOpen();
   }
 
-  return { startMenuApps, startMenuShortcuts, handleAppClick };
+  return { startMenuApps, startMenuShortcuts, handleAppClick, openProfileImage };
 }
 
 export default useStartMenuStates;

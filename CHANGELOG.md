@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Optimize Docker development setup for faster container startup and smaller context size ([#79](https://github.com/GabFiterman/sete-janelas/issues/79))
+- Customize Start Menu & Window transitions: updated user shortcut and profile picture click behavior to load Gabriel(2).webp, replaced default Windows flower icon, integrated smooth slide/fade animations for opening and closing the panel, and implemented smooth directional window transitions (minimizing to bottom, closing to top-right) ([#59](https://github.com/GabFiterman/sete-janelas/issues/59))
 
 ### Fixed
 

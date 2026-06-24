@@ -1,5 +1,5 @@
-import { motion, useDragControls } from 'framer-motion';
-import { useMemo } from 'react';
+import { motion, useDragControls, usePresence } from 'framer-motion';
+import { useMemo, useState, useRef } from 'react';
 
 import useUIStore from '@/store/uiStore';
 import { useDraggableElement, useWindowResize, useIsMobile } from '@/hooks';
@@ -14,7 +14,17 @@ interface WindowProps {
 }
 
 function Window({ id }: WindowProps) {
-  const windowData = useUIStore((state) => state.windows.find((win) => win.id === id));
+  const storeWindowData = useUIStore((state) => state.windows.find((win) => win.id === id));
+  const lastWindowDataRef = useRef<typeof storeWindowData>(undefined);
+
+  if (storeWindowData) {
+    lastWindowDataRef.current = storeWindowData;
+  }
+
+  const windowData = storeWindowData || lastWindowDataRef.current;
+  const [isPresent] = usePresence();
+  const transformOrigin = isPresent ? 'center bottom' : 'right top';
+
   const closeWindow = useUIStore((state) => state.closeWindow);
   const focusWindow = useUIStore((state) => state.focusWindow);
   const updateWindowStatus = useUIStore((state) => state.updateWindowStatus);
@@ -49,6 +59,21 @@ function Window({ id }: WindowProps) {
   );
 
   const isMinimized = safeStatus === 'minimized';
+  const [shouldHide, setShouldHide] = useState(isMinimized);
+  const [prevIsMinimized, setPrevIsMinimized] = useState(isMinimized);
+
+  if (isMinimized !== prevIsMinimized) {
+    setPrevIsMinimized(isMinimized);
+    if (!isMinimized) {
+      setShouldHide(false);
+    }
+  }
+
+  const handleAnimationComplete = () => {
+    if (isMinimized) {
+      setShouldHide(true);
+    }
+  };
 
   if (!windowData) return null;
 
@@ -82,9 +107,14 @@ function Window({ id }: WindowProps) {
       }}
       animate={{
         ...targetDims,
-        scale: 1,
-        opacity: 1,
+        scale: isMinimized ? 0.3 : 1,
+        opacity: isMinimized ? 0 : 1,
       }}
+      exit={{
+        scale: 0.3,
+        opacity: 0,
+      }}
+      onAnimationComplete={handleAnimationComplete}
       transition={{
         type: 'spring',
         stiffness: 350,
@@ -96,7 +126,8 @@ function Window({ id }: WindowProps) {
         position: 'absolute',
         top: 0,
         left: 0,
-        ...(isMinimized && { display: 'none' }),
+        transformOrigin,
+        ...(shouldHide && { display: 'none' }),
       }}
       {...dragProps}
     >
