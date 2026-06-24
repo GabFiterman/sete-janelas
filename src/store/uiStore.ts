@@ -151,7 +151,7 @@ const useUIStore = create<UIState>((set, get) => ({
                 status:
                   isMobileDevice || newWindow.appName === 'AcrobatReader' || newWindow.appName === 'InternetExplorer'
                     ? 'maximized'
-                    : (newWindow.status ?? window.status),
+                    : (window.status === 'minimized' ? 'normal' : (newWindow.status ?? window.status)),
               };
             }
             return window;
