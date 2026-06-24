@@ -76,21 +76,46 @@ Example:
 
 ---
 
-## 3. Workflow: Cutting a Release
+## 3. Branching Strategy & Workflow
 
-When all issues in a milestone are complete and the milestone is ready for release:
+The project uses a Gitflow-inspired branching strategy tailored for portfolio development:
 
-1. **Rename `[Unreleased]` → `[X.Y.Z] - YYYY-MM-DD`** in `CHANGELOG.md`.
-2. **Add a fresh `[Unreleased]` section** above it.
-3. **Bump the version** in `package.json`.
-4. **Commit** with message: `chore: release vX.Y.Z`.
-5. **Create a Git tag**: `git tag vX.Y.Z`.
-6. **Create a GitHub Release** from the tag, using the CHANGELOG section as release notes.
-7. **Close the milestone** on GitHub.
+- **`develop`**: The integration branch where all active development happens. All feature and bugfix branches are merged here.
+- **`main`**: The production branch containing stable, tagged releases.
+- **`release/vX.Y.Z`**: Temporary branches cut from `develop` when a milestone is complete. Used to finalize version bumps, update the changelog, and perform final build verification.
+
+### Flow Diagram
+```mermaid
+graph TD
+    feature[feature/issue-123] -->|PR| develop[develop]
+    bugfix[fix/issue-56] -->|PR| develop
+    develop -->|Cut Release| release[release/v1.2.0]
+    release -->|PR & Tag| main[main]
+    release -->|PR backport| develop
+```
 
 ---
 
-## 4. Commit Messages
+## 4. Workflow: Cutting a Release
+
+When all issues in a milestone are complete and the milestone is ready for release:
+
+1. **Cut the release branch** from `develop`: `git checkout -b release/vX.Y.Z`.
+2. **Rename `[Unreleased]` → `[X.Y.Z] - YYYY-MM-DD`** in `CHANGELOG.md`.
+3. **Add a fresh `[Unreleased]` section** above it.
+4. **Bump the version** in `package.json`.
+5. **Commit** with message: `chore: release vX.Y.Z`.
+6. **Merge to main and Tag**:
+   * Open a PR from `release/vX.Y.Z` to `main`.
+   * Once merged, create a Git tag: `git tag vX.Y.Z` on `main`.
+   * Create a GitHub Release from the tag, using the CHANGELOG section as release notes.
+7. **Merge back to develop**:
+   * Open a PR from `release/vX.Y.Z` to `develop` to sync the version bump and changelog.
+8. **Close the milestone** on GitHub.
+
+---
+
+## 5. Commit Messages
 
 Follow Conventional Commits tied to the issue:
 
@@ -110,7 +135,7 @@ Example:
 
 ---
 
-## 5. Branch Naming
+## 6. Branch Naming
 
 ```
 feature/issue-<number>    # For feat/style issues
@@ -120,7 +145,7 @@ chore/issue-<number>      # For chore/docs issues
 
 ---
 
-## 6. Milestone Discipline
+## 7. Milestone Discipline
 
 - Every issue MUST belong to a milestone before starting work.
 - Work progresses milestone by milestone (e.g., v1.2.0 → v1.3.0).
