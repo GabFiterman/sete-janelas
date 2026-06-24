@@ -72,4 +72,3 @@ function FileExplorer({ windowId }: FileExplorerProps) {
 }
 
 export default FileExplorer;
-
