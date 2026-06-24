@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Prevent app state reset when minimizing/restoring windows — windows are now hidden via CSS instead of unmounted from the DOM, preserving iframe navigation, video playback position, and PDF viewer state (including preventing PDF page unmounts and zoom level recalculation when minimized) ([#56](https://github.com/GabFiterman/sete-janelas/issues/56))
 - Restore minimized windows (like File Explorer) when double-clicking workspace directory shortcuts or launching them again ([#57](https://github.com/GabFiterman/sete-janelas/issues/57))
+- Prevent workspace desktop icon overlaps by enforcing fixed square bounding boxes, truncating long titles with ellipsis, and implementing AABB collision prevention on drag end ([#58](https://github.com/GabFiterman/sete-janelas/issues/58))
 
 ## [1.1.2] - 2026-06-05
 
