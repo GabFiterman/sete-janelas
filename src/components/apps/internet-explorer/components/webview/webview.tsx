@@ -50,4 +50,3 @@ function Webview({ windowId }: WebviewProps) {
 }
 
 export default Webview;
-

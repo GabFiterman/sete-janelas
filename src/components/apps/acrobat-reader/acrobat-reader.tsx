@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
+import useUIStore from '@/store/uiStore';
 import { LeftPanel, PdfGallery, PdfViewer, RightPanel, SplashScreen, TopBar } from './components';
 import { useAcrobatReader } from './hooks';
 
@@ -7,7 +8,11 @@ import './acrobat-reader.scss';
 
 import type { FileSystemItem } from '@/constants/file-system-map';
 
-export const AcrobatReader = ({ appContext }: { appContext?: FileSystemItem }) => {
+export const AcrobatReader = ({ appContext, windowId }: { appContext?: FileSystemItem; windowId?: string }) => {
+  const isMinimized = useUIStore((state) =>
+    windowId ? state.windows.find((win) => win.id === windowId)?.status === 'minimized' : false
+  );
+
   const {
     activeTool,
     currentPage,
@@ -59,6 +64,7 @@ export const AcrobatReader = ({ appContext }: { appContext?: FileSystemItem }) =
                     setCurrentPage={setCurrentPage}
                     setNumPages={setNumPages}
                     setZoomLevel={setZoomLevel}
+                    isMinimized={isMinimized}
                   />
                 ) : (
                   <PdfGallery onSelectFile={(uri) => setSelectedFile(uri)} />

@@ -48,7 +48,9 @@ function Window({ id }: WindowProps) {
     [isMaximized, localDims, viewportSize.width, viewportSize.height, FIXED_MENU_HEIGHT, isMobile]
   );
 
-  if (!windowData || safeStatus === 'minimized') return null;
+  const isMinimized = safeStatus === 'minimized';
+
+  if (!windowData) return null;
 
   const AppComponent = getAppComponent(windowData.appName);
 
@@ -94,6 +96,7 @@ function Window({ id }: WindowProps) {
         position: 'absolute',
         top: 0,
         left: 0,
+        ...(isMinimized && { display: 'none' }),
       }}
       {...dragProps}
     >
