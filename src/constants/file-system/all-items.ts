@@ -10,6 +10,7 @@ import {
   pictureIcon,
   videosIcon,
   workspaceIcon,
+  SpotifyLogo,
   GithubExternalLogo,
   LinkedinExternalLogo,
   WhatsappExternalLogo,
@@ -157,15 +158,6 @@ export const ITEMS_MAP_FITERMAN: Record<string, FileSystemItem> = {
     uri: 'downloads/',
   },
 
-  'C:/USUARIOS/FITERMAN/MÚSICAS': {
-    extension: '/',
-    iconSrc: musicsIcon,
-    label: 'Músicas',
-    path: 'C:/Usuários/Fiterman/Músicas',
-    type: 'folder',
-    uri: 'musicas/',
-  },
-
   'C:/USUARIOS/FITERMAN/VIDEOS': {
     extension: '/',
     iconSrc: videosIcon,
@@ -173,6 +165,15 @@ export const ITEMS_MAP_FITERMAN: Record<string, FileSystemItem> = {
     path: 'C:/Usuários/Fiterman/Videos',
     type: 'folder',
     uri: 'videos/',
+  },
+
+  'C:/USUARIOS/FITERMAN/MUSICAS': {
+    extension: '/',
+    iconSrc: musicsIcon,
+    label: 'Músicas',
+    path: 'C:/Usuários/Fiterman/Músicas',
+    type: 'folder',
+    uri: 'musicas/',
   },
 };
 
@@ -214,40 +215,85 @@ export const ITEMS_MAP_DOCUMENTS: Record<string, FileSystemItem> = {
 
 // ROOT LEVEL 4 [ IMAGENS ]
 export const ITEMS_MAP_IMAGES: Record<string, FileSystemItem> = {
-  'C:/USUARIOS/FITERMAN/IMAGENS/MARACUJÁ.WEBP': {
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/ARCH.WEBP': {
     extension: '.webp',
     iconSrc: pictureIcon,
-    label: 'Maracujá',
-    path: 'C:/Usuários/Fiterman/Imagens/Maracujá.webp',
+    label: 'Arch',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/arch.webp',
     type: 'file',
-    uri: 'imagens/maracuja.webp',
+    uri: 'imagens/moodboard/arch.webp',
   },
 
-  'C:/USUARIOS/FITERMAN/IMAGENS/ALFACE.WEBP': {
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/ART.WEBP': {
     extension: '.webp',
     iconSrc: pictureIcon,
-    label: 'Alface',
-    path: 'C:/Usuários/Fiterman/Imagens/Alface.webp',
+    label: 'Art',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/art.webp',
     type: 'file',
-    uri: 'imagens/alface.webp',
+    uri: 'imagens/moodboard/art.webp',
   },
 
-  'C:/USUARIOS/FITERMAN/IMAGENS/PAO_DE_QUEIJO.JPG': {
-    extension: '.jpg',
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/ATHIRST.WEBP': {
+    extension: '.webp',
     iconSrc: pictureIcon,
-    label: 'Pão de Queijo',
-    path: 'C:/Usuários/Fiterman/Imagens/pao_de_queijo.jpg',
+    label: 'Athirst',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/athirst.webp',
     type: 'file',
-    uri: 'imagens/pao_de_queijo.jpg',
+    uri: 'imagens/moodboard/athirst.webp',
   },
 
-  'C:/USUARIOS/FITERMAN/IMAGENS/FLOWER.JPG': {
-    extension: '.jpg',
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/FREE.WEBP': {
+    extension: '.webp',
     iconSrc: pictureIcon,
-    label: 'Flowers',
-    path: 'C:/Usuários/Fiterman/Imagens/flower.jpg',
+    label: 'Free',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/free.webp',
     type: 'file',
-    uri: 'imagens/flower.jpg',
+    uri: 'imagens/moodboard/free.webp',
+  },
+
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/HEART_BRAIN.WEBP': {
+    extension: '.webp',
+    iconSrc: pictureIcon,
+    label: 'Heart Brain',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/heart-brain.webp',
+    type: 'file',
+    uri: 'imagens/moodboard/heart-brain.webp',
+  },
+
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/JAVASCRIPT.WEBP': {
+    extension: '.webp',
+    iconSrc: pictureIcon,
+    label: 'JavaScript',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/javascript.webp',
+    type: 'file',
+    uri: 'imagens/moodboard/javascript.webp',
+  },
+
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/JUST_ARCH.WEBP': {
+    extension: '.webp',
+    iconSrc: pictureIcon,
+    label: 'Just Arch',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/just-arch.webp',
+    type: 'file',
+    uri: 'imagens/moodboard/just-arch.webp',
+  },
+
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/LOOK.WEBP': {
+    extension: '.webp',
+    iconSrc: pictureIcon,
+    label: 'Look',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/look.webp',
+    type: 'file',
+    uri: 'imagens/moodboard/look.webp',
+  },
+
+  'C:/USUARIOS/FITERMAN/IMAGENS/MOODBOARD/WATER.WEBP': {
+    extension: '.webp',
+    iconSrc: pictureIcon,
+    label: 'Water',
+    path: 'C:/Usuários/Fiterman/Imagens/moodboard/water.webp',
+    type: 'file',
+    uri: 'imagens/moodboard/water.webp',
   },
 
   'C:/USUARIOS/FITERMAN/IMAGENS/DEVFITERMAN.WEBP': {
@@ -660,6 +706,136 @@ export const ITEMS_MAP_ABOUT_ME: Record<string, FileSystemItem> = {
   },
 };
 
+// ROOT LEVEL 4 [ MÚSICAS ]
+export const ITEMS_MAP_MUSICS_FOLDERS: Record<string, FileSystemItem> = {
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS': {
+    extension: '/',
+    iconSrc: folderIcon,
+    label: 'Artistas',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas',
+    type: 'folder',
+    uri: 'musicas/artistas/',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/PLAYLISTS': {
+    extension: '/',
+    iconSrc: folderIcon,
+    label: 'Playlists',
+    path: 'C:/Usuários/Fiterman/Músicas/Playlists',
+    type: 'folder',
+    uri: 'musicas/playlists/',
+  },
+};
+
+export const ITEMS_MAP_MUSICS_ARTISTS: Record<string, FileSystemItem> = {
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/XAMA.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Xamã',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Xama.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/5YwzDz4RJfTiMHS4tdR5Lf?si=XN0mM02dSf2-GnGOyKAckA',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/AURORA.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Aurora',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Aurora.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/1WgXqy2Dd70QQOU7Ay074N?si=RaLCOp96SDWcKq0gLIyR2g',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/SYSTEM_OF_A_DOWN.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'System Of A Down',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/System_Of_A_Down.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1?si=rsFGcWEkT3uqz-M9qLS7dQ',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/RED_HOT_CHILLI_PEPPERS.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Red Hot Chilli Peppers',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Red_Hot_Chilli_Peppers.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO0nT692?si=3f8fa4f495d84da4',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/MICHAEL_JACKSON.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Michael Jackson',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Michael_Jackson.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1SVXaM?si=e06fcfd0b68d4811',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/JIMMY_HENDRIX.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Jimmy Hendrix',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Jimmy_Hendrix.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/776Uo845nYHJpNaStv1Ds4?si=fIiHHeAcTtK2Aca71kbdNg',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/PINK_FLOYD.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Pink Floyd',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Pink_Floyd.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9?si=ambAlBaDRhuORsaZTP7GJg',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/SAMANTHA_MACHADO.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Samantha Machado',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Samantha_Machado.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/5qQdzyIlYfzICKOVdb7XvY?si=B-uufAWdR6KDUxXq8Xq2vg',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/CHAPELEIRO.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Chapeleiro',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Chapeleiro.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/5M5NrRoOEBa49sW1hzKkuH?si=F7TWk98RQMqM4HDi7c4uCw',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/ARTISTAS/KAMAITACHI.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Kamaitachi',
+    path: 'C:/Usuários/Fiterman/Músicas/Artistas/Kamaitachi.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/artist/1ISc8zhrqxd5WrJMkMMLSm?si=pnIklKfWSVSZ8_t6QZP-HQ',
+  },
+};
+
+export const ITEMS_MAP_MUSICS_PLAYLISTS: Record<string, FileSystemItem> = {
+  'C:/USUARIOS/FITERMAN/MUSICAS/PLAYLISTS/YOUR_ALL_TIME_TOP_SONGS.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Your All-Time Top Songs',
+    path: 'C:/Usuários/Fiterman/Músicas/Playlists/Your_All_Time_Top_Songs.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/playlist/37i9dQZF1CKOCslvgs31RV?si=06b4ac09accf43fd',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/PLAYLISTS/PUNKDAY.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'PunkDay 🤘🏻',
+    path: 'C:/Usuários/Fiterman/Músicas/Playlists/PunkDay.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/playlist/4WkMdnwBKb9810nuiwu0XY?si=4e2d0ee6dbdb492e',
+  },
+  'C:/USUARIOS/FITERMAN/MUSICAS/PLAYLISTS/BRASIL_FRITANDO.URL': {
+    extension: '.url',
+    iconSrc: SpotifyLogo,
+    label: 'Brasil Fritando',
+    path: 'C:/Usuários/Fiterman/Músicas/Playlists/Brasil_Fritando.url',
+    type: 'externalLink',
+    uri: 'https://open.spotify.com/playlist/1sfe3rUPSdVtEJqrWN8nkE?si=05311f5347114f6c',
+  },
+};
+
 // ROOT LEVEL 2 [ SISTEMA_DE_ARQUIVOS ]
 export const ITEMS_MAP_SISTEMA_DE_ARQUIVOS: Record<string, FileSystemItem> = {
   'C:/SISTEMA_DE_ARQUIVOS/NOTEPAD.EXE': {
@@ -733,5 +909,8 @@ export const ITEMS_MAP_ALL: Record<string, FileSystemItem> = {
   ...ITEMS_MAP_PROJETO_3_LEAFLETZEN,
   ...ITEMS_MAP_PROJETO_4_SETEJANELAS,
   ...ITEMS_MAP_ABOUT_ME,
+  ...ITEMS_MAP_MUSICS_FOLDERS,
+  ...ITEMS_MAP_MUSICS_ARTISTS,
+  ...ITEMS_MAP_MUSICS_PLAYLISTS,
   ...ITEMS_MAP_SISTEMA_DE_ARQUIVOS,
 };
