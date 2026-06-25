@@ -106,6 +106,7 @@ make down
 ### 💻 Método Local (Sem Docker)
 
 #### Pré-requisitos
+
 - `Node.js (v18+)`
 - `npm`
 
@@ -174,7 +175,7 @@ A cada push ou pull request direcionado a `develop` ou `main`, o pipeline de CI 
 
 ## 👨‍💻 Autor
 
-**Gabriel Fiterman** - *Product-Oriented Software Engineer*
+**Gabriel Fiterman** - _Product-Oriented Software Engineer_
 
 Desenvolvedor Full Stack focado na intersecção entre alta performance de engenharia de software e design gráfico impecável.
 
