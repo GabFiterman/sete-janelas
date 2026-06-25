@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import useWorkspace from './use-workspace';
 import useUIStore from '@/store/uiStore';
 
@@ -24,13 +25,21 @@ function Workspace() {
   return (
     <div className="workspace" style={style} onMouseDown={() => handleIconClick()}>
       <div className="workspace-canvas">
-        {windows.map((window) => (
-          <Window key={window.id} id={window.id} />
-        ))}
+        <AnimatePresence>
+          {windows.map((window) => (
+            <Window key={window.id} id={window.id} />
+          ))}
+        </AnimatePresence>
 
         <div className="workspace-canvas-icons" ref={constraintsRef}>
           {workspaceIcons.map((workspaceIcon) => {
-            return <IconLinkLabel key={workspaceIcon.path} icon={workspaceIcon} constraintsRef={constraintsRef} />;
+            return (
+              <IconLinkLabel
+                key={`${workspaceIcon.path}_${workspaceIcon.dragVersion ?? 0}`}
+                icon={workspaceIcon}
+                constraintsRef={constraintsRef}
+              />
+            );
           })}
         </div>
       </div>

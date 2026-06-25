@@ -6,6 +6,7 @@ import { ITEMS_MAP_WORKSPACE, type FileSystemItem } from '@/constants';
 export interface WorkspaceIcon extends FileSystemItem {
   x: number;
   y: number;
+  dragVersion?: number;
 }
 
 export interface WindowState {
@@ -94,6 +95,7 @@ const useUIStore = create<UIState>((set, get) => ({
     ...item,
     x: (index % 2) * 150,
     y: Math.floor(index / 2) * 150,
+    dragVersion: 0,
   })),
 
   isBooting: true,
@@ -151,7 +153,9 @@ const useUIStore = create<UIState>((set, get) => ({
                 status:
                   isMobileDevice || newWindow.appName === 'AcrobatReader' || newWindow.appName === 'InternetExplorer'
                     ? 'maximized'
-                    : (newWindow.status ?? window.status),
+                    : window.status === 'minimized'
+                      ? 'normal'
+                      : (newWindow.status ?? window.status),
               };
             }
             return window;
@@ -281,13 +285,31 @@ const useUIStore = create<UIState>((set, get) => ({
   updateWorkspaceIconPosition: (path, newX, newY) =>
     set((state) => {
       const { viewport, CONSTANTS } = state;
+      const isMobileDevice = viewport.width < 768;
+      const size = isMobileDevice ? 90 : 120;
 
-      const clampedX = Math.max(0, Math.min(newX, viewport.width - 80));
-      const clampedY = Math.max(0, Math.min(newY, viewport.height - CONSTANTS.FIXED_MENU_HEIGHT - 80));
+      const clampedX = Math.max(0, Math.min(newX, viewport.width - size));
+      const clampedY = Math.max(0, Math.min(newY, viewport.height - CONSTANTS.FIXED_MENU_HEIGHT - size));
+
+      // Checa colisão com os outros ícones
+      const COLLISION_THRESHOLD = size;
+      const hasCollision = state.workspaceIcons.some((icon) => {
+        if (icon.path === path) return false;
+        return Math.abs(clampedX - icon.x) < COLLISION_THRESHOLD && Math.abs(clampedY - icon.y) < COLLISION_THRESHOLD;
+      });
+
+      if (hasCollision) {
+        // Rejeita a alteração mas incrementa dragVersion para resetar o offset visual do drag
+        return {
+          workspaceIcons: state.workspaceIcons.map((icon) =>
+            icon.path === path ? { ...icon, dragVersion: (icon.dragVersion ?? 0) + 1 } : icon
+          ),
+        };
+      }
 
       return {
         workspaceIcons: state.workspaceIcons.map((icon) =>
-          icon.path === path ? { ...icon, x: clampedX, y: clampedY } : icon
+          icon.path === path ? { ...icon, x: clampedX, y: clampedY, dragVersion: (icon.dragVersion ?? 0) + 1 } : icon
         ),
       };
     }),

@@ -15,9 +15,16 @@ interface VirtualPageWrapperProps {
   zoomLevel: number;
   innerRef: (el: HTMLDivElement | null) => void;
   onLoadSuccess?: (width: number, height: number) => void;
+  isMinimized?: boolean;
 }
 
-const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef, onLoadSuccess }: VirtualPageWrapperProps) => {
+const VirtualPageWrapper = ({
+  pageNumber,
+  zoomLevel,
+  innerRef,
+  onLoadSuccess,
+  isMinimized = false,
+}: VirtualPageWrapperProps) => {
   const localRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [pageSize, setPageSize] = useState<{ width: number; height: number } | null>(null);
@@ -34,7 +41,12 @@ const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef, onLoadSuccess }: 
     if (!localRef.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        setIsVisible(entries[0].isIntersecting);
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else if (!isMinimized) {
+          setIsVisible(false);
+        }
       },
       {
         rootMargin: '2000px',
@@ -42,7 +54,7 @@ const VirtualPageWrapper = ({ pageNumber, zoomLevel, innerRef, onLoadSuccess }: 
     );
     observer.observe(localRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMinimized]);
 
   return (
     <div
@@ -89,6 +101,7 @@ interface PdfViewerProps {
   setCurrentPage: (num: number) => void;
   setNumPages: (num: number) => void;
   activeTool: 'selection' | 'hand';
+  isMinimized?: boolean;
 }
 
 export const PdfViewer = ({
@@ -99,6 +112,7 @@ export const PdfViewer = ({
   setCurrentPage,
   setNumPages,
   activeTool,
+  isMinimized = false,
 }: PdfViewerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [internalNumPages, setInternalNumPages] = useState<number>(0);
@@ -141,6 +155,7 @@ export const PdfViewer = ({
     const calculateFitZoom = () => {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.clientWidth;
+      if (containerWidth <= 0) return; // Do not calculate or change zoom if minimized/hidden
       const margin = 60;
       const fitZoom = (containerWidth - margin) / firstPageWidth;
       const roundedZoom = Math.round(fitZoom * 20) / 20;
@@ -258,6 +273,7 @@ export const PdfViewer = ({
         pageRefs.current[index] = el;
       }}
       onLoadSuccess={index === 0 ? handleFirstPageLoad : undefined}
+      isMinimized={isMinimized}
     />
   ));
 

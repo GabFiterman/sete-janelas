@@ -7,8 +7,12 @@ NPM = npm
 
 all: up
 
-app: ## Sobe os containers da aplicação em modo de desenvolvimento.
+app: ## Sobe os containers da aplicação em modo de desenvolvimento (rápido).
 	@echo "\n #### Iniciando os containers do projeto... ####\n"
+	$(DOCKER_COMPOSE) up
+
+app-rebuild: ## Reconstrói a imagem e recria volumes (útil se dependências mudarem).
+	@echo "\n #### Reconstruindo e iniciando os containers do projeto... ####\n"
 	$(DOCKER_COMPOSE) up --build -V
 
 down: ## Derruba os containers da aplicação.

@@ -61,4 +61,3 @@ function InternetExplorer({ initialUrl, windowId }: InternetExplorerProps) {
 }
 
 export default InternetExplorer;
-

@@ -40,4 +40,3 @@ export const useAcrobatReader = (appContext?: FileSystemItem) => {
     setZoomLevel,
   };
 };
-
