@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add unit test suite for string utilities and Zustand UI Store using Vitest ([#61](https://github.com/GabFiterman/sete-janelas/issues/61))
+- Add continuous integration (CI) workflow using GitHub Actions ([#61](https://github.com/GabFiterman/sete-janelas/issues/61))
 - Update VFS media: organized Spotify artist and playlist links into structured folders under Music directory, and replaced old test images with the new moodboard image collection ([#60](https://github.com/GabFiterman/sete-janelas/issues/60))
 
 ### Changed
 
+- Refactor project main README with in-depth technical focus on architecture, OS logic on web, testing, and git flow ([#61](https://github.com/GabFiterman/sete-janelas/issues/61))
 - Optimize Docker development setup for faster container startup and smaller context size ([#79](https://github.com/GabFiterman/sete-janelas/issues/79))
 - Customize Start Menu & Window transitions: updated user shortcut and profile picture click behavior to load Gabriel(2).webp, replaced default Windows flower icon, integrated smooth slide/fade animations for opening and closing the panel, and implemented smooth directional window transitions (minimizing to bottom, closing to top-right) ([#59](https://github.com/GabFiterman/sete-janelas/issues/59))
 
