@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Update VFS media: organized Spotify artist and playlist links into structured folders under Music directory, and replaced old test images with the new moodboard image collection ([#60](https://github.com/GabFiterman/sete-janelas/issues/60))
+
 ### Changed
 
 - Optimize Docker development setup for faster container startup and smaller context size ([#79](https://github.com/GabFiterman/sete-janelas/issues/79))
