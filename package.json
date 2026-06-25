@@ -1,11 +1,12 @@
 {
   "name": "sete-janelas",
   "private": true,
-  "version": "1.1.2",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
     "dev": "vite --host",
+    "prepare": "npm run lint:fix && npm run format && npm run test",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
     "lint:check": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

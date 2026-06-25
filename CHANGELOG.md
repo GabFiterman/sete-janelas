@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Changed
+
+### Fixed
+
+## [1.2.0] - 2026-06-25
+
+### Added
+
 - Add unit test suite for string utilities and Zustand UI Store using Vitest ([#61](https://github.com/GabFiterman/sete-janelas/issues/61))
 - Add continuous integration (CI) workflow using GitHub Actions ([#61](https://github.com/GabFiterman/sete-janelas/issues/61))
 - Update VFS media: organized Spotify artist and playlist links into structured folders under Music directory, and replaced old test images with the new moodboard image collection ([#60](https://github.com/GabFiterman/sete-janelas/issues/60))
