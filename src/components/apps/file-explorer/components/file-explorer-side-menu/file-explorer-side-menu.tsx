@@ -1,5 +1,5 @@
 import { useFileExplorerStore } from '../../use-file-explorer';
-import { useIsMobile } from '@/hooks';
+import { useIsMobile, useVFS } from '@/hooks';
 
 import { BtnIconTextLink } from '@/components';
 import { ITEMS_MAP_ALL, STRUCTURE_MAP_SIDE_MENU, type FileSystemItem } from '@/constants';
@@ -9,6 +9,7 @@ function FileExplorerSideMenu() {
   const { getIsItemSelected, navigateTo, toggleItemSelection, isSidebarOpen, setIsSidebarOpen } =
     useFileExplorerStore();
   const isMobile = useIsMobile();
+  const { getLabel } = useVFS();
 
   const handleItemClick = (item: FileSystemItem | null | undefined) => {
     if (!item) return;
@@ -41,7 +42,7 @@ function FileExplorerSideMenu() {
                 icon={mainItem.iconSrc}
                 onClick={(event) => handleItemInteraction(event, mainItem)}
                 onDoubleClick={() => handleItemClick(mainItem)}
-                text={mainItem.label}
+                text={getLabel(mainItem)}
                 selected={getIsItemSelected(mainItem)}
               />
               {subItems?.length > 0 &&
@@ -55,7 +56,7 @@ function FileExplorerSideMenu() {
                         key={subItem.uri}
                         onClick={(event) => handleItemInteraction(event, subItem)}
                         onDoubleClick={() => handleItemClick(subItem)}
-                        text={subItem.label}
+                        text={getLabel(subItem)}
                         selected={getIsItemSelected(subItem)}
                       />
                     )

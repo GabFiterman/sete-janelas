@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { generateUUID, isImageByExtension, isVideoByExtension, isTextByExtension, isPdfByExtension } from '@/utils';
 import { ITEMS_MAP_WORKSPACE } from '@/constants';
-import { useDraggableElement, useIsMobile } from '@/hooks';
+import { useDraggableElement, useIsMobile, useVFS } from '@/hooks';
 import useUiStore, { type WorkspaceIcon } from '@/store/uiStore';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 
@@ -33,6 +33,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
   const { openWindow } = useUiStore();
   const { getIsItemSelected, toggleItemSelection } = useFileExplorerStore();
   const isMobile = useIsMobile();
+  const { getLabel } = useVFS();
 
   const iconRef = useRef<HTMLDivElement>(null);
   const [iconDimensions, setIconDimensions] = useState({
@@ -195,7 +196,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
       onClick={(event) => handleSingleClick(event)}
       dragConstraints={constraintsRef}
       drag={!isMobile}
-      title={`${label}${type === 'file' && extension ? extension : ''}`}
+      title={`${getLabel(icon)}${type === 'file' && extension ? extension : ''}`}
       style={{
         x: x,
         y: y,
@@ -209,7 +210,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
         <div className="icon-image">
           <img
             src={iconSrc}
-            alt={`${label} Icon`}
+            alt={`${getLabel(icon)} Icon`}
             style={{
               width: 'auto',
               height: `${adjustedSize}`,
@@ -219,7 +220,7 @@ function IconLinkLabel({ className, constraintsRef, icon, size = '6vh' }: IconLi
           />
         </div>
         <span className="label">
-          {label}
+          {getLabel(icon)}
           {type === 'file' && extension ? `${extension}` : ''}
         </span>
       </div>

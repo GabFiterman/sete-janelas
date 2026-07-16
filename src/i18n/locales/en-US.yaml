@@ -3,3 +3,16 @@ startMenu:
   noResults: 'No results found.'
   allPrograms: 'All programs'
   turnOff: 'Shut down'
+vfs:
+  desktop:
+    computer: 'Computer'
+    recycleBin: 'Recycle Bin'
+  folders:
+    users: 'Users'
+    documents: 'Documents'
+    music: 'Music'
+    pictures: 'Pictures'
+    videos: 'Videos'
+    downloads: 'Downloads'
+    desktop: 'Desktop'
+    projects: 'Projects'

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import useUIStore from '@/store/uiStore';
 import useStartMenuStates from './use-start-menu';
-import { useIsMobile } from '@/hooks';
+import { useIsMobile, useVFS } from '@/hooks';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 import { searchVFS } from '@/constants';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,7 @@ import './start-menu.scss';
 function StartMenu() {
   const { isStartMenuOpen, setIsStartMenuOpen, startMenuAutofocusSearch } = useUIStore();
   const isMobile = useIsMobile();
+  const { getLabel } = useVFS();
   const { navigateTo } = useFileExplorerStore();
   const { t } = useTranslation();
 
@@ -68,7 +69,7 @@ function StartMenu() {
                         <img src={item.iconSrc} className="start-menu-search-icon" />
                         <div className="start-menu-search-details">
                           <span className="start-menu-search-label">
-                            {item.label}
+                            {getLabel(item)}
                             {item.type === 'file' ? item.extension : ''}
                           </span>
                           <span className="start-menu-search-path">{item.path}</span>

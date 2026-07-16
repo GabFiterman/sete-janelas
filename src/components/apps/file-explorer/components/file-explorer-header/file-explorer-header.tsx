@@ -3,6 +3,7 @@ import { useFileExplorerStore } from '../../use-file-explorer';
 import { BtnForwardBackward, InputAndIcon } from '@/components';
 import { folderUserIcon, Reload, Search, ArrowDropdown } from '@/assets';
 import { searchVFS, ITEMS_MAP_ALL } from '@/constants';
+import { useVFS } from '@/hooks';
 
 function FileExplorerHeader() {
   const {
@@ -16,6 +17,7 @@ function FileExplorerHeader() {
     navigateTo,
     setSearchQuery,
   } = useFileExplorerStore();
+  const { getLabel } = useVFS();
 
   const [pathVal, setPathVal] = useState(currentPath);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -114,7 +116,7 @@ function FileExplorerHeader() {
                 <img src={item.iconSrc} className="dropdown-item-icon" />
                 <div className="dropdown-item-details">
                   <span className="dropdown-item-label">
-                    {item.label}
+                    {getLabel(item)}
                     {item.type === 'file' ? item.extension : ''}
                   </span>
                   <span className="dropdown-item-path">{item.path}</span>

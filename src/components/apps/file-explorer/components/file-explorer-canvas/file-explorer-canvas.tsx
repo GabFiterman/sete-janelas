@@ -3,10 +3,12 @@ import { BtnIconTextLink } from '@/components';
 import { searchVFS, type FileSystemItem } from '@/constants';
 import { isImageByExtension } from '@/utils';
 import { getMediaAssetPath } from '@/components/apps/media-center/utils';
+import { useVFS } from '@/hooks';
 
 function FileExplorerCanvas() {
   const { currentDirectoryContents, getIsItemSelected, navigateTo, toggleItemSelection, searchQuery, setSearchQuery } =
     useFileExplorerStore();
+  const { getLabel } = useVFS();
 
   const rawItems = searchQuery.trim() ? searchVFS(searchQuery) : currentDirectoryContents;
   const itemsToRender = (rawItems || []).filter((item): item is FileSystemItem => item !== undefined && item !== null);
@@ -40,7 +42,7 @@ function FileExplorerCanvas() {
                 <img
                   src={getMediaAssetPath(item) || item?.iconSrc}
                   className="file-explorer-thumbnail"
-                  alt={item.label}
+                  alt={getLabel(item)}
                 />
               </div>
             ) : (
@@ -60,7 +62,7 @@ function FileExplorerCanvas() {
                 onDoubleClick={() => navigateTo(item)}
                 orientation="vertical"
                 selected={getIsItemSelected(item)}
-                text={`${item?.label}${item.type === 'file' ? item.extension : ''}`}
+                text={`${getLabel(item)}${item.type === 'file' ? item.extension : ''}`}
               />
             );
           })

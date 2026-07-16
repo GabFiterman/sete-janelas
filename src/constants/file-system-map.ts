@@ -17,6 +17,7 @@ interface FileSystemItem {
   uri: string;
   miniature?: string;
   appName?: string;
+  labelKey?: string;
 }
 
 export type { FileSystemItem };

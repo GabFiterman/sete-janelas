@@ -3,3 +3,16 @@ startMenu:
   noResults: 'Nenhum resultado encontrado.'
   allPrograms: 'Todos os programas'
   turnOff: 'Desligar'
+vfs:
+  desktop:
+    computer: 'Meu Computador'
+    recycleBin: 'Lixeira'
+  folders:
+    users: 'Usuários'
+    documents: 'Documentos'
+    music: 'Músicas'
+    pictures: 'Imagens'
+    videos: 'Vídeos'
+    downloads: 'Downloads'
+    desktop: 'Área de Trabalho'
+    projects: 'Projetos'
