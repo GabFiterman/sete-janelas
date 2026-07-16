@@ -1,0 +1,5 @@
+startMenu:
+  searchPlaceholder: 'Pesquisar programas e arquivos'
+  noResults: 'Nenhum resultado encontrado.'
+  allPrograms: 'Todos os programas'
+  turnOff: 'Desligar'

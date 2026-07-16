@@ -1,0 +1,5 @@
+startMenu:
+  searchPlaceholder: 'Search programs and files'
+  noResults: 'No results found.'
+  allPrograms: 'All programs'
+  turnOff: 'Shut down'

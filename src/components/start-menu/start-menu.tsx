@@ -5,6 +5,7 @@ import useStartMenuStates from './use-start-menu';
 import { useIsMobile } from '@/hooks';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 import { searchVFS } from '@/constants';
+import { useTranslation } from 'react-i18next';
 
 import { InputAndIcon } from '@/components';
 import { indicationArrowIcon, personalUserIcon } from '@/assets';
@@ -14,6 +15,7 @@ function StartMenu() {
   const { isStartMenuOpen, setIsStartMenuOpen, startMenuAutofocusSearch } = useUIStore();
   const isMobile = useIsMobile();
   const { navigateTo } = useFileExplorerStore();
+  const { t } = useTranslation();
 
   const { handleAppClick, startMenuApps, startMenuShortcuts, openProfileImage } = useStartMenuStates();
   const [searchVal, setSearchVal] = useState('');
@@ -74,7 +76,7 @@ function StartMenu() {
                       </div>
                     ))
                   ) : (
-                    <div className="start-menu-search-no-results">Nenhum resultado encontrado.</div>
+                    <div className="start-menu-search-no-results">{t('startMenu.noResults')}</div>
                   )}
                 </div>
               ) : (
@@ -96,14 +98,14 @@ function StartMenu() {
 
               <div className="start-menu-app-all-apps disabled">
                 <img src={indicationArrowIcon} className="disabled" />
-                <span className="disabled">Todos os programas</span>
+                <span className="disabled">{t('startMenu.allPrograms')}</span>
               </div>
 
               <div className="start-menu-app-search">
                 <InputAndIcon
                   ref={inputRef}
                   type="text"
-                  placeholder="Pesquisar programas e arquivos"
+                  placeholder={t('startMenu.searchPlaceholder')}
                   value={searchVal}
                   onChange={(e) => setSearchVal(e.target.value)}
                 />
@@ -142,7 +144,7 @@ function StartMenu() {
                   disabled={true}
                   onClick={() => console.log('DESLIGAR')}
                 >
-                  Desligar
+                  {t('startMenu.turnOff')}
                 </button>
                 <button
                   className="start-menu-button button-more-options disabled"

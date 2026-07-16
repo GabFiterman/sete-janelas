@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instala todas as dependências usando npm ci (mais rápido e limpo para ambientes automatizados/Docker)
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 # Expõe a porta de desenvolvimento do Vite
 EXPOSE 5173

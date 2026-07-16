@@ -1,4 +1,4 @@
-import { DatetimeWidget } from '../common/widgets';
+import { DatetimeWidget, LanguageWidget } from '../common/widgets';
 
 import { FixedMenuTaskbarItem } from './components';
 import { useFixedMenu } from './hooks';
@@ -73,6 +73,9 @@ export function FixedMenu() {
         </div>
 
         <div className="menu-widgets-container">
+          <div className="menu-widget-container">
+            <LanguageWidget />
+          </div>
           <div className="menu-widget-container">
             <DatetimeWidget />
           </div>
