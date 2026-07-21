@@ -15,7 +15,9 @@ function FileExplorerFooter() {
       <span>
         {totalItems === 1 ? t('apps.fileExplorer.item') : `${totalItems} ${t('apps.fileExplorer.items')}`}{' '}
         {getSelectedItemsLength() > 0 &&
-          (getSelectedItemsLength() === 1 ? `(1 ${t('apps.fileExplorer.selected')})` : `(${getSelectedItemsLength()} ${t('apps.fileExplorer.selecteds')})`)}
+          (getSelectedItemsLength() === 1
+            ? `(1 ${t('apps.fileExplorer.selected')})`
+            : `(${getSelectedItemsLength()} ${t('apps.fileExplorer.selecteds')})`)}
       </span>
     </div>
   );

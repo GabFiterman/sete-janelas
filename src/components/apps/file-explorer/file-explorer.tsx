@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   FileExplorerCanvas,
   FileExplorerController,
@@ -12,8 +13,6 @@ import { ITEMS_MAP_ALL } from '@/constants';
 import { useTranslation } from 'react-i18next';
 
 import './file-explorer.scss';
-
-import { useEffect } from 'react';
 
 interface FileExplorerProps {
   windowId?: string;
@@ -33,7 +32,7 @@ function FileExplorer({ windowId }: FileExplorerProps) {
       const title = folderItem ? getLabel(folderItem) : currentPath;
       updateWindowTitle(windowId, title);
     }
-  }, [currentPath, windowId, updateWindowTitle, t]);
+  }, [currentPath, windowId, updateWindowTitle, getLabel, t]);
 
   useEffect(() => {
     const handleAppBack = (e: Event) => {

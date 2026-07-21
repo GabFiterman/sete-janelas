@@ -12,7 +12,7 @@ export const useAcrobatReader = (appContext?: FileSystemItem, windowId?: string)
   const [selectedFile, setSelectedFileState] = useState<string | null>(null);
 
   const setSelectedFile = (uri: string | null) => {
-    if (uri && !uri.startsWith('http' ) && !uri.startsWith('/')) {
+    if (uri && !uri.startsWith('http') && !uri.startsWith('/')) {
       setSelectedFileState(`/${uri}`);
     } else {
       setSelectedFileState(uri);
