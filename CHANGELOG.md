@@ -13,6 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.3.0] - 2026-07-20
+
+### Added
+
+- Add full internationalization (i18n) support to Sete Janelas with Portuguese (pt-BR) and English (en-US) translations using `react-i18next` ([#67](https://github.com/GabFiterman/sete-janelas/issues/67))
+- Introduce dynamic translation selector in the taskbar for real-time locale switching ([#67](https://github.com/GabFiterman/sete-janelas/issues/67))
+
+### Changed
+
+- Refactor static action menus and constants (Notepad, File Explorer, Media Center, Fixed Menu, Start Menu) into custom hooks to safely consume translations without hook rules violations ([#67](https://github.com/GabFiterman/sete-janelas/issues/67))
+- Update all core application titles (File Explorer, Internet Explorer, Notepad, Acrobat Reader, Media Center) to reactively translate when the language changes ([#67](https://github.com/GabFiterman/sete-janelas/issues/67))
+
+### Fixed
+
+- Resolve stacking context layering issue in File Explorer where action dropdowns rendered beneath the sidebar by defining explicit z-index section boundaries in SCSS ([#67](https://github.com/GabFiterman/sete-janelas/issues/67))
+
 ## [1.2.0] - 2026-06-25
 
 ### Added

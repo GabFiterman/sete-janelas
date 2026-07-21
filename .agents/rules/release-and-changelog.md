@@ -76,43 +76,37 @@ Example:
 
 ---
 
-## 3. Branching Strategy & Workflow
+## 3. Branching Strategy & Workflow (Trunk-Based / Rolling Release)
 
-The project uses a Gitflow-inspired branching strategy tailored for portfolio development:
+The project uses a Trunk-Based Development workflow with micro-releases, optimized for fast and continuous delivery:
 
-- **`develop`**: The integration branch where all active development happens. All feature and bugfix branches are merged here.
-- **`main`**: The production branch containing stable, tagged releases.
-- **`release/vX.Y.Z`**: Temporary branches cut from `develop` when a milestone is complete. Used to finalize version bumps, update the changelog, and perform final build verification.
+- **`main`**: The primary branch representing the current production environment (Vercel deploys `main` automatically).
+- **`feature/issue-NN`** or **`fix/issue-NN`**: Temporary branches cut from `main`. Features/fixes are merged directly back into `main` after verification.
 
 ### Flow Diagram
 
 ```mermaid
 graph TD
-    feature[feature/issue-123] -->|PR| develop[develop]
-    bugfix[fix/issue-56] -->|PR| develop
-    develop -->|Cut Release| release[release/v1.2.0]
-    release -->|PR & Tag| main[main]
-    release -->|PR backport| develop
+    feature[feature/issue-123] -->|Merge PR| main[main]
+    bugfix[fix/issue-56] -->|Merge PR| main
+    main -->|Tag Release| tag[v1.3.0]
 ```
 
 ---
 
-## 4. Workflow: Cutting a Release
+## 4. Workflow: Cutting a Micro-Release
 
-When all issues in a milestone are complete and the milestone is ready for release:
+When a feature branch is ready to be merged and deployed:
 
-1. **Cut the release branch** from `develop`: `git checkout -b release/vX.Y.Z`.
-2. **Rename `[Unreleased]` → `[X.Y.Z] - YYYY-MM-DD`** in `CHANGELOG.md`.
-3. **Add a fresh `[Unreleased]` section** above it.
-4. **Bump the version** in `package.json`.
-5. **Commit** with message: `chore: release vX.Y.Z`.
-6. **Merge to main and Tag**:
-   - Open a PR from `release/vX.Y.Z` to `main`.
-   - Once merged, create a Git tag: `git tag vX.Y.Z` on `main`.
-   - Create a GitHub Release from the tag, using the CHANGELOG section as release notes.
-7. **Merge back to develop**:
-   - Open a PR from `release/vX.Y.Z` to `develop` to sync the version bump and changelog.
-8. **Close the milestone** on GitHub.
+1. **Bump the version** in `package.json` on the feature branch (incrementing minor for new features, patch for bugfixes/minor updates, following SemVer).
+2. **Move changes from `[Unreleased]` to a new version section** in `CHANGELOG.md` (e.g., `## [X.Y.Z] - YYYY-MM-DD`). Add a fresh empty `[Unreleased]` section.
+3. **Commit** these changes on the feature branch with a release message: `chore: release vX.Y.Z`.
+4. **Merge to main**: Open and merge the Pull Request from the feature branch to `main` (Vercel will build and deploy `main` automatically).
+5. **Tag the Release**:
+   - On the `main` branch, create a Git tag: `git tag vX.Y.Z`.
+   - Push the tag: `git push origin vX.Y.Z`.
+   - (Optional) Draft a GitHub Release on GitHub using the changelog section as release notes.
+6. **Close the issue** on GitHub.
 
 ---
 
