@@ -6,6 +6,7 @@ import { useIsWindowFocused } from '../../hooks';
 import { getMediaAssetPath, getSystemMediaItems } from '../../utils';
 import { isImageByExtension } from '@/utils';
 import useUIStore from '@/store/uiStore';
+import { useTranslation } from 'react-i18next';
 
 // Types
 import type { MouseEvent } from 'react';
@@ -58,6 +59,8 @@ export function useMediaCenterImage({
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0, top: 0, bottom: 0 });
+
+  const { t } = useTranslation();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -222,16 +225,16 @@ export function useMediaCenterImage({
     if (!windowId || !updateWindowTitle) return;
 
     if (viewMode === 'gallery') {
-      updateWindowTitle(windowId, 'Galeria de Fotos');
+      updateWindowTitle(windowId, t('apps.mediaCenterImage.windowTitle'));
     } else {
       const currentItem = currentPlaylist[currentIndex];
       if (currentItem) {
         updateWindowTitle(windowId, currentItem.label + (currentItem.extension || ''));
       } else {
-        updateWindowTitle(windowId, 'Visualizador de Imagens');
+        updateWindowTitle(windowId, t('apps.mediaCenterImage.windowTitle'));
       }
     }
-  }, [viewMode, currentIndex, currentPlaylist, windowId, updateWindowTitle]);
+  }, [viewMode, currentIndex, currentPlaylist, windowId, updateWindowTitle, t]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {

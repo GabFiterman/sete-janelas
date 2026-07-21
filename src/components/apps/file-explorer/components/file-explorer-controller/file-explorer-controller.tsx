@@ -1,4 +1,4 @@
-import { controllerItems, actionItems } from '../../constants/file-explorer-constants';
+import { useControllerItems, useActionItems } from '../../constants/file-explorer-constants';
 import { AppControllerWidget } from '@/components';
 import { useIsMobile } from '@/hooks';
 import { useFileExplorerStore } from '../../use-file-explorer';
@@ -7,6 +7,8 @@ import { IoMdMenu } from 'react-icons/io';
 function FileExplorerController() {
   const isMobile = useIsMobile();
   const { isSidebarOpen, setIsSidebarOpen } = useFileExplorerStore();
+  const controllerItems = useControllerItems();
+  const actionItems = useActionItems();
 
   return (
     <div className="file-explorer-controller-container">

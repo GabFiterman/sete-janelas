@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import type { AppName } from '@/components/apps/app-config';
 import { useIsMobile } from '@/hooks';
 import useUIStore from '@/store/uiStore';
@@ -28,6 +30,7 @@ interface GroupedWindows {
 }
 
 export const useFixedMenu = () => {
+  const { t } = useTranslation();
   const windows = useUIStore((state) => state.windows);
   const closeWindow = useUIStore((state) => state.closeWindow);
   const toggleIsStartMenuOpen = useUIStore((state) => state.toggleIsStartMenuOpen);
@@ -52,12 +55,12 @@ export const useFixedMenu = () => {
       // INTERNET EXPLORER
       {
         id: INTERNET_EXPLORER_WINDOW_ID,
-        label: 'Internet Explorer',
+        label: t('appNames.internetExplorer'),
         appName: 'InternetExplorer' as AppName,
         action: () =>
           openWindow({
             id: INTERNET_EXPLORER_WINDOW_ID,
-            title: 'Internet Explorer',
+            title: t('appNames.internetExplorer'),
             appName: 'InternetExplorer',
             iconSrc: internetExplorerIcon,
             appProps: {
@@ -69,12 +72,12 @@ export const useFixedMenu = () => {
       // FILE EXPLORER
       {
         id: FILE_EXPLORER_WINDOW_ID,
-        label: 'File Explorer',
+        label: t('appNames.fileExplorer'),
         appName: 'FileExplorer' as AppName,
         action: () =>
           openWindow({
             id: FILE_EXPLORER_WINDOW_ID,
-            title: 'File Explorer',
+            title: t('appNames.fileExplorer'),
             appName: 'FileExplorer',
             iconSrc: fileExplorerIcon,
             widthRatio: 0.55,
@@ -85,12 +88,12 @@ export const useFixedMenu = () => {
       // NOTEPAD
       {
         id: NOTEPAD_WINDOW_ID,
-        label: 'Bloco de Notas',
+        label: t('appNames.notepad'),
         appName: 'Notepad' as AppName,
         action: () =>
           openWindow({
             id: NOTEPAD_WINDOW_ID,
-            title: 'Bloco de Notas',
+            title: t('appNames.notepad'),
             appName: 'Notepad',
             iconSrc: notepadIcon,
           }),
@@ -99,12 +102,12 @@ export const useFixedMenu = () => {
       // MEDIA CENTER IMAGE
       {
         id: MEDIA_CENTER_IMAGE_WINDOW_ID,
-        label: 'Visualizador de Fotos do Sete Janelas',
+        label: t('appNames.mediaCenterImage'),
         appName: 'MediaCenterImage' as AppName,
         action: () =>
           openWindow({
             id: MEDIA_CENTER_IMAGE_WINDOW_ID,
-            title: 'Visualizador de Fotos do Sete Janelas',
+            title: t('appNames.mediaCenterImage'),
             appName: 'MediaCenterImage',
             iconSrc: mediaCenterImageIcon,
           }),
@@ -113,12 +116,12 @@ export const useFixedMenu = () => {
       // MEDIA CENTER VIDEO
       {
         id: MEDIA_CENTER_VIDE_WINDOW_ID,
-        label: 'Visualizador de Vídeos do Sete Janelas',
+        label: t('appNames.mediaCenterVideo'),
         appName: 'MediaCenterVideo' as AppName,
         action: () =>
           openWindow({
             id: MEDIA_CENTER_VIDE_WINDOW_ID,
-            title: 'Visualizador de Vídeos do Sete Janelas',
+            title: t('appNames.mediaCenterVideo'),
             appName: 'MediaCenterVideo',
             iconSrc: videosIcon,
           }),
@@ -127,19 +130,19 @@ export const useFixedMenu = () => {
       // ACROBAT READER
       {
         id: ACROBAT_READER_WINDOW_ID,
-        label: 'Adobe Acrobat Reader',
+        label: t('appNames.acrobatReader'),
         appName: 'AcrobatReader' as AppName,
         action: () =>
           openWindow({
             id: ACROBAT_READER_WINDOW_ID,
-            title: 'Adobe Acrobat Reader',
+            title: t('appNames.acrobatReader'),
             appName: 'AcrobatReader',
             iconSrc: AcrobatReaderLogo,
           }),
         icon: AcrobatReaderLogo,
       },
     ],
-    [openWindow]
+    [openWindow, t]
   );
 
   const activeWindowsByApp = useMemo(() => {

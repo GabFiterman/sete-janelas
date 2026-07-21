@@ -5,6 +5,7 @@ import { getMediaAssetPath } from '../../utils';
 import defaultVideo from '@/assets/media-center/The-Jimi-Hendrix-Experience-Purple-Haze_240p.mp4';
 
 import type { FileSystemItem } from '@/constants';
+import { useTranslation } from 'react-i18next';
 
 interface VideoCardProps {
   video: FileSystemItem;
@@ -66,9 +67,10 @@ interface MediaCenterVideoGalleryProps {
 }
 
 export function MediaCenterVideoGallery({ videos, onSelectVideo }: MediaCenterVideoGalleryProps) {
+  const { t } = useTranslation();
   return (
     <div className="media-center-gallery">
-      <h2 className="media-center-gallery-title">Galeria de Vídeos</h2>
+      <h2 className="media-center-gallery-title">{t('apps.mediaCenterVideo.windowTitle')}</h2>
       <div className="media-center-gallery-grid">
         {videos.map((video) => (
           <VideoCard key={video.path} video={video} onClick={() => onSelectVideo(video)} />

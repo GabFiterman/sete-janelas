@@ -8,7 +8,7 @@ import { MediaCenterImageDetail, MediaCenterImageFooter, MediaCenterImageGallery
 import { useMediaCenterImage } from './hooks';
 
 // Constants & Styles
-import { controllerItems } from './constants';
+import { useControllerItems } from './constants';
 import './media-center-image.scss';
 
 // Types
@@ -25,6 +25,7 @@ interface MediaCenterImageProps {
 }
 
 function MediaCenterImage(props: MediaCenterImageProps) {
+  const controllerItems = useControllerItems();
   const {
     allSystemImages,
     containerRef,

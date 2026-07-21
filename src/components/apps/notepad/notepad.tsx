@@ -1,44 +1,15 @@
-import { useEffect, useState } from 'react';
-
 import { NotepadController, NotepadCanvas } from './components';
+import { useNotepad } from './hooks';
 import { type FileSystemItem } from '@/constants';
-
 import './notepad.scss';
 
 export interface NotepadProps {
   initialItem?: FileSystemItem;
+  windowId?: string;
 }
 
-function getAssetPath(item: FileSystemItem | undefined): string | null {
-  if (!item) return null;
-
-  const ssoBasePath = 'C:/USUÁRIOS/FITERMAN/';
-  const assetBasePath = '/media-center/';
-
-  if (item.path.toUpperCase().startsWith(ssoBasePath)) {
-    const relativePath = item.path.substring(ssoBasePath.length);
-    return assetBasePath + relativePath;
-  }
-  return null;
-}
-
-function Notepad({ initialItem }: NotepadProps) {
-  const [initialTextSource, setInitialTextSource] = useState('');
-
-  useEffect(() => {
-    const assetPath = getAssetPath(initialItem);
-    if (assetPath) {
-      fetch(assetPath)
-        .then((response) => response.text())
-        .then((text) => {
-          if (text.startsWith('<!doctype html>')) {
-            return;
-          } else {
-            setInitialTextSource(text);
-          }
-        });
-    }
-  }, [initialItem]);
+function Notepad({ initialItem, windowId }: NotepadProps) {
+  const { initialTextSource } = useNotepad(initialItem, windowId);
 
   return (
     <div className="notepad-container">

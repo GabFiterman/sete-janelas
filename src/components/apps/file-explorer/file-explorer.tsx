@@ -6,9 +6,10 @@ import {
   FileExplorerSideMenu,
 } from './components';
 import { useFileExplorerStore } from './use-file-explorer';
-import { useIsMobile } from '@/hooks';
+import { useIsMobile, useVFS } from '@/hooks';
 import useUIStore from '@/store/uiStore';
 import { ITEMS_MAP_ALL } from '@/constants';
+import { useTranslation } from 'react-i18next';
 
 import './file-explorer.scss';
 
@@ -22,15 +23,17 @@ function FileExplorer({ windowId }: FileExplorerProps) {
   const { isSidebarOpen, setIsSidebarOpen, currentPath } = useFileExplorerStore();
   const isMobile = useIsMobile();
   const updateWindowTitle = useUIStore((state) => state.updateWindowTitle);
+  const { getLabel } = useVFS();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (windowId && currentPath) {
       const pathUpper = currentPath.toUpperCase();
       const folderItem = ITEMS_MAP_ALL[pathUpper];
-      const title = folderItem ? folderItem.label : currentPath;
+      const title = folderItem ? getLabel(folderItem) : currentPath;
       updateWindowTitle(windowId, title);
     }
-  }, [currentPath, windowId, updateWindowTitle]);
+  }, [currentPath, windowId, updateWindowTitle, t]);
 
   useEffect(() => {
     const handleAppBack = (e: Event) => {

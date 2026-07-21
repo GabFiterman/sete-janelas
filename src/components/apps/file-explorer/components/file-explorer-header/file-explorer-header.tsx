@@ -4,6 +4,7 @@ import { BtnForwardBackward, InputAndIcon } from '@/components';
 import { folderUserIcon, Reload, Search, ArrowDropdown } from '@/assets';
 import { searchVFS, ITEMS_MAP_ALL } from '@/constants';
 import { useVFS } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 function FileExplorerHeader() {
   const {
@@ -18,6 +19,7 @@ function FileExplorerHeader() {
     setSearchQuery,
   } = useFileExplorerStore();
   const { getLabel } = useVFS();
+  const { t } = useTranslation();
 
   const [pathVal, setPathVal] = useState(currentPath);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -129,7 +131,7 @@ function FileExplorerHeader() {
 
       <div className="query-container search-container">
         <InputAndIcon
-          placeholder="Pesquisar Fiterman"
+          placeholder={t('apps.fileExplorer.searchPlaceholder')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           childAfter={

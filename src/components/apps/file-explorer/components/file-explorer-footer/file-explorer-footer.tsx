@@ -1,8 +1,10 @@
 import { useFileExplorerStore } from '../../use-file-explorer';
 import { folderUserIcon } from '@/assets';
 import { searchVFS } from '@/constants';
+import { useTranslation } from 'react-i18next';
 
 function FileExplorerFooter() {
+  const { t } = useTranslation();
   const { currentDirectoryContents, getSelectedItemsLength, searchQuery } = useFileExplorerStore();
 
   const totalItems = searchQuery.trim() ? searchVFS(searchQuery).length : currentDirectoryContents?.length || 0;
@@ -11,9 +13,9 @@ function FileExplorerFooter() {
     <div className="file-explorer-footer">
       <img src={folderUserIcon} alt="folder-user-icon" />
       <span>
-        {totalItems === 1 ? '1 Item' : `${totalItems} Itens`}{' '}
+        {totalItems === 1 ? t('apps.fileExplorer.item') : `${totalItems} ${t('apps.fileExplorer.items')}`}{' '}
         {getSelectedItemsLength() > 0 &&
-          (getSelectedItemsLength() === 1 ? '(1 selecionado)' : `(${getSelectedItemsLength()} selecionados)`)}
+          (getSelectedItemsLength() === 1 ? `(1 ${t('apps.fileExplorer.selected')})` : `(${getSelectedItemsLength()} ${t('apps.fileExplorer.selecteds')})`)}
       </span>
     </div>
   );

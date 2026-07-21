@@ -11,6 +11,16 @@
     flex-shrink: 0;
   }
 
+  > header {
+    position: relative;
+    z-index: 3;
+  }
+
+  > section:nth-of-type(1) {
+    position: relative;
+    z-index: 2;
+  }
+
   .file-explorer-header {
     background: #d2e0ed;
     display: flex;
@@ -100,6 +110,7 @@
     height: 100%;
     overflow: hidden;
     position: relative;
+    z-index: 1;
 
     .file-explorer-mobile-backdrop {
       position: absolute;

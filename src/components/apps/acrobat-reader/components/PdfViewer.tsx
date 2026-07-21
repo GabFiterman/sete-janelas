@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
+import { useTranslation } from 'react-i18next';
 
 import workerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
@@ -126,6 +127,8 @@ export const PdfViewer = ({
   const isDragging = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
   const scrollPos = useRef({ left: 0, top: 0 });
+
+  const { t } = useTranslation();
 
   const handleFirstPageLoad = useCallback((width: number) => {
     setFirstPageWidth(width);
@@ -291,7 +294,7 @@ export const PdfViewer = ({
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}
         className="acrobat-pdf-document"
-        loading={<div className="acrobat-loading">Loading PDF...</div>}
+        loading={<div className="acrobat-loading">{t('apps.acrobatReader.loadingPdf')}...</div>}
       >
         {pages}
       </Document>

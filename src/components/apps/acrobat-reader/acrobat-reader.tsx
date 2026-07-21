@@ -26,7 +26,7 @@ export const AcrobatReader = ({ appContext, windowId }: { appContext?: FileSyste
     setNumPages,
     setSelectedFile,
     setZoomLevel,
-  } = useAcrobatReader(appContext);
+  } = useAcrobatReader(appContext, windowId);
 
   return (
     <div className="acrobat-reader-container">

@@ -13,6 +13,7 @@ import useUIStore from '@/store/uiStore';
 import { useFileExplorerStore } from '@/components/apps/file-explorer/use-file-explorer';
 import { ITEMS_MAP_ALL } from '@/constants';
 import { generateUUID } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const INTERNET_EXPLORER_WINDOW_ID = 'internet-explorer-window';
 const FILE_EXPLORER_WINDOW_ID = `file-explorer-window`;
@@ -28,15 +29,16 @@ const MEDIA_CENTER_IMAGE_FITERMAN = ITEMS_MAP_ALL['C:/USUARIOS/FITERMAN/IMAGENS/
 function useStartMenuStates() {
   const { openWindow, toggleIsStartMenuOpen, activeWindowsByApp } = useUIStore();
   const { setCurrentPath } = useFileExplorerStore();
+  const { t } = useTranslation();
 
   const startMenuApps = [
     {
       id: 1,
-      label: 'Internet Explorer',
+      label: t('appNames.internetExplorer'),
       action: () => {
         openWindow({
           id: INTERNET_EXPLORER_WINDOW_ID,
-          title: 'Internet Explorer',
+          title: t('appNames.internetExplorer'),
           appName: 'InternetExplorer' as AppName,
           iconSrc: internetExplorerIcon,
         });
@@ -45,7 +47,7 @@ function useStartMenuStates() {
     },
     {
       id: 2,
-      label: 'File Explorer',
+      label: t('appNames.fileExplorer'),
       action: () => {
         const activeWindows = activeWindowsByApp();
         if (!activeWindows['FileExplorer'] || activeWindows['FileExplorer']?.length === 0) {
@@ -53,7 +55,7 @@ function useStartMenuStates() {
         }
         openWindow({
           id: FILE_EXPLORER_WINDOW_ID,
-          title: 'File Explorer',
+          title: t('appNames.fileExplorer'),
           appName: 'FileExplorer' as AppName,
           iconSrc: fileExplorerIcon,
         });
@@ -62,11 +64,11 @@ function useStartMenuStates() {
     },
     {
       id: 3,
-      label: 'Bloco de Notas',
+      label: t('appNames.notepad'),
       action: () => {
         openWindow({
           id: `notepad-menu-window-${generateUUID()}`,
-          title: 'Bloco de Notas',
+          title: t('appNames.notepad'),
           appName: 'Notepad' as AppName,
           iconSrc: notepadIcon,
         });
@@ -75,11 +77,11 @@ function useStartMenuStates() {
     },
     {
       id: 4,
-      label: 'Visualizador de Imagens',
+      label: t('appNames.mediaCenterImage'),
       action: () => {
         openWindow({
           id: MEDIA_CENTER_IMAGE_WINDOW_ID,
-          title: 'Visualizador de Fotos do Sete Janelas',
+          title: t('appNames.mediaCenterImage'),
           appName: 'MediaCenterImage' as AppName,
           iconSrc: mediaCenterImageIcon,
         });
@@ -88,11 +90,11 @@ function useStartMenuStates() {
     },
     {
       id: 5,
-      label: 'Visualizador de Vídeos',
+      label: t('appNames.mediaCenterVideo'),
       action: () => {
         openWindow({
           id: MEDIA_CENTER_VIDEO_WINDOW_ID,
-          title: 'Visualizador de Vídeos do Sete Janelas',
+          title: t('appNames.mediaCenterVideo'),
           appName: 'MediaCenterVideo' as AppName,
           iconSrc: videosIcon,
         });
@@ -101,11 +103,11 @@ function useStartMenuStates() {
     },
     {
       id: 6,
-      label: 'Adobe Acrobat Reader',
+      label: t('appNames.acrobatReader'),
       action: () => {
         openWindow({
           id: ACROBAT_READER_WINDOW_ID,
-          title: 'Adobe Acrobat Reader',
+          title: t('appNames.acrobatReader'),
           appName: 'AcrobatReader' as AppName,
           iconSrc: AcrobatReaderLogo,
         });
@@ -117,11 +119,11 @@ function useStartMenuStates() {
   const startMenuShortcuts = [
     {
       id: 1,
-      label: 'Fiterman',
+      label: t('vfs.desktop.username'),
       action: () => {
         openWindow({
           id: MEDIA_CENTER_IMAGE_WINDOW_ID,
-          title: 'gabriel(2).webp',
+          title: `${t('vfs.desktop.username')}.webp`,
           appName: 'MediaCenterImage' as AppName,
           iconSrc: mediaCenterImageIcon,
           appProps: {
@@ -133,12 +135,12 @@ function useStartMenuStates() {
     },
     {
       id: 2,
-      label: 'Documentos',
+      label: t('vfs.folders.documents'),
       action: () => {
         setCurrentPath(FILE_EXPLORER_DOCUMENTS_PATH);
         openWindow({
           id: FILE_EXPLORER_WINDOW_ID,
-          title: 'File Explorer',
+          title: `${t('appNames.fileExplorer')} - ${t('vfs.folders.documents')}`,
           appName: 'FileExplorer' as AppName,
           iconSrc: fileExplorerIcon,
         });
@@ -146,12 +148,12 @@ function useStartMenuStates() {
     },
     {
       id: 3,
-      label: 'Imagens',
+      label: t('vfs.folders.pictures'),
       action: () => {
         setCurrentPath(FILE_EXPLORER_IMAGES_PATH);
         openWindow({
           id: FILE_EXPLORER_WINDOW_ID,
-          title: 'File Explorer',
+          title: `${t('appNames.fileExplorer')} - ${t('vfs.folders.pictures')}`,
           appName: 'FileExplorer' as AppName,
           iconSrc: fileExplorerIcon,
         });
@@ -162,7 +164,7 @@ function useStartMenuStates() {
   const openProfileImage = () => {
     openWindow({
       id: MEDIA_CENTER_IMAGE_WINDOW_ID,
-      title: 'gabriel(2).webp',
+      title: `${t('vfs.desktop.username')}.webp`,
       appName: 'MediaCenterImage' as AppName,
       iconSrc: mediaCenterImageIcon,
       appProps: {

@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import useUIStore from '@/store/uiStore';
 import { create } from 'zustand';
 
 export const INITIAL_URL = '/home';
@@ -94,7 +97,7 @@ const useInternetExplorerStore = create<IEState>((set, get) => ({
   },
 }));
 
-export function useInternetExplorer() {
+export function useInternetExplorer(windowId?: string) {
   const {
     currentUrl,
     goBack,
@@ -109,6 +112,20 @@ export function useInternetExplorer() {
     setFocus,
     setInputUrl,
   } = useInternetExplorerStore();
+
+  const { t } = useTranslation();
+  const updateWindowTitle = useUIStore((state) => state.updateWindowTitle);
+
+  useEffect(() => {
+    if (windowId) {
+      if (currentUrl === INITIAL_URL) {
+        updateWindowTitle(windowId, t('appNames.internetExplorer'));
+      } else {
+        const displayUrl = currentUrl.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+        updateWindowTitle(windowId, `${displayUrl} - ${t('appNames.internetExplorer')}`);
+      }
+    }
+  }, [currentUrl, windowId, updateWindowTitle, t]);
 
   return {
     currentUrl,

@@ -11,6 +11,7 @@ import {
   FaSearchMinus,
 } from 'react-icons/fa';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useTranslation } from 'react-i18next';
 
 interface TopBarProps {
   currentPage: number;
@@ -35,6 +36,7 @@ export const TopBar = ({
 }: TopBarProps) => {
   const STANDARD_ZOOM_LEVELS = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 3.5, 4];
   const isStandard = STANDARD_ZOOM_LEVELS.includes(zoomLevel);
+  const { t } = useTranslation();
 
   const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const page = parseInt(e.target.value);
@@ -147,7 +149,7 @@ export const TopBar = ({
 
       <div className="acrobat-tools-group acrobat-search-group">
         <div className="acrobat-search-input">
-          <input type="text" placeholder="Find text..." disabled />
+          <input type="text" placeholder={`${t('apps.acrobatReader.findText')}...`} disabled />
           <FaSearch />
         </div>
       </div>

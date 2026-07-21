@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getMediaAssetPath, getSystemMediaItems } from '../../utils';
 import { isVideoByExtension } from '@/utils';
 import useUIStore from '@/store/uiStore';
+import { useTranslation } from 'react-i18next';
 
 // Assets
 import defaultVideo from '@/assets/media-center/The-Jimi-Hendrix-Experience-Purple-Haze_240p.mp4';
@@ -20,6 +21,7 @@ interface UseMediaCenterVideoProps {
 }
 
 export function useMediaCenterVideo({ windowId, initialItem }: UseMediaCenterVideoProps) {
+  const { t } = useTranslation();
   const [selectedItem, setSelectedItem] = useState<FileSystemItem | undefined>(initialItem);
   const [viewMode, setViewMode] = useState<'detail' | 'gallery'>(() => {
     return initialItem ? 'detail' : 'gallery';
@@ -77,15 +79,15 @@ export function useMediaCenterVideo({ windowId, initialItem }: UseMediaCenterVid
     if (!windowId || !updateWindowTitle) return;
 
     if (viewMode === 'gallery') {
-      updateWindowTitle(windowId, 'Galeria de Vídeos');
+      updateWindowTitle(windowId, t('apps.mediaCenterVideo.windowTitle'));
     } else {
       if (selectedItem) {
         updateWindowTitle(windowId, selectedItem.label + (selectedItem.extension || ''));
       } else {
-        updateWindowTitle(windowId, 'Reprodutor de Vídeo');
+        updateWindowTitle(windowId, t('apps.mediaCenterVideo.windowTitle'));
       }
     }
-  }, [viewMode, selectedItem, windowId, updateWindowTitle]);
+  }, [viewMode, selectedItem, windowId, updateWindowTitle, t]);
 
   return {
     allSystemVideos,

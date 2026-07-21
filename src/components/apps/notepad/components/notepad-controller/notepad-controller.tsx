@@ -1,8 +1,10 @@
 import { AppControllerWidget } from '@/components';
 
-import { controllerItems } from '../../constants/notepad-constants';
+import { useControllerItems } from '../../constants/notepad-constants';
 
 function NotepadController() {
+  const controllerItems = useControllerItems();
+
   return (
     <div className="notepad-controller-container">
       <AppControllerWidget

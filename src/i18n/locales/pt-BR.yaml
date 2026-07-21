@@ -3,10 +3,107 @@ startMenu:
   noResults: 'Nenhum resultado encontrado.'
   allPrograms: 'Todos os programas'
   turnOff: 'Desligar'
+appNames:
+  internetExplorer: 'Internet Explorer'
+  fileExplorer: 'Explorador de Arquivos'
+  notepad: 'Bloco de Notas'
+  mediaCenterImage: 'Visualizador de Fotos do Sete Janelas'
+  mediaCenterVideo: 'Visualizador de Vídeos do Sete Janelas'
+  acrobatReader: 'Adobe Acrobat Reader'
+apps:
+  fileExplorer:
+    searchPlaceholder: 'Pesquisar Fiterman'
+    organize: 'Organizar'
+    organizeBox:
+      cut: 'Recortar'
+      copy: 'Copiar'
+      paste: 'Colar'
+      undo: 'Desfazer'
+      redo: 'Refazer'
+      selectAll: 'Selecionar tudo'
+      layout: 'Layout >'
+      pasteSearchOptions: 'Opções de pasta e pesquisa'
+      delete: 'Excluir'
+      rename: 'Renomear'
+      removeProps: 'Remover Propriedades'
+      props: 'Propriedades'
+      close: 'Fechar'
+    newFolder: 'Nova Pasta'
+    items: 'Itens'
+    item: 'Item'
+    selecteds: 'Selecionados'
+    selected: 'Selecionado'
+  notepad:
+    file: 'Arquivo'
+    edit: 'Editar'
+    format: 'Formatar'
+    view: 'Exibir'
+    help: 'Ajuda'
+    fileBox:
+      new: 'Novo'
+      open: 'Abrir'
+      save: 'Salvar'
+      saveAs: 'Salvar como'
+      configPage: 'Configurar Página'
+      print: 'Imprimir'
+      close: 'Fechar'
+    editBox:
+      undo: 'Desfazer'
+      redo: 'Refazer'
+      cut: 'Recortar'
+      copy: 'Copiar'
+      paste: 'Colar'
+      delete: 'Excluir'
+      find: 'Localizar'
+      findNext: 'Localizar próximo'
+      replace: 'Substituir'
+      goTo: 'Ir para'
+      selectAll: 'Selecionar tudo'
+      dateTime: 'Hora e data'
+    formatBox:
+      wordWrap: 'Quebra automática de linha'
+      font: 'Fonte'
+    viewBox:
+      statusBar: 'Barra de status'
+    helpBox:
+      viewHelp: 'Ajuda'
+      about: 'Sobre o Bloco de Notas'
+  mediaCenterImage:
+    windowTitle: 'Visualizador de Fotos do Sete Janelas'
+    file: 'Arquivo'
+    fileBox:
+      delete: 'Excluir'
+      createCopy: 'Criar Cópia...'
+      copy: 'Copiar'
+      props: 'Propriedades'
+      close: 'Sair'
+    print: 'Imprimir'
+    printBox:
+      print: 'Imprimir'
+      orderCopies: 'Encomendar Cópias'
+    email: 'Email'
+    record: 'Gravar'
+    recordBox:
+      dataDisk: 'Disco de Dados...'
+      dvdVideo: 'DVD de Vídeo...'
+    open: 'Abrir'
+    openBox:
+      paint: 'Paint'
+      firefox: 'Firefox'
+      wmc: 'Windows Media Center'
+      chooseProgram: 'Escolher programa...'
+  mediaCenterVideo:
+    windowTitle: 'Visualizador de Vídeos do Sete Janelas'
+  acrobatReader:
+    recentDocuments: 'Documentos recentes'
+    noPdfsFound: 'Nenhum PDF encontrado'
+    findText: 'Encontrar texto'
+    loadingPdf: 'Carregando PDF'
 vfs:
   desktop:
     computer: 'Meu Computador'
     recycleBin: 'Lixeira'
+    username: 'Fiterman'
   folders:
     users: 'Usuários'
     documents: 'Documentos'
@@ -16,3 +113,5 @@ vfs:
     downloads: 'Downloads'
     desktop: 'Área de Trabalho'
     projects: 'Projetos'
+    favorites: 'Favoritos'
+    aboutMe: 'Sobre mim'

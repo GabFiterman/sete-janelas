@@ -3,6 +3,7 @@ import { getMediaAssetPath } from '../../utils';
 
 // Types
 import type { FileSystemItem } from '@/constants';
+import { useTranslation } from 'react-i18next';
 
 interface MediaCenterImageGalleryProps {
   images: FileSystemItem[];
@@ -10,9 +11,11 @@ interface MediaCenterImageGalleryProps {
 }
 
 export function MediaCenterImageGallery({ images, onSelectImage }: MediaCenterImageGalleryProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="media-center-gallery">
-      <h2 className="media-center-gallery-title">Galeria de Fotos</h2>
+      <h2 className="media-center-gallery-title">{t('apps.mediaCenterImage.windowTitle')}</h2>
       <div className="media-center-gallery-grid">
         {images.map((image) => {
           const src = getMediaAssetPath(image);
