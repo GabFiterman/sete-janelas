@@ -101,12 +101,20 @@ When a feature branch is ready to be merged and deployed:
 1. **Bump the version** in `package.json` on the feature branch (incrementing minor for new features, patch for bugfixes/minor updates, following SemVer).
 2. **Move changes from `[Unreleased]` to a new version section** in `CHANGELOG.md` (e.g., `## [X.Y.Z] - YYYY-MM-DD`). Add a fresh empty `[Unreleased]` section.
 3. **Commit** these changes on the feature branch with a release message: `chore: release vX.Y.Z`.
-4. **Merge to main**: Open and merge the Pull Request from the feature branch to `main` (Vercel will build and deploy `main` automatically).
-5. **Tag the Release**:
-   - On the `main` branch, create a Git tag: `git tag vX.Y.Z`.
-   - Push the tag: `git push origin vX.Y.Z`.
-   - (Optional) Draft a GitHub Release on GitHub using the changelog section as release notes.
-6. **Close the issue** on GitHub.
+4. **Push the feature branch** to origin: `git push origin feature/issue-NN`.
+5. **Open a Pull Request** from `feature/issue-NN` to `main` on GitHub:
+   - Complete the PR template with description and context.
+   - Merge the PR to `main` via the GitHub UI (keeps a historical record of the PR).
+6. **Tag the Release**:
+   - Checkout to `main` locally and pull the merge: `git checkout main && git pull origin main`.
+   - Create a Git tag on `main`: `git tag vX.Y.Z`.
+   - Push the tag to GitHub: `git push origin vX.Y.Z`.
+7. **Publish GitHub Release**:
+   - Go to the GitHub repository page, click on **Releases** and then **Draft a new release**.
+   - Select the tag `vX.Y.Z` you just pushed.
+   - Title the release `vX.Y.Z` and copy the entries from `CHANGELOG.md` for this version into the description field.
+   - Click **Publish release** (this will make it visible on the main page of the repository).
+8. **Close the issue** on GitHub.
 
 ---
 
